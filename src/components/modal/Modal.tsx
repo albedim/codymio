@@ -12,14 +12,16 @@ import { HiArrowCircleRight } from "react-icons/hi";
 interface ContributeProps {
   onClose: () => void,
   visible: boolean,
-  repo_id: number
+  open_issues: number,
+  repo_full_name: string
 }
 
 
 const Contribute: React.FC<ContributeProps> = ({
   visible,
   onClose,
-  repo_id
+  repo_full_name,
+  open_issues
 }) => {
 
 
@@ -36,7 +38,7 @@ const Contribute: React.FC<ContributeProps> = ({
                 </div>
                 <div className="p-8 justify-around flex">
                   <div>
-                  
+                    <h2>Issues ({open_issues})</h2>
                   </div>
                 </div>
               </div>
