@@ -1,14 +1,18 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { BASE_URL } from "../../utils/utils";
+import { BASE_URL } from "../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { BiGitRepoForked } from 'react-icons/bi'
 import { SpinnerCircular } from "spinners-react";
+import Repository, { Repo } from "../components/overview/Repository";
+import Contribute from "../components/modal/Modal";
 
 
 const Home = () => {
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState<Repo[]>([])
+
+  const [modalOptions, setModalOptions] = useState({ repo_id: 0, visible: false }) 
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -18,7 +22,7 @@ const Home = () => {
 
   const [language, setLanguage] = useState("all")
 
-  const [availableLanguages, setAvailableLanguages] = useState([])
+  const [availableLanguages, setAvailableLanguages] = useState<string[]>([])
 
 
   const getData = async () => {
@@ -44,6 +48,7 @@ const Home = () => {
 
   return (
     <div className="mt-40 items-center justify-around w-screen flex">
+      <Contribute onClose={() => setModalOptions({ repo_id: 0, visible: false })} repo_id={modalOptions.repo_id} visible={modalOptions.visible} />
       <div className="w-4/5">
         <div className="justify-around flex">
           <div className="flex">
@@ -105,39 +110,8 @@ const Home = () => {
           ) : (
             <div className="mt-24 flex flex-wrap">
               {
-                data.map((repo: any) => (
-                  <div className="pb-14 p-4">
-                    <div style={{ width: 450 }} className="p-6 rounded-lg bg-[#fafafa]">
-                      <div className="justify-between flex">
-                        <div>
-                          <h2 className="text-xl font-semibold font-workSans">{repo.name}</h2>
-                        </div>
-                        <div className="items-center flex pr-3 pl-3 rounded-md text-[black] border-2 border-[black]">
-                          <h2 className="font-workSans">{repo.open_issues} Issues</h2>
-                        </div>
-                      </div>
-                      <div>
-                        <h2 className="font-workSans">@{repo.full_name.split("/")[0]}</h2>
-                      </div>
-                      <div className="pt-2">
-                        <h2 className="font-workSans" >{repo.description}</h2>
-                        <div className="pt-2 items-center flex">
-                          <div className="pr-2"><BiGitRepoForked /></div>
-                          <h2 className="font-semibold font-workSans">{repo.forks}</h2>
-                        </div>
-                      </div>
-                      <div className="pt-8 justify-between flex">
-                        <div>
-                          <h2 className="hidden bg-opacity-40 text-[white] rounded-md p-2 text-sm font-normal font-lato" style={{ backgroundColor: repo.language.color }}>{repo.language.value}</h2>
-                        </div>
-                        <div>
-                          <button className="rounded-md font-workSans text-sm p-2 text-[white] bg-[black]">
-                            Contribute
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                data.map((repo: Repo) => (
+                  <Repository onClick={() => setModalOptions({ repo_id: repo.github_repo_id, visible: true })} repository={repo} />
                 ))
               }
             </div>

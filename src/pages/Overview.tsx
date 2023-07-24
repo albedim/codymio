@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { BASE_URL } from "../../utils/utils";
+import { BASE_URL } from "../utils/utils";
 import { useNavigate } from "react-router-dom";
 
 const Overview = () => {
