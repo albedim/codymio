@@ -36,7 +36,9 @@ const Repository: React.FC<RepositoryProps> = ({
       <div style={{ width: 450 }} className="p-6 rounded-lg bg-[#fafafa]">
         <div className="justify-between flex">
           <div>
-            <h2 className="text-xl font-semibold font-workSans">{repository.name}</h2>
+            <a target="_blank" href={"https://github.com/"+repository.full_name}>
+              <h2 className="hover:underline text-xl font-semibold font-workSans">{repository.name}</h2>
+            </a>
           </div>
           <div className="items-center flex pr-3 pl-3 rounded-md text-[black] border-2 border-[black]">
             <h2 className="font-workSans">{repository.open_issues} Issues</h2>
