@@ -5,14 +5,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Overview from './pages/Overview';
 import Header from './components/header/Header';
 import Home from './pages/Home';
-import Contribute from './pages/Contribute';
+import Contribute from './pages/Contributions';
+import Contributions from './pages/Contributions';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<><Header/><Overview/></>} />
-        <Route path='/contribute/:github_repository_id' element={<><Header/><Contribute/></>} />
+        <Route path='/contributions' element={<><Header/><Contributions/></>} />
         <Route path="/home" element={<><Header/><Home/></>} />
       </Routes>
     </BrowserRouter>
