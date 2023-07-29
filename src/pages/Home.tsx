@@ -12,7 +12,7 @@ const Home = () => {
 
   const [data, setData] = useState<Repo[]>([])
 
-  const [modalOptions, setModalOptions] = useState({ repo_open_issues: 0, repo_full_name: "", visible: false }) 
+  const [modalOptions, setModalOptions] = useState({ repo_id: 0, repo_open_issues: 0, repo_full_name: "", visible: false }) 
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -48,7 +48,7 @@ const Home = () => {
 
   return (
     <div className="mt-40 items-center justify-around w-screen flex">
-      <Contribute open_issues={modalOptions.repo_open_issues} onClose={() => setModalOptions({ repo_open_issues: 0, repo_full_name: "", visible: false })} repo_full_name={modalOptions.repo_full_name} visible={modalOptions.visible} />
+      <Contribute repo_id={modalOptions.repo_id} open_issues={modalOptions.repo_open_issues} onClose={() => setModalOptions({ repo_id: 0, repo_open_issues: 0, repo_full_name: "", visible: false })} repo_full_name={modalOptions.repo_full_name} visible={modalOptions.visible} />
       <div className="w-4/5">
         <div className="justify-around flex">
           <div className="flex">
@@ -111,7 +111,7 @@ const Home = () => {
             <div className="mt-24 flex flex-wrap">
               {
                 data.map((repo: Repo) => (
-                  <Repository onClick={() => setModalOptions({ repo_open_issues: repo.open_issues, repo_full_name: repo.full_name, visible: true })} repository={repo} />
+                  <Repository onClick={() => setModalOptions({ repo_id: repo.github_repo_id, repo_open_issues: repo.open_issues, repo_full_name: repo.full_name, visible: true })} repository={repo} />
                 ))
               }
             </div>

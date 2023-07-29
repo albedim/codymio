@@ -19,6 +19,8 @@ const Overview = () => {
     })
       .then((res) => {
         window.localStorage.setItem("token", res.data.param.token)
+        console.log(res.data.param)
+        window.localStorage.setItem("github_token", res.data.param.github_token)
         navigate("/home")
       })
       .catch(err => console.log(err))
