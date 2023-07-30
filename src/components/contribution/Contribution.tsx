@@ -49,8 +49,8 @@ const Contribution: React.FC<RepositoryProps> = ({
   const [modalOptions, setModalOptions] = useState({ visible: false })
 
   return (
-    <div className="pb-14 p-4">
-      <div style={{ width: 450 }} className="p-6 rounded-lg bg-[#fafafa]">
+    <div className="border pb-14 p-4">
+      <div className="repository p-6 rounded-lg bg-[#fafafa]">
         <div className="justify-between flex">
           <div>
             <a target="_blank" href={"https://github.com/" + repository.full_name}>

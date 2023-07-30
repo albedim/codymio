@@ -29,7 +29,7 @@ interface Issue {
   issue_body: string
 }
 
-interface Response{
+interface Response {
   unseen: number,
   merged: ContributedRepo[],
   unmerged: ContributedRepo[]
@@ -65,6 +65,21 @@ const Contributions = () => {
       })
       .catch(err => console.log(err))
   }
+  
+  /*const setSeen = async () => {
+    setIsLoading(true)
+    await axios.post(BASE_URL + "/contributed-repo/seen", { user_id: user.user_id }, {
+      headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
+    })
+      .then(res => {
+        setData({
+          unseen: 0,
+          merged: data.merged,
+          unmerged: data.unmerged
+        })
+      })
+      .catch(err => console.log(err))
+  }*/
 
   useEffect(() => {
     getData()
@@ -72,27 +87,32 @@ const Contributions = () => {
 
   return (
     <div className="mt-40 justify-around flex w-4/5">
-      <div>
+      <div className="p-14">
         <div>
           <h2 className="text-2xl font-semibold font-workSans">My Contributions</h2>
         </div>
         <div className="flex">
           <div onClick={() => {
             setPage("unmerged")
-            getData()
           }} className="pb-2 p-4" style={{ borderBottom: page == 'unmerged' ? "2px solid black" : "" }}>
             <h2 className="font-workSans">Unmerged</h2>
           </div>
           <div onClick={() => {
             setPage("merged")
-            getData()
+            //setSeen()
           }} className="items-center flex pb-2 p-4" style={{ borderBottom: page == 'merged' ? "2px solid black" : "" }}>
             <h2 className="font-workSans">Merged</h2>
-            <div className="pl-4">
-              <div className="rounded-full pb-0 pt-0 p-1 bg-[red]">
-                <h2 className="text-sm rounded-full pb-0 pt-0 p-1 bg-[red] text-[white] font-workSans">{data.unseen}</h2>
-              </div>
-            </div>
+            {
+              data.unseen > 0 ? (
+                <div className="pl-4">
+                  <div className="rounded-full pb-0 pt-0 p-1 bg-[red]">
+                    <h2 className="text-sm rounded-full pb-0 pt-0 p-1 bg-[red] text-[white] font-workSans">{data.unseen}</h2>
+                  </div>
+                </div>
+              ) : (
+                <></>
+              )
+            }
           </div>
         </div>
         <div className="flex-wrap flex">

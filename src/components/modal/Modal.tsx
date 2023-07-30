@@ -50,7 +50,9 @@ const Contribute: React.FC<ContributeProps> = ({
   const [issues, setIssues] = useState([])
 
   const getIssues = async () => {
-    await axios.get(BASE_URL + "/repo-github/issues/"+repo_full_name+"?page="+page)
+    await axios.get(BASE_URL + "/repo-github/issues/"+repo_full_name+"?page="+page, {
+      headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
+    })
     .then(res => setIssues(res.data.param))
     .catch(err => console.log(err))
   }

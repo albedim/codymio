@@ -10,3 +10,13 @@
 input[type="checkbox"] {
   accent-color: black;    
 }
+
+.repository{
+  width: 454px;
+}
+
+@media screen and (max-width: 340px) {
+  .repository{
+    width: 154px !important;
+  }
+}
