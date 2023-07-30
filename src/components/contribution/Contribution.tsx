@@ -46,7 +46,6 @@ const Contribution: React.FC<RepositoryProps> = ({
 
   const [showMore, setShowMore] = useState(false)
 
-  const [modalOptions, setModalOptions] = useState({ visible: false })
 
   return (
     <div className="border pb-14 p-4">
@@ -64,17 +63,17 @@ const Contribution: React.FC<RepositoryProps> = ({
         <div className="pt-2 border-t mt-4">
           <div className="items-center justify-between flex">
             <div>
-              <a href={"https://github.com/" + repository.full_name + "/issues/" + issue.number}>
-                <h2 className="text-lg font-semibold font-workSans" >{issue.title} • <span className="text-sm font-normal">@{repository.full_name.split("/")[0]}</span></h2>
+              <a target="_blank" href={"https://github.com/" + repository.full_name + "/issues/" + issue.number}>
+                <h2 className="hover:underline cursor-pointer text-lg font-semibold font-workSans" >{issue.title} • <span className="text-sm font-normal">@{repository.full_name.split("/")[0]}</span></h2>
               </a>
             </div>
             <div><h2 className="bg-opacity-40 text-[white] rounded-md text-xs p-1 font-workSans bg-[red]" >PROBLEM</h2></div>
           </div>
           {
             issue.body.length > 240 ? (
-                <div>
+                <div className="mt-2">
                   <h2 className="pt-2 font-workSans" >{showMore ? issue.body : issue.body.substring(0,240)+"..."}</h2>
-                  <h2 onClick={() => setShowMore(!showMore)} >{showMore ? "Show less" : "Show more"}</h2>
+                  <h2 className="cursor-pointer font-semibold underline" onClick={() => setShowMore(!showMore)} >{showMore ? "Show less" : "Show more"}</h2>
                 </div>
             ):(
               <h2 className="pt-2 font-workSans" >{issue.body}</h2>

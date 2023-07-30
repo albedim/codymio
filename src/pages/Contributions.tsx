@@ -66,7 +66,7 @@ const Contributions = () => {
       .catch(err => console.log(err))
   }
   
-  /*const setSeen = async () => {
+  const setSeen = async () => {
     setIsLoading(true)
     await axios.post(BASE_URL + "/contributed-repo/seen", { user_id: user.user_id }, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
@@ -77,16 +77,17 @@ const Contributions = () => {
           merged: data.merged,
           unmerged: data.unmerged
         })
+        setIsLoading(false)
       })
       .catch(err => console.log(err))
-  }*/
+  }
 
   useEffect(() => {
     getData()
   }, [])
 
   return (
-    <div className="mt-40 justify-around flex w-4/5">
+    <div className="mt-40 justify-around flex w-screen">
       <div className="p-14">
         <div>
           <h2 className="text-2xl font-semibold font-workSans">My Contributions</h2>
@@ -99,7 +100,7 @@ const Contributions = () => {
           </div>
           <div onClick={() => {
             setPage("merged")
-            //setSeen()
+            setSeen()
           }} className="items-center flex pb-2 p-4" style={{ borderBottom: page == 'merged' ? "2px solid black" : "" }}>
             <h2 className="font-workSans">Merged</h2>
             {
