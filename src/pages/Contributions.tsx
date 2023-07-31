@@ -65,7 +65,7 @@ const Contributions = () => {
       })
       .catch(err => console.log(err))
   }
-  
+
   const setSeen = async () => {
     setIsLoading(true)
     await axios.post(BASE_URL + "/contributed-repo/seen", { user_id: user.user_id }, {
@@ -116,36 +116,47 @@ const Contributions = () => {
             }
           </div>
         </div>
-        <div className="flex-wrap flex">
-          {
-            isLoading ? (
-              <></>
-            ) : (
-              data[page].map((contributedRepo: ContributedRepo) => (
-                <Contribution
-                  repository={{
-                    name: contributedRepo.repository.repo_full_name.split("/")[1],
-                    github_repo_id: contributedRepo.repository.repo_id,
-                    full_name: contributedRepo.repository.repo_full_name,
-                    language: {
-                      value: "s",
-                      color: "s"
-                    },
-                    status: contributedRepo.status
-                  }}
+        {
+          isLoading ? (
+            <div className="justify-around mt-24 flex">
+              <div>
+                <div className="justify-around flex">
+                  <SpinnerCircular
+                    secondaryColor="#fafafa"
+                    size={54.4}
+                    color="black"
+                    thickness={214}
+                  />
+                </div>
+                <h2 className="mt-2 text-2xl font-semibold font-workSans">Loading...</h2>
+              </div>
+            </div>
+          ) : (
+            <div className="flex-wrap flex">
+              {
+                data[page].map((contributedRepo: ContributedRepo) => (
+                  <Contribution
+                    repository={{
+                      name: contributedRepo.repository.repo_full_name.split("/")[1],
+                      github_repo_id: contributedRepo.repository.repo_id,
+                      full_name: contributedRepo.repository.repo_full_name,
+                      language: "",
+                      status: contributedRepo.status
+                    }}
 
-                  issue={{
-                    title: contributedRepo.issue.issue_title,
-                    number: contributedRepo.issue.issue_number,
-                    issue_id: contributedRepo.issue.issue_id,
-                    body: contributedRepo.issue.issue_body,
-                    owner: contributedRepo.issue.issue_owner
-                  }}
-                />
-              ))
-            )
-          }
-        </div>
+                    issue={{
+                      title: contributedRepo.issue.issue_title,
+                      number: contributedRepo.issue.issue_number,
+                      issue_id: contributedRepo.issue.issue_id,
+                      body: contributedRepo.issue.issue_body,
+                      owner: contributedRepo.issue.issue_owner
+                    }}
+                  />
+                ))
+              }
+            </div>
+          )
+        }
       </div>
     </div>
   )

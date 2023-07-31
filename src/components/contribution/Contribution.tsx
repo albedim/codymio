@@ -15,7 +15,7 @@ export interface Repo {
   github_repo_id: number,
   full_name: string,
   status: RepoStatus
-  language: Language
+  language: string
 }
 
 export interface RepoStatus{
@@ -32,11 +32,6 @@ export interface Issue {
   owner: string
 }
 
-export interface Language {
-  color: string,
-  value: string
-}
-
 const Contribution: React.FC<RepositoryProps> = ({
   repository,
   issue
@@ -48,7 +43,7 @@ const Contribution: React.FC<RepositoryProps> = ({
 
 
   return (
-    <div className="border pb-14 p-4">
+    <div className="pb-14 p-4">
       <div className="repository p-6 rounded-lg bg-[#fafafa]">
         <div className="justify-between flex">
           <div>

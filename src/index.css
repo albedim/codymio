@@ -15,8 +15,8 @@ input[type="checkbox"] {
   width: 454px;
 }
 
-@media screen and (max-width: 340px) {
+@media screen and (max-width: 740px) {
   .repository{
-    width: 154px !important;
+    width: 354px !important;
   }
 }
