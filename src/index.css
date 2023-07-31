@@ -19,4 +19,22 @@ input[type="checkbox"] {
   .repository{
     width: 354px !important;
   }
+  .block-flex{
+    display: flex !important;
+  }
+  .flex-block{
+    display: block !important;
+  }
+  .padding-right{
+    padding: 4px;
+  }
 }
+
+.block-flex{
+  display: block;
+}
+
+.flex-block{
+  display: flex;
+}
+

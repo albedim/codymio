@@ -25,7 +25,7 @@ const Repository: React.FC<RepositoryProps> = ({
 
   return (
     <div className="pb-14 p-4">
-      <div style={{ width: 450 }} className="p-6 rounded-lg bg-[#fafafa]">
+      <div className="repository p-6 rounded-lg bg-[#fafafa]">
         <div className="justify-between flex">
           <div>
             <a target="_blank" href={"https://github.com/"+repository.full_name}>
@@ -40,7 +40,7 @@ const Repository: React.FC<RepositoryProps> = ({
           <h2 className="font-workSans">@{repository.full_name.split("/")[0]}</h2>
         </div>
         <div className="pt-2">
-          <h2 className="font-workSans" >{repository.description}</h2>
+          <h2 style={{ maxWidth: 254 }} className="font-workSans" >{repository.description}</h2>
           <div className="pt-2 items-center flex">
             <div className="pr-2"><BiGitRepoForked /></div>
             <h2 className="font-semibold font-workSans">{repository.forks}</h2>

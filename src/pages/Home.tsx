@@ -81,10 +81,10 @@ const Home = () => {
             />
             <div className="w-4/5">
               <div className="justify-around flex">
-                <div className="flex">
-                  <div className="flex items-center">
-                    <div>
-                      <div className="items-center justify-around flex">
+                <div className="flex-block">
+                  <div className="pl-4 flex items-center">
+                    <div className="block-flex">
+                      <div className="padding-right items-center justify-around flex">
                         <input
                           className="w-4 h-4 text-black-600 
                           bg-gray-100 border-gray-300 rounded focus:ring-black-500 

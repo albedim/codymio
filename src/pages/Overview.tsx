@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { BASE_URL } from "../utils/utils";
+import { BASE_FE_URL, BASE_URL } from "../utils/utils";
 import { useNavigate } from "react-router-dom";
 
 const Overview = () => {
@@ -22,7 +22,7 @@ const Overview = () => {
         window.localStorage.setItem("token", res.data.param.token)
         console.log(res.data.param)
         window.localStorage.setItem("github_token", res.data.param.github_token)
-        navigate("/home")
+        window.location.href = BASE_FE_URL + "/home"
       })
       .catch(err => console.log(err))
   }
@@ -35,7 +35,7 @@ const Overview = () => {
         if (!res.data.success) {
           window.localStorage.setItem("token", res.data.param.token)
         }
-        navigate("/home")
+        window.location.href = BASE_FE_URL + "/home"
       })
       .catch(err => {
         

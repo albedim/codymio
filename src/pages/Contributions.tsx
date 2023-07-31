@@ -103,6 +103,7 @@ const Contributions = () => {
 
   useEffect(() => {
     loggedIn()
+    document.title = "Contrycode - Dashboard"
   }, [])
 
   return (
@@ -155,7 +156,7 @@ const Contributions = () => {
                   </div>
                 </div>
               ) : (
-                <div className="flex-wrap flex">
+                <div className="mt-8 flex-wrap flex">
                   {
                     data[page].map((contributedRepo: ContributedRepo) => (
                       <Contribution
