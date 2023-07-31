@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { AiFillCode } from "react-icons/ai"
 import { BiGitRepoForked } from 'react-icons/bi'
 import { useNavigate } from "react-router-dom"
 
@@ -14,12 +15,7 @@ export interface Repo{
   full_name: string,
   description: string,
   forks: number,
-  language: Language
-}
-
-export interface Language{
-  color: string,
-  value: string
+  language: string
 }
 
 const Repository: React.FC<RepositoryProps> = ({
@@ -55,8 +51,9 @@ const Repository: React.FC<RepositoryProps> = ({
           </div>
         </div>
         <div className="pt-8 justify-between flex">
-          <div>
-            <h2 className="hidden bg-opacity-40 text-[white] rounded-md p-2 text-sm font-normal font-lato" style={{ backgroundColor: repository.language.color }}>{repository.language.value}</h2>
+          <div className="items-center flex">
+            <div><AiFillCode size={18} color="black"/></div>
+            <h2 className="bg-opacity-40 text-[black] rounded-md p-2 text-sm font-semibold font-lato" >{repository.language}</h2>
           </div>
           <div>
             <button onClick={onClick} className="rounded-md font-workSans text-sm p-2 text-[white] bg-[black]">

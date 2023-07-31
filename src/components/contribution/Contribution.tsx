@@ -1,13 +1,14 @@
 import React, { useState } from "react"
 import { BsFillSignMergeLeftFill } from 'react-icons/bs'
-import { AiFillClockCircle } from 'react-icons/ai'
+import { AiFillClockCircle, AiFillDelete } from 'react-icons/ai'
 import { PiPushPinFill } from 'react-icons/pi'
 import { BiGitRepoForked } from 'react-icons/bi'
 import { useNavigate } from "react-router-dom"
 
 interface RepositoryProps {
   repository: Repo
-  issue: Issue
+  issue: Issue,
+  onRemove: () => void
 }
 
 export interface Repo {
@@ -34,7 +35,8 @@ export interface Issue {
 
 const Contribution: React.FC<RepositoryProps> = ({
   repository,
-  issue
+  issue,
+  onRemove
 }) => {
 
   const navigate = useNavigate()
@@ -45,11 +47,14 @@ const Contribution: React.FC<RepositoryProps> = ({
   return (
     <div className="pb-14 p-4">
       <div className="repository p-6 rounded-lg bg-[#fafafa]">
-        <div className="justify-between flex">
+        <div className="itens-center justify-between flex">
           <div>
             <a target="_blank" href={"https://github.com/" + repository.full_name}>
               <h2 className="hover:underline text-xl font-semibold font-workSans">{repository.name}</h2>
             </a>
+          </div>
+          <div className="items-center justify-around flex">
+            <AiFillDelete className="cursor-pointer" onClick={onRemove} opacity={"40%"} color="red" size={24}/>
           </div>
         </div>
         <div>

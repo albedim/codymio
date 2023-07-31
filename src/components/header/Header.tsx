@@ -31,7 +31,7 @@ const Header = () => {
   return(
     <div className="top-0 bg-[white] bg-opacity-10 fixed border-b p-4 justify-between flex w-screen">
       <div>
-        <img width={145} src={require('../../images/logo.png')} alt="" />
+        <img className="cursor-pointer" width={145} src={require('../../images/logo.png')} alt="" />
       </div>
       <div>
         {

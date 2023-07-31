@@ -72,7 +72,6 @@ const Contributions = () => {
   }
 
   const setSeen = async () => {
-    setIsLoading(true)
     await axios.post(BASE_URL + "/contributed-repo/seen", { user_id: user.user_id }, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
@@ -82,7 +81,6 @@ const Contributions = () => {
           merged: data.merged,
           unmerged: data.unmerged
         })
-        setIsLoading(false)
       })
       .catch(err => console.log(err))
   }
@@ -101,6 +99,12 @@ const Contributions = () => {
   useEffect(() => {
     loggedIn()
   }, [])
+
+  const removeContribution = async (contributedRepoId: number) => {
+    await axios.delete(BASE_URL + "/contributed-repo/" + contributedRepoId)
+    .then((res) => getData())
+    .catch(err => console.log(err))
+  }
 
   return (
     <div className="mt-40 justify-around flex w-screen">
@@ -171,6 +175,8 @@ const Contributions = () => {
                           body: contributedRepo.issue.issue_body,
                           owner: contributedRepo.issue.issue_owner
                         }}
+
+                        onRemove={() => removeContribution(contributedRepo.contributed_id)}
                       />
                     ))
                   }

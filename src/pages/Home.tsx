@@ -29,6 +29,7 @@ const Home = () => {
   const navigate = useNavigate()
 
   const getData = async () => {
+    setIsLoading(true)
     await axios.get(BASE_URL + "/repo-github/fetch?query=" + (anyTopic ? "all" : query) + "&language=" + language)
       .then(res => setData(res.data.param))
       .catch(err => console.log(err))
@@ -94,13 +95,13 @@ const Home = () => {
                   <div className="p-4">
                     {
                       anyTopic || !anyTopic && query != "" ? (
-                        <button className="font-workSans text-[white] rounded-lg pl-14 pr-14 p-4 bg-[black]" onClick={() => {
+                        <button className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4 bg-[black]" onClick={() => {
                           getData()
-                        }} >ok</button>
+                        }} >SEARCH</button>
                       ) : (
-                        <button disabled className="font-workSans text-[white] rounded-lg pl-14 pr-14 p-4 bg-[black]" onClick={() => {
+                        <button disabled className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4 bg-[black]" onClick={() => {
                           getData()
-                        }} >ok</button>
+                        }} >SEARCH</button>
                       )
                     }
                   </div>
