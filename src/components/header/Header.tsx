@@ -11,7 +11,7 @@ const Header = () => {
 
   const loggedIn = async () => {
     await axios.get(BASE_URL + "/user/sync", {
-      headers: { "Authorization": "Bearer " + window.localStorage.getItem("token") }
+      headers: { "Authorization": "Bearer " + token }
     })
       .then((res) => {
         if (!res.data.success) {
@@ -24,7 +24,9 @@ const Header = () => {
 
   useEffect(() => {
     loggedIn()
-  })
+  },[])
+
+  const navigate = useNavigate()
 
   return(
     <div className="top-0 bg-[white] bg-opacity-10 fixed border-b p-4 justify-between flex w-screen">
@@ -34,9 +36,9 @@ const Header = () => {
       <div>
         {
           isLoggedIn ? (
-            <img  style={{ borderRadius: "50%" }} width={40.4} src={jwtDecode<any>(token).sub.avatar} alt="" />
+            <img onClick={() => navigate("/contributions")} style={{ borderRadius: "50%" }} width={40.4} src={jwtDecode<any>(token).sub.avatar} alt="" />
           ):(
-            <></>
+            <h2>sdgsd</h2>
           )
         }
       </div>

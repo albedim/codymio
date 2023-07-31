@@ -34,9 +34,11 @@ const Overview = () => {
         if (!res.data.success) {
           window.localStorage.setItem("token", res.data.param.token)
         }
-        //navigate("/home")
+        navigate("/home")
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        
+      })
   }
 
   useEffect(() => {
