@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 const Overview = () => {
 
   const urlParams: any = new URLSearchParams(window.location.search);
-  
+
   const navigate = useNavigate()
 
 
   const login = async () => {
-    window.location.assign("https://github.com/login/oauth/authorize/?client_id=38839c37d7a53b00e9dc")
+    window.location.assign("https://github.com/login/oauth/authorize/?client_id="+process.env.REACT_APP_CLIENT_ID)
   }
 
   const signin = async (code: string) => {

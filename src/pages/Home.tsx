@@ -6,6 +6,7 @@ import { BiGitRepoForked } from 'react-icons/bi'
 import { SpinnerCircular } from "spinners-react";
 import Repository, { Repo } from "../components/overview/Repository";
 import Contribute from "../components/modal/Modal";
+import { HiSearch } from "react-icons/hi";
 
 
 const Home = () => {
@@ -124,11 +125,15 @@ const Home = () => {
                       anyTopic || !anyTopic && query != "" ? (
                         <button className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4 bg-[black]" onClick={() => {
                           getData()
-                        }} >SEARCH</button>
+                        }} >
+                          <HiSearch size={24} color="white" />
+                        </button>
                       ) : (
                         <button disabled className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4 bg-[black]" onClick={() => {
                           getData()
-                        }} >SEARCH</button>
+                        }} >
+                          <HiSearch size={24} color="white" />
+                        </button>
                       )
                     }
                   </div>

@@ -47,10 +47,16 @@ const Repository: React.FC<RepositoryProps> = ({
           </div>
         </div>
         <div className="pt-8 justify-between flex">
-          <div className="items-center flex">
-            <div><AiFillCode size={18} color="black"/></div>
-            <h2 className="bg-opacity-40 text-[black] rounded-md p-2 text-sm font-semibold font-lato" >{repository.language}</h2>
-          </div>
+          {
+            repository.language ? (
+              <div className="items-center flex">
+                <div><AiFillCode size={18} color="black"/></div>
+                <h2 className="bg-opacity-40 text-[black] rounded-md p-2 text-sm font-semibold font-lato" >{repository.language}</h2>
+              </div>
+            ):(
+              <div></div>
+            )
+          }
           <div>
             <button onClick={onClick} className="rounded-md font-workSans text-sm p-2 text-[white] bg-[black]">
               Contribute
