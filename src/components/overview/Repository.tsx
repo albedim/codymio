@@ -23,10 +23,6 @@ const Repository: React.FC<RepositoryProps> = ({
   onClick
 }) => {
 
-  const navigate = useNavigate()
-
-  const [modalOptions, setModalOptions] = useState({ visible: false })
-
   return (
     <div className="pb-14 p-4">
       <div style={{ width: 450 }} className="p-6 rounded-lg bg-[#fafafa]">

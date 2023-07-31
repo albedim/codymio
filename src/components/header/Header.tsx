@@ -7,7 +7,12 @@ import jwtDecode from "jwt-decode";
 const Header = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+
   const token: any = window.localStorage.getItem("token")
+  
+  const navigate = useNavigate()
+
+
 
   const loggedIn = async () => {
     await axios.get(BASE_URL + "/user/sync", {
@@ -26,8 +31,6 @@ const Header = () => {
     loggedIn()
   },[])
 
-  const navigate = useNavigate()
-
   return(
     <div className="top-0 bg-[white] bg-opacity-10 fixed border-b p-4 justify-between flex w-screen">
       <div>
@@ -36,7 +39,13 @@ const Header = () => {
       <div>
         {
           isLoggedIn ? (
-            <img onClick={() => navigate("/contributions")} style={{ borderRadius: "50%" }} width={40.4} src={jwtDecode<any>(token).sub.avatar} alt="" />
+            <img 
+              onClick={() => navigate("/contributions")} 
+              style={{ borderRadius: "50%" }} 
+              width={40.4} 
+              src={jwtDecode<any>(token).sub.avatar} 
+              alt="" 
+            />
           ):(
             <h2>sdgsd</h2>
           )

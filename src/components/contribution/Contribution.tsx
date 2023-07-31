@@ -5,6 +5,7 @@ import { PiPushPinFill } from 'react-icons/pi'
 import { BiGitRepoForked } from 'react-icons/bi'
 import { useNavigate } from "react-router-dom"
 
+
 interface RepositoryProps {
   repository: Repo
   issue: Issue,
@@ -39,8 +40,6 @@ const Contribution: React.FC<RepositoryProps> = ({
   onRemove
 }) => {
 
-  const navigate = useNavigate()
-
   const [showMore, setShowMore] = useState(false)
 
 
@@ -63,8 +62,13 @@ const Contribution: React.FC<RepositoryProps> = ({
         <div className="pt-2 border-t mt-4">
           <div className="items-center justify-between flex">
             <div>
-              <a target="_blank" href={"https://github.com/" + repository.full_name + "/issues/" + issue.number}>
-                <h2 className="hover:underline cursor-pointer text-lg font-semibold font-workSans" >{issue.title} • <span className="text-sm font-normal">@{repository.full_name.split("/")[0]}</span></h2>
+              <a 
+                target="_blank" 
+                href={"https://github.com/" + repository.full_name + "/issues/" + issue.number}>
+                <h2 
+                  className="hover:underline cursor-pointer text-lg font-semibold font-workSans" >
+                  {issue.title} • <span className="text-sm font-normal">@{repository.full_name.split("/")[0]}</span>
+                </h2>
               </a>
             </div>
             <div><h2 className="bg-opacity-40 text-[white] rounded-md text-xs p-1 font-workSans bg-[red]" >PROBLEM</h2></div>
@@ -72,8 +76,12 @@ const Contribution: React.FC<RepositoryProps> = ({
           {
             issue.body.length > 240 ? (
                 <div className="mt-2">
-                  <h2 className="pt-2 font-workSans" >{showMore ? issue.body : issue.body.substring(0,240)+"..."}</h2>
-                  <h2 className="cursor-pointer font-semibold underline" onClick={() => setShowMore(!showMore)} >{showMore ? "Show less" : "Show more"}</h2>
+                  <h2 className="pt-2 font-workSans" >
+                    {showMore ? issue.body : issue.body.substring(0,240)+"..."}
+                  </h2>
+                  <h2 className="cursor-pointer font-semibold underline" onClick={() => setShowMore(!showMore)} >
+                    {showMore ? "Show less" : "Show more"}
+                  </h2>
                 </div>
             ):(
               <h2 className="pt-2 font-workSans" >{issue.body}</h2>

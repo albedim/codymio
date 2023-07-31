@@ -45,8 +45,6 @@ const Contributions = () => {
 
   const [page, setPage] = useState<"merged" | "unmerged">("unmerged")
 
-  const [itemsPage, setItemsPage] = useState(0)
-
   const [isSessionLoading, setIsSessionLoading] = useState(true)
 
   const [isLoading, setIsLoading] = useState(true)
@@ -56,6 +54,7 @@ const Contributions = () => {
   const token: any = window.localStorage.getItem("token")
 
   const user: any = token ? jwtDecode<any>(token).sub : {}
+
 
   const getData = async () => {
     setIsLoading(true)
@@ -96,15 +95,15 @@ const Contributions = () => {
     setIsSessionLoading(false)
   }
 
-  useEffect(() => {
-    loggedIn()
-  }, [])
-
   const removeContribution = async (contributedRepoId: number) => {
     await axios.delete(BASE_URL + "/contributed-repo/" + contributedRepoId)
     .then((res) => getData())
     .catch(err => console.log(err))
   }
+
+  useEffect(() => {
+    loggedIn()
+  }, [])
 
   return (
     <div className="mt-40 justify-around flex w-screen">
