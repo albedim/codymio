@@ -174,7 +174,7 @@ const Home = () => {
               {
                 isLoading ? (
                   <div className="mt-24">
-                    <Loader padding={14} direction="horizontal" height={240} width={"auto"} n={10}/>
+                    <Loader padding={14} direction="horizontal" height={240} width={454} n={10}/>
                   </div>
                 ) : (
                   <div className="mt-24 flex flex-wrap">

@@ -24,6 +24,12 @@ const Repository: React.FC<RepositoryProps> = ({
   onClick
 }) => {
 
+  const maxLength = 62
+
+  const [showMore, setShowMore] = useState(false)
+  
+  const overLength: boolean = repository?.description != undefined && repository?.description.length > maxLength
+
   return (
     <div className="pb-14 p-4">
       <div className="repository p-6 rounded-lg bg-[#fafafa]">
@@ -41,7 +47,20 @@ const Repository: React.FC<RepositoryProps> = ({
           <h2 className="font-workSans">@{repository?.full_name.split("/")[0]}</h2>
         </div>
         <div className="pt-2">
-          <h2 style={{ maxWidth: 254 }} className="font-workSans" >{repository?.description}</h2>
+          {
+            overLength ? (
+                <div className="mt-2">
+                  <h2 style={{ maxWidth: 254 }} className="font-workSans" >{
+                    showMore ? repository?.description : repository?.description?.substring(0,maxLength)+"..." 
+                  }</h2>
+                  <h2 className="cursor-pointer font-semibold underline" onClick={() => setShowMore(!showMore)} >
+                    {showMore ? "Show less" : "Show more"}
+                  </h2>
+                </div>
+            ):(
+              <h2 className="pt-2 font-workSans" >{repository?.description}</h2>
+            )
+          }
           <div className="pt-2 items-center flex">
             <div className="pr-2"><BiGitRepoForked /></div>
             <h2 className="font-semibold font-workSans">{repository?.forks}</h2>

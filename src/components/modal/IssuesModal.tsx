@@ -122,7 +122,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                     <div>
                       {
                         isLoading ? (
-                          <Loader direction={"vertical"} n={3} padding={14} height={124} width={424} />
+                          <Loader direction={"vertical"} n={3} padding={14} height={154} width={424} />
                         ) : (
                           issues.length > 0 ? (
                             <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
