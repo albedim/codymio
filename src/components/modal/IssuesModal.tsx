@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { SpinnerCircular } from "spinners-react";
 import Loader from "../loading/Loader";
+import NoResults from "../no_results/NoResults";
 
 
 interface ContributeProps {
@@ -97,6 +98,8 @@ const IssuesModal: React.FC<ContributeProps> = ({
                       <div className="items-center flex">
                         <div className="p-2">
                           <HiArrowCircleLeft style={{ opacity: isLoading || page == 0 ? "40%" : "100%" }} size={34} onClick={() => {
+                            if(isLoading || page == 0 )
+                              return;
                             if (page > 0) {
                               setPage(page - 1)
                               getIssues()
@@ -106,6 +109,8 @@ const IssuesModal: React.FC<ContributeProps> = ({
                         <h2 className="text-xl font-workSans">{page}</h2>
                         <div className="p-2" >
                           <HiArrowCircleRight style={{ opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
+                            if(isLoading || page == 30 )
+                              return;
                             if (page <= 30) {
                               setPage(page + 1)
                               getIssues()
@@ -121,43 +126,47 @@ const IssuesModal: React.FC<ContributeProps> = ({
                         ) : (
                           <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
                             {
-                              issues.map((issue: Issue) => (
-                                <div className="p-4">
-                                  <div className="justify-between flex rounded-lg p-4 bg-[#fafafa]">
-                                    <div>
-                                      <h2
-                                        style={{ maxWidth: 340 }}
-                                        className="font-semibold text-lg font-workSans">{issue.title}
-                                      </h2>
-                                      <h2
-                                        className="font-normal text-md font-workSans">@{issue.creator_username}
-                                      </h2>
-                                      <h2
-                                        className="mt-1 font-semibold font-workSans text-[gray]"
-                                      >{
-                                          issue.created_on.substring(0, 10).split("-")[2] + "/" +
-                                          issue.created_on.substring(0, 10).split("-")[1] + "/" +
-                                          issue.created_on.substring(0, 10).split("-")[0]
-                                        }
-                                      </h2>
-                                    </div>
-                                    <div className="items-center justify-around flex">
-                                      <button><HiArrowCircleRight onClick={() => {
-                                        addContribution({
-                                          issue_owner: issue.creator_username,
-                                          user_id: user.user_id,
-                                          repo_id: repo_id,
-                                          repo_full_name: repo_full_name,
-                                          issue_id: issue.issue_id,
-                                          issue_number: issue.number,
-                                          issue_title: issue.title,
-                                          issue_body: issue.body
-                                        })
-                                      }} size={34} color="black" /></button>
+                              issues.length > 0 ? (
+                                issues.map((issue: Issue) => (
+                                  <div className="p-4">
+                                    <div className="justify-between flex rounded-lg p-4 bg-[#fafafa]">
+                                      <div>
+                                        <h2
+                                          style={{ maxWidth: 340 }}
+                                          className="font-semibold text-lg font-workSans">{issue.title}
+                                        </h2>
+                                        <h2
+                                          className="font-normal text-md font-workSans">@{issue.creator_username}
+                                        </h2>
+                                        <h2
+                                          className="mt-1 font-semibold font-workSans text-[gray]"
+                                        >{
+                                            issue.created_on.substring(0, 10).split("-")[2] + "/" +
+                                            issue.created_on.substring(0, 10).split("-")[1] + "/" +
+                                            issue.created_on.substring(0, 10).split("-")[0]
+                                          }
+                                        </h2>
+                                      </div>
+                                      <div className="items-center justify-around flex">
+                                        <button><HiArrowCircleRight onClick={() => {
+                                          addContribution({
+                                            issue_owner: issue.creator_username,
+                                            user_id: user.user_id,
+                                            repo_id: repo_id,
+                                            repo_full_name: repo_full_name,
+                                            issue_id: issue.issue_id,
+                                            issue_number: issue.number,
+                                            issue_title: issue.title,
+                                            issue_body: issue.body
+                                          })
+                                        }} size={34} color="black" /></button>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              ))
+                                ))
+                              ):(
+                                <NoResults/>
+                              )
                             }
                           </div>
                         )

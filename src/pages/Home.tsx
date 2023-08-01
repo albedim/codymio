@@ -150,6 +150,8 @@ const Home = () => {
                 <div className="items-center flex">
                   <div className="p-2">
                     <HiArrowCircleLeft style={{ opacity: isLoading || page == 0 ? "40%" : "100%" }} size={34} onClick={() => {
+                      if(isLoading || page == 0 )
+                        return;
                       if(page > 0){
                         setPage(page - 1)
                         getData()
@@ -159,6 +161,8 @@ const Home = () => {
                   <h2 className="text-xl font-workSans">{page}</h2>
                   <div className="p-2" >
                     <HiArrowCircleRight style={{ opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
+                      if(isLoading || page == 30 )
+                        return;
                       if(page < 30){
                         setPage(page + 1)
                         getData()
