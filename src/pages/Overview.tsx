@@ -9,9 +9,11 @@ const Overview = () => {
 
   const navigate = useNavigate()
 
+  const [isloggedIn, setIsLoggedIn] = useState(true)
+
 
   const login = async () => {
-    window.location.assign("https://github.com/login/oauth/authorize/?client_id="+process.env.REACT_APP_CLIENT_ID)
+    window.location.assign("https://github.com/login/oauth/authorize/?client_id=" + process.env.REACT_APP_CLIENT_ID)
   }
 
   const signin = async (code: string) => {
@@ -38,7 +40,7 @@ const Overview = () => {
         window.location.href = BASE_FE_URL + "/home"
       })
       .catch(err => {
-        
+        setIsLoggedIn(false)
       })
   }
 
@@ -53,23 +55,27 @@ const Overview = () => {
   }, [])
 
   return (
-    <div className="bg-img items-center justify-around flex h-screen w-screen">
-      <div className="p-4">
-        <h2 className="text-4xl font-semibold font-workSans">
-          Find the perfect <br />open source for you.
-        </h2>
-        <h2 className="mt-5 text-xl font-workSans">
-          We'll help you find the rights open source projects
-          to contribute to. <br />We'll manage
-          your commits and repository updates, for free.
-        </h2>
-        <div className="mt-8">
-          <button onClick={() => login()} className="font-normal text-[white] font-workSans rounded-lg p-4 bg-[black]">
-            GET STARTED
-          </button>
+    isloggedIn ? (
+      <></>
+    ) : (
+      <div className="bg-img items-center justify-around flex h-screen w-screen">
+        <div className="p-4">
+          <h2 className="text-4xl font-semibold font-workSans">
+            Find the perfect <br />open source for you.
+          </h2>
+          <h2 className="mt-5 text-xl font-workSans">
+            We'll help you find the rights open source projects
+            to contribute to. <br />We'll manage
+            your commits and repository updates, for free.
+          </h2>
+          <div className="mt-8">
+            <button onClick={() => login()} className="font-normal text-[white] font-workSans rounded-lg p-4 bg-[black]">
+              GET STARTED
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    )
   )
 
 

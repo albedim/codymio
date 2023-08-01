@@ -10,6 +10,7 @@ import { BASE_URL } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { SpinnerCircular } from "spinners-react";
+import Loader from "../loading/Loader";
 
 
 interface ContributeProps {
@@ -30,7 +31,7 @@ interface Issue {
 }
 
 
-const Contribute: React.FC<ContributeProps> = ({
+const IssuesModal: React.FC<ContributeProps> = ({
   visible,
   onClose,
   repo_full_name,
@@ -116,19 +117,7 @@ const Contribute: React.FC<ContributeProps> = ({
                     <div>
                       {
                         isLoading ? (
-                          <div className="justify-around mt-24 flex">
-                            <div>
-                              <div className="justify-around flex">
-                                <SpinnerCircular
-                                  secondaryColor="#fafafa"
-                                  size={54.4}
-                                  color="black"
-                                  thickness={214}
-                                />
-                              </div>
-                              <h2 className="mt-2 text-2xl font-semibold font-workSans">Loading...</h2>
-                            </div>
-                          </div>
+                          <Loader direction={"vertical"} n={3} padding={14} height={124} width={424} />
                         ) : (
                           <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
                             {
@@ -187,4 +176,4 @@ const Contribute: React.FC<ContributeProps> = ({
   );
 };
 
-export default Contribute;
+export default IssuesModal;

@@ -5,8 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { BiGitRepoForked } from 'react-icons/bi'
 import { SpinnerCircular } from "spinners-react";
 import Repository, { Repo } from "../components/overview/Repository";
-import Contribute from "../components/modal/Modal";
+import Contribute from "../components/modal/IssuesModal";
 import { HiArrowCircleLeft, HiArrowCircleRight, HiSearch } from "react-icons/hi";
+import HomeLoader from "../components/loading/Loader";
+import Loader from "../components/loading/Loader";
+import IssuesModal from "../components/modal/IssuesModal";
 
 
 const Home = () => {
@@ -69,7 +72,7 @@ const Home = () => {
           <></>
         ) : (
           <>
-            <Contribute
+            <IssuesModal
               repo_id={modalOptions.repo_id}
               open_issues={modalOptions.repo_open_issues}
               onClose={() => setModalOptions({
@@ -166,18 +169,8 @@ const Home = () => {
               </div>
               {
                 isLoading ? (
-                  <div className="justify-around mt-24 flex">
-                    <div>
-                      <div className="justify-around flex">
-                        <SpinnerCircular
-                          secondaryColor="#fafafa"
-                          size={54.4}
-                          color="black"
-                          thickness={214}
-                        />
-                      </div>
-                      <h2 className="mt-2 text-2xl font-semibold font-workSans">Loading...</h2>
-                    </div>
+                  <div className="mt-24">
+                    <Loader padding={14} direction="horizontal" height={240} width={"auto"} n={10}/>
                   </div>
                 ) : (
                   <div className="mt-24 flex flex-wrap">
@@ -192,6 +185,7 @@ const Home = () => {
                             visible: true
                           })}
                           repository={repo}
+                          loading={false}
                         />
                       ))
                     }

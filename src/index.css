@@ -38,3 +38,21 @@ input[type="checkbox"] {
   display: flex;
 }
 
+.loading-screen {
+  box-shadow: 0 25px 150px 60px #e3e3e3;
+  background-color: #e3e3e3;
+  opacity: 40%;
+  width: 100px;
+  height: 100%;
+  position: relative;
+  animation: moveAnimation 0.8s infinite linear;
+}
+
+@keyframes moveAnimation {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: calc(100% - 30px);
+  }
+}

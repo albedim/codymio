@@ -7,6 +7,7 @@ import Header from './components/header/Header';
 import Home from './pages/Home';
 import Contribute from './pages/Contributions';
 import Contributions from './pages/Contributions';
+import NotFound from './components/not_found/NotFound';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<><Header/><Overview/></>} />
         <Route path='/contributions' element={<><Header/><Contributions/></>} />
         <Route path="/home" element={<><Header/><Home/></>} />
+        <Route path='/*' element={<NotFound/>}/>
       </Routes>
     </BrowserRouter>
   );

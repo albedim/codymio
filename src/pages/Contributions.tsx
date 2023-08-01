@@ -7,6 +7,8 @@ import { SpinnerCircular } from "spinners-react";
 import Repository, { Repo } from "../components/overview/Repository";
 import Contribution, { RepoStatus } from "../components/contribution/Contribution";
 import jwtDecode from "jwt-decode";
+import Loader from "../components/loading/Loader";
+import NoResults from "../components/no_results/NoResults";
 
 interface ContributedRepo {
   contributed_id: number,
@@ -142,43 +144,37 @@ const Contributions = () => {
             </div>
             {
               isLoading ? (
-                <div className="justify-around mt-24 flex">
-                  <div>
-                    <div className="justify-around flex">
-                      <SpinnerCircular
-                        secondaryColor="#fafafa"
-                        size={54.4}
-                        color="black"
-                        thickness={214}
-                      />
-                    </div>
-                    <h2 className="mt-2 text-2xl font-semibold font-workSans">Loading...</h2>
-                  </div>
+                <div className="mt-24">
+                  <Loader padding={14} direction="horizontal" height={240} width={"auto"} n={10}/>
                 </div>
               ) : (
                 <div className="mt-8 flex-wrap flex">
                   {
-                    data[page].map((contributedRepo: ContributedRepo) => (
-                      <Contribution
-                        repository={{
-                          name: contributedRepo.repository.repo_full_name.split("/")[1],
-                          github_repo_id: contributedRepo.repository.repo_id,
-                          full_name: contributedRepo.repository.repo_full_name,
-                          language: "",
-                          status: contributedRepo.status
-                        }}
-
-                        issue={{
-                          title: contributedRepo.issue.issue_title,
-                          number: contributedRepo.issue.issue_number,
-                          issue_id: contributedRepo.issue.issue_id,
-                          body: contributedRepo.issue.issue_body,
-                          owner: contributedRepo.issue.issue_owner
-                        }}
-
-                        onRemove={() => removeContribution(contributedRepo.contributed_id)}
-                      />
-                    ))
+                    data[page].length > 0 ? (
+                      data[page].map((contributedRepo: ContributedRepo) => (
+                        <Contribution
+                          repository={{
+                            name: contributedRepo.repository.repo_full_name.split("/")[1],
+                            github_repo_id: contributedRepo.repository.repo_id,
+                            full_name: contributedRepo.repository.repo_full_name,
+                            language: "",
+                            status: contributedRepo.status
+                          }}
+  
+                          issue={{
+                            title: contributedRepo.issue.issue_title,
+                            number: contributedRepo.issue.issue_number,
+                            issue_id: contributedRepo.issue.issue_id,
+                            body: contributedRepo.issue.issue_body,
+                            owner: contributedRepo.issue.issue_owner
+                          }}
+  
+                          onRemove={() => removeContribution(contributedRepo.contributed_id)}
+                        />
+                      ))
+                    ):(
+                      <NoResults/>
+                    )
                   }
                 </div>
               )
