@@ -5,10 +5,11 @@ import "./Modal.css";
 import axios from "axios";
 import { MdBookmarkRemove, MdOutlineBookmark, MdOutlineFlightTakeoff } from "react-icons/md";
 import { FaRegSadCry } from "react-icons/fa";
-import { HiArrowCircleRight } from "react-icons/hi";
+import { HiArrowCircleLeft, HiArrowCircleRight } from "react-icons/hi";
 import { BASE_URL } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import { SpinnerCircular } from "spinners-react";
 
 
 interface ContributeProps {
@@ -39,6 +40,8 @@ const Contribute: React.FC<ContributeProps> = ({
 
   const [page, setPage] = useState(0)
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const token: any = window.localStorage.getItem("token")
 
   const user: any = jwtDecode<any>(token).sub
@@ -49,11 +52,13 @@ const Contribute: React.FC<ContributeProps> = ({
 
 
   const getIssues = async () => {
+    setIsLoading(true)
     await axios.get(BASE_URL + "/repo-github/issues/" + repo_full_name + "?page=" + page, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
       .then(res => setIssues(res.data.param))
       .catch(err => console.log(err))
+    setIsLoading(false)
   }
 
   const addContribution = async (obj: any) => {
@@ -63,6 +68,7 @@ const Contribute: React.FC<ContributeProps> = ({
   }
 
   useEffect(() => {
+    setPage(0)
     getIssues()
   }, [visible])
 
@@ -86,45 +92,86 @@ const Contribute: React.FC<ContributeProps> = ({
                     <div className="pb-4">
                       <h2 className="text-xl font-semibold font-workSans">Issues ({open_issues})</h2>
                     </div>
-                    <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
+                    <div className="items-center justify-around flex">
+                      <div className="items-center flex">
+                        <div className="p-2">
+                          <HiArrowCircleLeft style={{ opacity: isLoading || page == 0 ? "40%" : "100%" }} size={34} onClick={() => {
+                            if (page > 0) {
+                              setPage(page - 1)
+                              getIssues()
+                            }
+                          }} />
+                        </div>
+                        <h2 className="text-xl font-workSans">{page}</h2>
+                        <div className="p-2" >
+                          <HiArrowCircleRight style={{ opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
+                            if (page <= 30) {
+                              setPage(page + 1)
+                              getIssues()
+                            }
+                          }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
                       {
-                        issues.map((issue: Issue) => (
-                          <div className="p-4">
-                            <div className="justify-between flex rounded-lg p-4 bg-[#fafafa]">
-                              <div>
-                                <h2 
-                                  style={{ maxWidth: 340 }} 
-                                  className="font-semibold text-lg font-workSans">{issue.title}
-                                </h2>
-                                <h2 
-                                  className="font-normal text-md font-workSans">@{issue.creator_username}
-                                </h2>
-                                <h2 
-                                  className="mt-1 font-semibold font-workSans text-[gray]"
-                                  >{
-                                    issue.created_on.substring(0, 10).split("-")[2] + "/" +
-                                    issue.created_on.substring(0, 10).split("-")[1] + "/" +
-                                    issue.created_on.substring(0, 10).split("-")[0]
-                                  }
-                                </h2>
+                        isLoading ? (
+                          <div className="justify-around mt-24 flex">
+                            <div>
+                              <div className="justify-around flex">
+                                <SpinnerCircular
+                                  secondaryColor="#fafafa"
+                                  size={54.4}
+                                  color="black"
+                                  thickness={214}
+                                />
                               </div>
-                              <div className="items-center justify-around flex">
-                                <button><HiArrowCircleRight onClick={() => {
-                                  addContribution({
-                                    issue_owner: issue.creator_username,
-                                    user_id: user.user_id,
-                                    repo_id: repo_id,
-                                    repo_full_name: repo_full_name,
-                                    issue_id: issue.issue_id,
-                                    issue_number: issue.number,
-                                    issue_title: issue.title,
-                                    issue_body: issue.body
-                                  })
-                                }} size={34} color="black" /></button>
-                              </div>
+                              <h2 className="mt-2 text-2xl font-semibold font-workSans">Loading...</h2>
                             </div>
                           </div>
-                        ))
+                        ) : (
+                          <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
+                            {
+                              issues.map((issue: Issue) => (
+                                <div className="p-4">
+                                  <div className="justify-between flex rounded-lg p-4 bg-[#fafafa]">
+                                    <div>
+                                      <h2
+                                        style={{ maxWidth: 340 }}
+                                        className="font-semibold text-lg font-workSans">{issue.title}
+                                      </h2>
+                                      <h2
+                                        className="font-normal text-md font-workSans">@{issue.creator_username}
+                                      </h2>
+                                      <h2
+                                        className="mt-1 font-semibold font-workSans text-[gray]"
+                                      >{
+                                          issue.created_on.substring(0, 10).split("-")[2] + "/" +
+                                          issue.created_on.substring(0, 10).split("-")[1] + "/" +
+                                          issue.created_on.substring(0, 10).split("-")[0]
+                                        }
+                                      </h2>
+                                    </div>
+                                    <div className="items-center justify-around flex">
+                                      <button><HiArrowCircleRight onClick={() => {
+                                        addContribution({
+                                          issue_owner: issue.creator_username,
+                                          user_id: user.user_id,
+                                          repo_id: repo_id,
+                                          repo_full_name: repo_full_name,
+                                          issue_id: issue.issue_id,
+                                          issue_number: issue.number,
+                                          issue_title: issue.title,
+                                          issue_body: issue.body
+                                        })
+                                      }} size={34} color="black" /></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))
+                            }
+                          </div>
+                        )
                       }
                     </div>
                   </div>

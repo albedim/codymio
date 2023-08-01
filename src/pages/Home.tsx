@@ -6,12 +6,14 @@ import { BiGitRepoForked } from 'react-icons/bi'
 import { SpinnerCircular } from "spinners-react";
 import Repository, { Repo } from "../components/overview/Repository";
 import Contribute from "../components/modal/Modal";
-import { HiSearch } from "react-icons/hi";
+import { HiArrowCircleLeft, HiArrowCircleRight, HiSearch } from "react-icons/hi";
 
 
 const Home = () => {
 
   const [data, setData] = useState<Repo[]>([])
+
+  const [page, setPage] = useState(0)
 
   const [modalOptions, setModalOptions] = useState({ repo_id: 0, repo_open_issues: 0, repo_full_name: "", visible: false })
 
@@ -32,7 +34,7 @@ const Home = () => {
 
   const getData = async () => {
     setIsLoading(true)
-    await axios.get(BASE_URL + "/repo-github/fetch?query=" + (anyTopic ? "all" : query) + "&language=" + language)
+    await axios.get(BASE_URL + "/repo-github/fetch?query=" + (anyTopic ? "all" : query) + "&language=" + language + "&page="+page)
       .then(res => setData(res.data.param))
       .catch(err => console.log(err))
     setIsLoading(false)
@@ -125,12 +127,14 @@ const Home = () => {
                       anyTopic || !anyTopic && query != "" ? (
                         <button className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4 bg-[black]" onClick={() => {
                           getData()
+                          setPage(0)
                         }} >
                           <HiSearch size={24} color="white" />
                         </button>
                       ) : (
                         <button disabled className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4 bg-[black]" onClick={() => {
                           getData()
+                          setPage(0)
                         }} >
                           <HiSearch size={24} color="white" />
                         </button>
@@ -139,8 +143,26 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div>
-                <h2>{query != "" && language != "choose"}</h2>
+              <div className="items-center justify-around flex">
+                <div className="items-center flex">
+                  <div className="p-2">
+                    <HiArrowCircleLeft style={{ opacity: isLoading || page == 0 ? "40%" : "100%" }} size={34} onClick={() => {
+                      if(page > 0){
+                        setPage(page - 1)
+                        getData()
+                      }
+                    }}/>
+                  </div>
+                  <h2 className="text-xl font-workSans">{page}</h2>
+                  <div className="p-2" >
+                    <HiArrowCircleRight style={{ opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
+                      if(page < 30){
+                        setPage(page + 1)
+                        getData()
+                      }
+                    }}/>
+                  </div>
+                </div>
               </div>
               {
                 isLoading ? (

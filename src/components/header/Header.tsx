@@ -49,7 +49,7 @@ const Header = () => {
           isLoggedIn ? (
             <div className="items-center flex">
               <div className="pr-6">
-                <LuLogOut size={18} onClick={() => {
+                <LuLogOut className="cursor-pointer" size={18} onClick={() => {
                   window.localStorage.removeItem("token")
                   window.localStorage.removeItem("github-token")
                   window.location.href = BASE_FE_URL
@@ -69,7 +69,7 @@ const Header = () => {
               </a>
             </div>
           ) : (
-            <h2>sdgsd</h2>
+            <></>
           )
         }
       </div>
