@@ -98,7 +98,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                       <div className="items-center flex">
                         <div className="p-2">
                           <HiArrowCircleLeft style={{ opacity: isLoading || page == 0 ? "40%" : "100%" }} size={34} onClick={() => {
-                            if(isLoading || page == 0 )
+                            if (isLoading || page == 0)
                               return;
                             if (page > 0) {
                               setPage(page - 1)
@@ -109,7 +109,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                         <h2 className="text-xl font-workSans">{page}</h2>
                         <div className="p-2" >
                           <HiArrowCircleRight style={{ opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
-                            if(isLoading || page == 30 )
+                            if (isLoading || page == 30)
                               return;
                             if (page <= 30) {
                               setPage(page + 1)
@@ -124,9 +124,9 @@ const IssuesModal: React.FC<ContributeProps> = ({
                         isLoading ? (
                           <Loader direction={"vertical"} n={3} padding={14} height={124} width={424} />
                         ) : (
-                          <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
-                            {
-                              issues.length > 0 ? (
+                          issues.length > 0 ? (
+                            <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
+                              {
                                 issues.map((issue: Issue) => (
                                   <div className="p-4">
                                     <div className="justify-between flex rounded-lg p-4 bg-[#fafafa]">
@@ -164,11 +164,11 @@ const IssuesModal: React.FC<ContributeProps> = ({
                                     </div>
                                   </div>
                                 ))
-                              ):(
-                                <NoResults/>
-                              )
-                            }
-                          </div>
+                              }
+                            </div>
+                          ) : (
+                            <NoResults />
+                          )
                         )
                       }
                     </div>
