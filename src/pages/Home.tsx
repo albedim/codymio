@@ -158,9 +158,9 @@ const Home = () => {
                       }
                     }}/>
                   </div>
-                  <h2 className="text-xl font-workSans">{page}</h2>
+                  <h2 className="text-xl font-workSans">{page + 1}</h2>
                   <div className="p-2" >
-                    <HiArrowCircleRight style={{ cursor: isLoading ? "default" : "pointer", opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
+                    <HiArrowCircleRight style={{ cursor: isLoading || page == 30 ? "default" : "pointer", opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
                       if(isLoading || page == 30 )
                         return;
                       if(page < 30){

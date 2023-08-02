@@ -97,7 +97,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                     <div className="items-center justify-around flex">
                       <div className="items-center flex">
                         <div className="p-2">
-                          <HiArrowCircleLeft style={{ opacity: isLoading || page == 0 ? "40%" : "100%" }} size={34} onClick={() => {
+                          <HiArrowCircleLeft style={{ cursor: isLoading || page == 0 ? "default" : "pointer", opacity: isLoading || page == 0 ? "40%" : "100%" }} size={34} onClick={() => {
                             if (isLoading || page == 0)
                               return;
                             if (page > 0) {
@@ -106,9 +106,9 @@ const IssuesModal: React.FC<ContributeProps> = ({
                             }
                           }} />
                         </div>
-                        <h2 className="text-xl font-workSans">{page}</h2>
+                        <h2 className="text-xl font-workSans">{page + 1}</h2>
                         <div className="p-2" >
-                          <HiArrowCircleRight style={{ opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
+                          <HiArrowCircleRight style={{ cursor: isLoading || page == 30 ? "default" : "pointer", opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
                             if (isLoading || page == 30)
                               return;
                             if (page <= 30) {
