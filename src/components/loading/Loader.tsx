@@ -38,7 +38,7 @@ const Loader: React.FC<LoaderProps> = ({
       {
         [...Array(n)].map((e, i) => (
           <div style={{ padding: padding }}>
-            <div style={style()} className="repository rounded-lg bg-[#f5f5f5]">
+            <div style={style()} className="rounded-lg bg-[#f5f5f5]">
               <div className="loading-screen"></div>
             </div>
           </div>
