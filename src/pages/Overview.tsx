@@ -64,9 +64,9 @@ const Overview = () => {
             Find the perfect <br />open source for you.
           </h2>
           <h2 className="mt-5 text-xl font-workSans">
-            We'll help you find the rights open source projects
-            to contribute to. <br />We'll manage
-            your commits and repository updates, for free.
+            We'll help you find the right open source projects
+            to contribute to. <br />Contrycode is also going to manage
+            your commits and <br />track your repository updates.
           </h2>
           <div className="mt-8">
             <button onClick={() => login()} className="font-normal text-[white] font-workSans rounded-lg p-4 bg-[black]">
