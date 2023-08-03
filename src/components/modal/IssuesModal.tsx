@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FiAlertCircle } from 'react-icons/fi'
 import ReactDOM from "react-dom";
 import { RiCloseFill } from "react-icons/ri";
 import "./Modal.css";
@@ -12,6 +13,7 @@ import jwtDecode from "jwt-decode";
 import { SpinnerCircular } from "spinners-react";
 import Loader from "../loading/Loader";
 import NoResults from "../no_results/NoResults";
+import { TbAlertTriangleFilled } from "react-icons/tb";
 
 
 interface ContributeProps {
@@ -27,6 +29,7 @@ interface Issue {
   created_on: string,
   body: string,
   number: number,
+  has_pull_requests: boolean,
   issue_id: number,
   creator_username: string
 }
@@ -55,7 +58,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
 
   const getIssues = async () => {
     setIsLoading(true)
-    await axios.get(BASE_URL + "/repo-github/issues/" + repo_full_name + "?page=" + page, {
+    await axios.get(BASE_URL + "/repo-github/" + repo_full_name + "/issues?page=" + page, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
       .then(res => setIssues(res.data.param))
@@ -148,18 +151,31 @@ const IssuesModal: React.FC<ContributeProps> = ({
                                         </h2>
                                       </div>
                                       <div className="items-center justify-around flex">
-                                        <button><HiArrowCircleRight onClick={() => {
-                                          addContribution({
-                                            issue_owner: issue.creator_username,
-                                            user_id: user.user_id,
-                                            repo_id: repo_id,
-                                            repo_full_name: repo_full_name,
-                                            issue_id: issue.issue_id,
-                                            issue_number: issue.number,
-                                            issue_title: issue.title,
-                                            issue_body: issue.body
-                                          })
-                                        }} size={34} color="black" /></button>
+                                        <div>
+                                          {
+                                            issue.has_pull_requests ? (
+                                              <div className="pb-4 justify-around flex">
+                                                <a title="This issue has pull requests already.">
+                                                  <TbAlertTriangleFilled className="cursor-pointer" opacity={"40%"} size={24} color="orange" />
+                                                </a>
+                                              </div>
+                                            ):(
+                                              <></>
+                                            )
+                                          }
+                                          <button><HiArrowCircleRight onClick={() => {
+                                            addContribution({
+                                              issue_owner: issue.creator_username,
+                                              user_id: user.user_id,
+                                              repo_id: repo_id,
+                                              repo_full_name: repo_full_name,
+                                              issue_id: issue.issue_id,
+                                              issue_number: issue.number,
+                                              issue_title: issue.title,
+                                              issue_body: issue.body
+                                            })
+                                          }} size={34} color="black" /></button>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
