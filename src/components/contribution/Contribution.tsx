@@ -74,7 +74,8 @@ const Contribution: React.FC<RepositoryProps> = ({
             <div><h2 className="bg-opacity-40 text-[white] rounded-md text-xs p-1 font-workSans bg-[red]" >PROBLEM</h2></div>
           </div>
           {
-            issue.body.length > 240 ? (
+            issue.body != null ? (
+              issue.body.length > 240 ? (
                 <div className="mt-2">
                   <h2 className="pt-2 font-workSans" >
                     {showMore ? issue.body : issue.body.substring(0,240)+"..."}
@@ -83,8 +84,11 @@ const Contribution: React.FC<RepositoryProps> = ({
                     {showMore ? "Show less" : "Show more"}
                   </h2>
                 </div>
+              ):(
+                <h2 className="pt-2 font-workSans" >{issue.body}</h2>
+              )
             ):(
-              <h2 className="pt-2 font-workSans" >{issue.body}</h2>
+              <h2 className="italic pt-2 font-workSans" >No description provided for this issue.</h2>
             )
           }
         </div>
