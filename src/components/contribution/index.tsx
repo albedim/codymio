@@ -2,17 +2,26 @@ import React, { useState } from "react"
 import { BsFillSignMergeLeftFill } from 'react-icons/bs'
 import { AiFillClockCircle, AiFillDelete } from 'react-icons/ai'
 import { PiPushPinFill } from 'react-icons/pi'
-import { BiGitRepoForked } from 'react-icons/bi'
-import { useNavigate } from "react-router-dom"
+import { USED_COLORS } from "../../App"
 
 
-interface RepositoryProps {
-  repository: Repo
+interface ContributionProps {
+  repository: RepositoryType
   issue: Issue,
   onRemove: () => void
 }
 
-export interface Repo {
+
+export interface Issue {
+  title: string,
+  issue_id: number,
+  number: number,
+  body: string,
+  owner: string
+}
+
+
+export interface RepositoryType {
   name: string,
   github_repo_id: number,
   full_name: string,
@@ -26,15 +35,8 @@ export interface RepoStatus{
   merged: boolean
 }
 
-export interface Issue {
-  title: string,
-  issue_id: number,
-  number: number,
-  body: string,
-  owner: string
-}
 
-const Contribution: React.FC<RepositoryProps> = ({
+const Contribution: React.FC<ContributionProps> = ({
   repository,
   issue,
   onRemove
@@ -45,11 +47,11 @@ const Contribution: React.FC<RepositoryProps> = ({
 
   return (
     <div className="pb-14 p-4">
-      <div className="repository p-6 rounded-lg bg-[#fafafa]">
+      <div style={{ borderColor: USED_COLORS[3], backgroundColor: USED_COLORS[2] }} className="border-2 repository p-6 rounded-lg">
         <div className="itens-center justify-between flex">
           <div>
             <a target="_blank" href={"https://github.com/" + repository.full_name}>
-              <h2 className="hover:underline text-xl font-semibold font-workSans">{repository.name}</h2>
+              <h2 style={{ color: USED_COLORS[1] }} className="hover:underline text-xl font-semibold font-workSans">{repository.name}</h2>
             </a>
           </div>
           <div className="items-center justify-around flex">
@@ -57,15 +59,16 @@ const Contribution: React.FC<RepositoryProps> = ({
           </div>
         </div>
         <div>
-          <h2 className="font-workSans">@{repository.full_name.split("/")[0]}</h2>
+          <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">@{repository.full_name.split("/")[0]}</h2>
         </div>
-        <div className="pt-2 border-t mt-4">
+        <div style={{ borderColor: USED_COLORS[0] }} className="pt-2 border-t mt-4">
           <div className="items-center justify-between flex">
             <div>
               <a 
                 target="_blank" 
                 href={"https://github.com/" + repository.full_name + "/issues/" + issue.number}>
-                <h2 
+                <h2
+                  style={{ color: USED_COLORS[1] }}
                   className="hover:underline cursor-pointer text-lg font-semibold font-workSans" >
                   {issue.title} • <span className="text-sm font-normal">@{repository.full_name.split("/")[0]}</span>
                 </h2>
@@ -77,18 +80,18 @@ const Contribution: React.FC<RepositoryProps> = ({
             issue.body != null ? (
               issue.body.length > 240 ? (
                 <div className="mt-2">
-                  <h2 className="pt-2 font-workSans" >
+                  <h2 style={{ color: USED_COLORS[1] }} className="pt-2 font-workSans" >
                     {showMore ? issue.body : issue.body.substring(0,240)+"..."}
                   </h2>
-                  <h2 className="cursor-pointer font-semibold underline" onClick={() => setShowMore(!showMore)} >
+                  <h2 style={{ color: USED_COLORS[1] }} className="cursor-pointer font-semibold underline" onClick={() => setShowMore(!showMore)} >
                     {showMore ? "Show less" : "Show more"}
                   </h2>
                 </div>
               ):(
-                <h2 className="pt-2 font-workSans" >{issue.body}</h2>
+                <h2 style={{ color: USED_COLORS[1] }} className="pt-2 font-workSans" >{issue.body}</h2>
               )
             ):(
-              <h2 className="italic pt-2 font-workSans" >No description provided for this issue.</h2>
+              <h2 style={{ color: USED_COLORS[1] }} className="italic pt-2 font-workSans" >No description provided for this issue.</h2>
             )
           }
         </div>

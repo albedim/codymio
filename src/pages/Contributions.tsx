@@ -2,13 +2,12 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { BASE_URL } from "../utils/utils";
 import { useNavigate } from "react-router-dom";
-import { BiGitRepoForked } from 'react-icons/bi'
-import { SpinnerCircular } from "spinners-react";
-import Repository, { Repo } from "../components/overview/Repository";
-import Contribution, { RepoStatus } from "../components/contribution/Contribution";
+import Contribution, { RepoStatus } from "../components/contribution";
 import jwtDecode from "jwt-decode";
-import Loader from "../components/loading/Loader";
-import NoResults from "../components/no_results/NoResults";
+import Loader from "../components/loading";
+import NoResults from "../components/no_results";
+import { USED_COLORS } from "../App";
+
 
 interface ContributedRepo {
   contributed_id: number,
@@ -60,7 +59,7 @@ const Contributions = () => {
 
   const getData = async () => {
     setIsLoading(true)
-    await axios.get(BASE_URL + "/contributed-repo/user/" + user.user_id, {
+    await axios.get(BASE_URL + "/contributions/user/" + user.user_id, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
       .then(res => {
@@ -73,7 +72,7 @@ const Contributions = () => {
   }
 
   const setSeen = async () => {
-    await axios.post(BASE_URL + "/contributed-repo/seen", { user_id: user.user_id }, {
+    await axios.post(BASE_URL + "/contributions/seen", { user_id: user.user_id }, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
       .then(res => {
@@ -98,7 +97,7 @@ const Contributions = () => {
   }
 
   const removeContribution = async (contributedRepoId: number) => {
-    await axios.delete(BASE_URL + "/contributed-repo/" + contributedRepoId)
+    await axios.delete(BASE_URL + "/contributions/" + contributedRepoId)
     .then((res) => getData())
     .catch(err => console.log(err))
   }
@@ -109,31 +108,43 @@ const Contributions = () => {
   }, [])
 
   return (
-    <div className="mt-40 justify-around flex w-screen">
+    <div style={{ backgroundColor: USED_COLORS[0] }} className="mt-40 justify-around flex w-screen">
       {
         isSessionLoading ? (
           <></>
         ):(
           <div className="p-14">
             <div>
-              <h2 className="text-2xl font-semibold font-workSans">My Contributions</h2>
+              <h2 style={{ color: USED_COLORS[1] }} className="text-2xl font-semibold font-workSans">My Contributions</h2>
             </div>
             <div className="flex">
-              <div onClick={() => {
-                setPage("unmerged")
-              }} className="cursor-pointer pb-2 p-4" style={{ borderBottom: page == 'unmerged' ? "2px solid black" : "" }}>
-                <h2 className="font-workSans">Unmerged</h2>
+              <div 
+                onClick={() => {
+                  setPage("unmerged")
+                }} 
+                className="cursor-pointer pb-2 p-4" 
+                style={{ borderBottom: page == 'unmerged' ? "2px solid " + USED_COLORS[1] : "" }}
+              >
+                <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">Unmerged</h2>
               </div>
-              <div onClick={() => {
-                setPage("merged")
-                setSeen()
-              }} className="cursor-pointer items-center flex pb-2 p-4" style={{ borderBottom: page == 'merged' ? "2px solid black" : "" }}>
-                <h2 className="font-workSans">Merged</h2>
+              <div 
+                onClick={() => {
+                  setPage("merged")
+                  setSeen()
+                }} 
+                className="cursor-pointer items-center flex pb-2 p-4" 
+                style={{ borderBottom: page == 'merged' ? "2px solid " + USED_COLORS[1] : "" }}
+              >
+                <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">Merged</h2>
                 {
                   data.unseen > 0 ? (
                     <div className="pl-4">
                       <div className="rounded-full pb-0 pt-0 p-1 bg-[red]">
-                        <h2 className="text-sm rounded-full pb-0 pt-0 p-1 bg-[red] text-[white] font-workSans">{data.unseen}</h2>
+                        <h2 
+                          className="text-sm rounded-full pb-0 pt-0 p-1 
+                          bg-[red] font-workSans"
+                          style={{ color: USED_COLORS[1] }}>{data.unseen}
+                        </h2>
                       </div>
                     </div>
                   ) : (
@@ -145,7 +156,13 @@ const Contributions = () => {
             {
               isLoading ? (
                 <div className="mt-24">
-                  <Loader padding={14} direction="horizontal" height={240} width={454} n={10}/>
+                  <Loader 
+                    padding={14} 
+                    direction="horizontal" 
+                    height={240} 
+                    width={454} 
+                    n={10}
+                  />
                 </div>
               ) : (
                 <div className="mt-8 flex-wrap flex">

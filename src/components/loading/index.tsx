@@ -1,5 +1,5 @@
 import React from "react";
-import Repository from "../overview/Repository";
+import { USED_COLORS } from "../../App";
 
 interface LoaderProps{
   n: number,
@@ -25,7 +25,7 @@ const Loader: React.FC<LoaderProps> = ({
   }
 
   const style = () => {
-    let obj = {}
+    let obj: any = { backgroundColor: USED_COLORS[2] }
     if(width != "auto")
       obj = { ...obj, width: width }
     if(height != "auto")
@@ -38,7 +38,7 @@ const Loader: React.FC<LoaderProps> = ({
       {
         [...Array(n)].map((e, i) => (
           <div style={{ padding: padding }}>
-            <div style={style()} className="rounded-lg bg-[#f5f5f5]">
+            <div style={ style()} className="rounded-lg">
               <div className="loading-screen"></div>
             </div>
           </div>

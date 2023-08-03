@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { FiAlertCircle } from 'react-icons/fi'
-import ReactDOM from "react-dom";
+import React, { 
+  useEffect, 
+  useState 
+} from "react";
 import { RiCloseFill } from "react-icons/ri";
 import "./Modal.css";
 import axios from "axios";
-import { MdBookmarkRemove, MdOutlineBookmark, MdOutlineFlightTakeoff } from "react-icons/md";
-import { FaRegSadCry } from "react-icons/fa";
-import { HiArrowCircleLeft, HiArrowCircleRight } from "react-icons/hi";
+import { 
+  HiArrowCircleLeft, 
+  HiArrowCircleRight 
+} from "react-icons/hi";
 import { BASE_URL } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import { SpinnerCircular } from "spinners-react";
-import Loader from "../loading/Loader";
-import NoResults from "../no_results/NoResults";
+import Loader from "../loading";
+import NoResults from "../no_results";
 import { TbAlertTriangleFilled } from "react-icons/tb";
+import { USED_COLORS } from "../../App";
 
 
 interface ContributeProps {
@@ -58,7 +60,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
 
   const getIssues = async () => {
     setIsLoading(true)
-    await axios.get(BASE_URL + "/repo-github/" + repo_full_name + "/issues?page=" + page, {
+    await axios.get(BASE_URL + "/repositories/" + repo_full_name + "/issues?page=" + page, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
       .then(res => setIssues(res.data.param))
@@ -67,7 +69,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
   }
 
   const addContribution = async (obj: any) => {
-    await axios.post(BASE_URL + "/contributed-repo/create", obj)
+    await axios.post(BASE_URL + "/contributions/create", obj)
       .then(res => navigate("/contributions"))
       .catch(err => console.log(err))
   }
@@ -84,7 +86,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
           <div className="modal">
             <div className="modal-wrapper p-4">
               <div
-                style={{ borderRadius: 8 }}
+                style={{ backgroundColor: USED_COLORS[0], borderRadius: 8 }}
                 className="modal-content"
                 onClick={e => e.stopPropagation()}
               >
@@ -95,12 +97,12 @@ const IssuesModal: React.FC<ContributeProps> = ({
                 <div className="p-8 justify-around flex">
                   <div>
                     <div className="pb-4">
-                      <h2 className="text-xl font-semibold font-workSans">Issues ({open_issues})</h2>
+                      <h2 style={{ color: USED_COLORS[1] }} className="text-xl font-semibold font-workSans">Issues ({open_issues})</h2>
                     </div>
                     <div className="items-center justify-around flex">
                       <div className="items-center flex">
                         <div className="p-2">
-                          <HiArrowCircleLeft style={{ cursor: isLoading || page == 0 ? "default" : "pointer", opacity: isLoading || page == 0 ? "40%" : "100%" }} size={34} onClick={() => {
+                          <HiArrowCircleLeft color={USED_COLORS[1]} style={{ cursor: isLoading || page == 0 ? "default" : "pointer", opacity: isLoading || page == 0 ? "40%" : "100%" }} size={34} onClick={() => {
                             if (isLoading || page == 0)
                               return;
                             if (page > 0) {
@@ -109,9 +111,9 @@ const IssuesModal: React.FC<ContributeProps> = ({
                             }
                           }} />
                         </div>
-                        <h2 className="text-xl font-workSans">{page + 1}</h2>
+                        <h2 style={{ color: USED_COLORS[1] }} className="text-xl font-workSans">{page + 1}</h2>
                         <div className="p-2" >
-                          <HiArrowCircleRight style={{ cursor: isLoading || page == 30 ? "default" : "pointer", opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
+                          <HiArrowCircleRight color={USED_COLORS[1]} style={{ cursor: isLoading || page == 30 ? "default" : "pointer", opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
                             if (isLoading || page == 30)
                               return;
                             if (page <= 30) {
@@ -132,13 +134,14 @@ const IssuesModal: React.FC<ContributeProps> = ({
                               {
                                 issues.map((issue: Issue) => (
                                   <div className="p-4">
-                                    <div className="justify-between flex rounded-lg p-4 bg-[#fafafa]">
+                                    <div style={{ backgroundColor: USED_COLORS[2] }} className="justify-between flex rounded-lg p-4">
                                       <div>
                                         <h2
-                                          style={{ maxWidth: 340 }}
+                                          style={{ color: USED_COLORS[1], maxWidth: 340 }}
                                           className="font-semibold text-lg font-workSans">{issue.title}
                                         </h2>
                                         <h2
+                                          style={{ color: USED_COLORS[1] }}
                                           className="font-normal text-md font-workSans">@{issue.creator_username}
                                         </h2>
                                         <h2
@@ -174,7 +177,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                                               issue_title: issue.title,
                                               issue_body: issue.body
                                             })
-                                          }} size={34} color="black" /></button>
+                                          }} size={34} color={USED_COLORS[1]} /></button>
                                         </div>
                                       </div>
                                     </div>

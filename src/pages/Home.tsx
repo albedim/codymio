@@ -2,19 +2,17 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { BASE_URL } from "../utils/utils";
 import { useNavigate } from "react-router-dom";
-import { BiGitRepoForked } from 'react-icons/bi'
-import { SpinnerCircular } from "spinners-react";
-import Repository, { Repo } from "../components/overview/Repository";
-import Contribute from "../components/modal/IssuesModal";
 import { HiArrowCircleLeft, HiArrowCircleRight, HiSearch } from "react-icons/hi";
-import HomeLoader from "../components/loading/Loader";
-import Loader from "../components/loading/Loader";
-import IssuesModal from "../components/modal/IssuesModal";
+import HomeLoader from "../components/loading";
+import Loader from "../components/loading";
+import IssuesModal from "../components/modal";
+import Repository, { RepositoryType } from "../components/repository";
+import { USED_COLORS } from "../App";
 
 
 const Home = () => {
 
-  const [data, setData] = useState<Repo[]>([])
+  const [data, setData] = useState<RepositoryType[]>([])
 
   const [page, setPage] = useState(0)
 
@@ -37,7 +35,7 @@ const Home = () => {
 
   const getData = async () => {
     setIsLoading(true)
-    await axios.get(BASE_URL + "/repo-github/fetch?query=" + (anyTopic ? "all" : query) + "&language=" + language + "&page="+page, {
+    await axios.get(BASE_URL + "/repositories/fetch?query=" + (anyTopic ? "all" : query) + "&language=" + language + "&page="+page, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("token")}
     })
       .then(res => setData(res.data.param))
@@ -68,7 +66,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="mt-40 items-center justify-around w-screen flex">
+    <div style={{ backgroundColor: USED_COLORS[0] }} className="mt-40 items-center justify-around w-screen flex">
       {
         isSessionLoading ? (
           <></>
@@ -102,23 +100,27 @@ const Home = () => {
                           type="checkbox"
                         />
                       </div>
-                      <h2 className="font-semibold font-workSans" >Any Topic</h2>
+                      <h2 style={{ color: USED_COLORS[1] }} className="font-semibold font-workSans" >Any Topic</h2>
                     </div>
                   </div>
                   <div className="p-4">
                     <input
-                      style={{ display: anyTopic ? 'none' : 'block', opacity: anyTopic ? "64%" : "100%" }}
+                      style={{ color: USED_COLORS[1], backgroundColor: USED_COLORS[2], display: anyTopic ? 'none' : 'block', opacity: anyTopic ? "64%" : "100%" }}
                       disabled={anyTopic}
                       onChange={(e) => setQuery(e.target.value)}
                       value={query}
                       placeholder="Search for a topic..."
-                      className="pr-14 rounded-lg p-4 bg-[#fafafa]"
+                      className="pr-14 rounded-lg p-4"
                       type="text"
                     />
                   </div>
                   <div className="p-4">
-                    <select className="pr-14 rounded-lg p-4 bg-[#fafafa]" onChange={(e) => setLanguage(e.target.value)}
-                      value={language} name="" id="">
+                    <select 
+                      className="pr-14 rounded-lg p-4" 
+                      onChange={(e) => setLanguage(e.target.value)}
+                      value={language} name="" id=""
+                      style={{ color: USED_COLORS[1], backgroundColor: USED_COLORS[2] }}
+                    >
                       <option value="all">Any Language</option>
                       {
                         availableLanguages.map((language: string) => (
@@ -130,18 +132,26 @@ const Home = () => {
                   <div className="p-4">
                     {
                       anyTopic || !anyTopic && query != "" ? (
-                        <button className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4 bg-[black]" onClick={() => {
-                          getData()
-                          setPage(0)
-                        }} >
-                          <HiSearch size={24} color="white" />
+                        <button 
+                          className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4" 
+                          style={{ backgroundColor: USED_COLORS[1] }}
+                          onClick={() => {
+                            getData()
+                            setPage(0)
+                          }} 
+                        >
+                          <HiSearch size={24} color={USED_COLORS[0]} />
                         </button>
                       ) : (
-                        <button disabled className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4 bg-[black]" onClick={() => {
-                          getData()
-                          setPage(0)
-                        }} >
-                          <HiSearch size={24} color="white" />
+                        <button 
+                          disabled 
+                          className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4" 
+                          style={{ backgroundColor: USED_COLORS[1] }}
+                          onClick={() => {
+                            getData()
+                            setPage(0)
+                          }} >
+                          <HiSearch size={24} color={USED_COLORS[0]} />
                         </button>
                       )
                     }
@@ -151,37 +161,54 @@ const Home = () => {
               <div className="items-center justify-around flex">
                 <div className="items-center flex">
                   <div className="p-2">
-                    <HiArrowCircleLeft style={{ cursor: isLoading || page == 0 ? "default" : "pointer", opacity: isLoading || page == 0 ? "40%" : "100%" }} size={34} onClick={() => {
-                      if(isLoading || page == 0 )
-                        return;
-                      if(page > 0){
-                        setPage(page - 1)
-                        getData()
-                      }
-                    }}/>
+                    <HiArrowCircleLeft 
+                      style={{ cursor: isLoading || page == 0 ? "default" : "pointer", 
+                      opacity: isLoading || page == 0 ? "40%" : "100%" }}
+                      size={34} 
+                      color={USED_COLORS[1]}
+                      onClick={() => {
+                        if(isLoading || page == 0 )
+                          return;
+                        if(page > 0){
+                          setPage(page - 1)
+                          getData()
+                        }
+                      }}
+                    />
                   </div>
-                  <h2 className="text-xl font-workSans">{page + 1}</h2>
+                  <h2 style={{ color: USED_COLORS[1] }} className="text-xl font-workSans">{page + 1}</h2>
                   <div className="p-2" >
-                    <HiArrowCircleRight style={{ cursor: isLoading || page == 30 ? "default" : "pointer", opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
-                      if(isLoading || page == 30 )
-                        return;
-                      if(page < 30){
-                        setPage(page + 1)
-                        getData()
-                      }
-                    }}/>
+                    <HiArrowCircleRight 
+                      style={{ cursor: isLoading || page == 30 ? "default" : "pointer",
+                      opacity: isLoading || page == 30 ? "40%" : "100%" }}
+                      color={USED_COLORS[1]}
+                      size={34} onClick={() => {
+                        if(isLoading || page == 30 )
+                          return;
+                        if(page < 30){
+                          setPage(page + 1)
+                          getData()
+                        }
+                      }}
+                    />
                   </div>
                 </div>
               </div>
               {
                 isLoading ? (
                   <div className="mt-24">
-                    <Loader padding={14} direction="horizontal" height={240} width={454} n={10}/>
+                    <Loader 
+                      padding={14} 
+                      direction="horizontal" 
+                      height={240} 
+                      width={454} 
+                      n={10}
+                    />
                   </div>
                 ) : (
                   <div className="mt-24 flex flex-wrap">
                     {
-                      data.map((repo: Repo) => (
+                      data.map((repo: RepositoryType) => (
                         <Repository
                           onClick={() => setModalOptions({
                             repo_id: repo.github_repo_id,
@@ -191,7 +218,6 @@ const Home = () => {
                             visible: true
                           })}
                           repository={repo}
-                          loading={false}
                         />
                       ))
                     }

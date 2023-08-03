@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { BASE_FE_URL, BASE_URL } from "../utils/utils";
 import { useNavigate } from "react-router-dom";
+import { USED_COLORS } from "../App";
 
 const Overview = () => {
 
@@ -60,16 +61,16 @@ const Overview = () => {
     ) : (
       <div className="bg-img items-center justify-around flex h-screen w-screen">
         <div className="p-4">
-          <h2 className="text-4xl font-semibold font-workSans">
+          <h2 style={{ color: USED_COLORS[1] }} className="text-4xl font-semibold font-workSans">
             Find the perfect <br />open source for you.
           </h2>
-          <h2 className="mt-5 text-xl font-workSans">
+          <h2 style={{ color: USED_COLORS[1] }} className="mt-5 text-xl font-workSans">
             We'll help you find the right open source projects
             to contribute to. <br />Contrycode is also going to manage
             your commits and <br />track your repository updates.
           </h2>
           <div className="mt-8">
-            <button onClick={() => login()} className="font-normal text-[white] font-workSans rounded-lg p-4 bg-[black]">
+            <button style={{ color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }} onClick={() => login()} className="font-normal font-workSans rounded-lg p-4">
               GET STARTED
             </button>
           </div>
