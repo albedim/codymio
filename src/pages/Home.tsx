@@ -37,7 +37,9 @@ const Home = () => {
 
   const getData = async () => {
     setIsLoading(true)
-    await axios.get(BASE_URL + "/repo-github/fetch?query=" + (anyTopic ? "all" : query) + "&language=" + language + "&page="+page)
+    await axios.get(BASE_URL + "/repo-github/fetch?query=" + (anyTopic ? "all" : query) + "&language=" + language + "&page="+page, {
+      headers: { "Authorization": "Bearer " + window.localStorage.getItem("token")}
+    })
       .then(res => setData(res.data.param))
       .catch(err => console.log(err))
     setIsLoading(false)
