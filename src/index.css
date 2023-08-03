@@ -57,3 +57,13 @@ input[type="checkbox"] {
     left: calc(100% - 30px);
   }
 }
+
+::-webkit-scrollbar{
+  background-color: transparent;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: gray;
+  border-radius: 24px;
+}

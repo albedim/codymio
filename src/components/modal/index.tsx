@@ -86,8 +86,8 @@ const IssuesModal: React.FC<ContributeProps> = ({
           <div className="modal">
             <div className="modal-wrapper p-4">
               <div
-                style={{ backgroundColor: USED_COLORS[0], borderRadius: 8 }}
-                className="modal-content"
+                style={{ borderColor: USED_COLORS[3], backgroundColor: USED_COLORS[0], borderRadius: 8 }}
+                className="border modal-content"
                 onClick={e => e.stopPropagation()}
               >
                 <div className="pb-0 p-4 items-center justify-between flex">

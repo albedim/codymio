@@ -9,8 +9,8 @@ import NoResults from "../components/no_results";
 import { USED_COLORS } from "../App";
 
 
-interface ContributedRepo {
-  contributed_id: number,
+interface ContributionType {
+  contribution_id: number,
   user_id: number,
   repository: Repository
   issue: Issue,
@@ -32,8 +32,8 @@ interface Issue {
 
 interface Response {
   unseen: number,
-  merged: ContributedRepo[],
-  unmerged: ContributedRepo[]
+  merged: ContributionType[],
+  unmerged: ContributionType[]
 }
 
 const Contributions = () => {
@@ -96,8 +96,8 @@ const Contributions = () => {
     setIsSessionLoading(false)
   }
 
-  const removeContribution = async (contributedRepoId: number) => {
-    await axios.delete(BASE_URL + "/contributions/" + contributedRepoId)
+  const removeContribution = async (ContributionId: number) => {
+    await axios.delete(BASE_URL + "/contributions/" + ContributionId)
     .then((res) => getData())
     .catch(err => console.log(err))
   }
@@ -168,25 +168,25 @@ const Contributions = () => {
                 <div className="mt-8 flex-wrap flex">
                   {
                     data[page].length > 0 ? (
-                      data[page].map((contributedRepo: ContributedRepo) => (
+                      data[page].map((contribution: ContributionType) => (
                         <Contribution
                           repository={{
-                            name: contributedRepo.repository.repo_full_name.split("/")[1],
-                            github_repo_id: contributedRepo.repository.repo_id,
-                            full_name: contributedRepo.repository.repo_full_name,
+                            name: contribution.repository.repo_full_name.split("/")[1],
+                            github_repo_id: contribution.repository.repo_id,
+                            full_name: contribution.repository.repo_full_name,
                             language: "",
-                            status: contributedRepo.status
+                            status: contribution.status
                           }}
   
                           issue={{
-                            title: contributedRepo.issue.issue_title,
-                            number: contributedRepo.issue.issue_number,
-                            issue_id: contributedRepo.issue.issue_id,
-                            body: contributedRepo.issue.issue_body,
-                            owner: contributedRepo.issue.issue_owner
+                            title: contribution.issue.issue_title,
+                            number: contribution.issue.issue_number,
+                            issue_id: contribution.issue.issue_id,
+                            body: contribution.issue.issue_body,
+                            owner: contribution.issue.issue_owner
                           }}
   
-                          onRemove={() => removeContribution(contributedRepo.contributed_id)}
+                          onRemove={() => removeContribution(contribution.contribution_id)}
                         />
                       ))
                     ):(
