@@ -14,6 +14,7 @@ export interface Repo {
   github_repo_id: number,
   open_issues: number,
   full_name: string,
+  has_contributed: boolean,
   description: string,
   forks: number,
   language: string
@@ -78,9 +79,17 @@ const Repository: React.FC<RepositoryProps> = ({
             )
           }
           <div>
-            <button onClick={onClick} className="rounded-md font-workSans text-sm p-2 text-[white] bg-[black]">
-              Contribute
-            </button>
+            {
+              repository?.has_contributed ? (
+                <button disabled onClick={onClick} className="opacity-40 rounded-md font-workSans text-sm p-2 text-[white] bg-[black]">
+                  Contribute
+                </button>
+              ):(
+                <button onClick={onClick} className="rounded-md font-workSans text-sm p-2 text-[white] bg-[black]">
+                  Contribute
+                </button>
+              )
+            }
           </div>
         </div>
       </div>
