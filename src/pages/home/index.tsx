@@ -1,13 +1,13 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { BASE_URL } from "../utils/utils";
+import { BASE_URL } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { HiArrowCircleLeft, HiArrowCircleRight, HiSearch } from "react-icons/hi";
-import HomeLoader from "../components/loading";
-import Loader from "../components/loading";
-import IssuesModal from "../components/modal";
-import Repository, { RepositoryType } from "../components/repository";
-import { USED_COLORS } from "../App";
+import HomeLoader from "../../components/loading";
+import Loader from "../../components/loading";
+import IssuesModal from "../../components/modal";
+import Repository, { RepositoryType } from "../../components/repository";
+import { USED_COLORS } from "../../App";
 
 
 const Home = () => {
@@ -198,10 +198,12 @@ const Home = () => {
                 isLoading ? (
                   <div className="mt-24">
                     <Loader 
-                      padding={14} 
+                      padding={14}
+                      backgroundColor={USED_COLORS[2]}
+                      foregroundColor={USED_COLORS[4]}
                       direction="horizontal" 
-                      height={240} 
-                      width={454} 
+                      height={284}
+                      width={450}
                       n={10}
                     />
                   </div>

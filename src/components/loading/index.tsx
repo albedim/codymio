@@ -1,50 +1,53 @@
 import React from "react";
 import { USED_COLORS } from "../../App";
+import ContentLoader from "react-content-loader";
 
-interface LoaderProps{
+interface LoaderProps {
   n: number,
   padding: number,
-  width: number | "auto",
-  height: number | "auto",
+  backgroundColor: string,
+  foregroundColor: string,
+  width: number,
+  height: number,
   direction: "vertical" | "horizontal"
 }
 
 const Loader: React.FC<LoaderProps> = ({
   n,
   width,
+  backgroundColor,
+  foregroundColor,
   height,
   direction,
   padding
 }) => {
 
   const wrapperStyle = () => {
-    if(direction == "horizontal")
+    if (direction == "horizontal")
       return "flex flex-wrap"
-    if(direction == "vertical")
+    if (direction == "vertical")
       return ""
   }
 
-  const style = () => {
-    let obj: any = { backgroundColor: USED_COLORS[2] }
-    if(width != "auto")
-      obj = { ...obj, width: width }
-    if(height != "auto")
-      obj = { ...obj, height: height }
-    return obj
-  }
-
-  return(
+  return (
     <div className={wrapperStyle()}>
       {
         [...Array(n)].map((e, i) => (
-          <div style={{ padding: padding }}>
-            <div style={ style()} className="rounded-lg">
-              <div className="loading-screen"></div>
-            </div>
+          <div>
+            <ContentLoader
+              speed={2}
+              width={width}
+              height={height}
+              viewBox={"0 0 " + width + " " + height}
+              backgroundColor={backgroundColor}
+              foregroundColor={foregroundColor}
+            >
+              <rect x="16" y="25" rx="2" ry="2" width={width - padding} height={height - padding} />
+            </ContentLoader>
           </div>
         ))
       }
-  </div>
+    </div>
   );
 }
 

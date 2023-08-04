@@ -1,8 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { BASE_FE_URL, BASE_URL } from "../utils/utils";
+import { BASE_FE_URL, BASE_URL } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
-import { USED_COLORS } from "../App";
+import { USED_COLORS } from "../../App";
+
 
 const Overview = () => {
 

@@ -1,13 +1,13 @@
-import React, { 
-  useEffect, 
-  useState 
+import React, {
+  useEffect,
+  useState
 } from "react";
 import { RiCloseFill } from "react-icons/ri";
 import "./Modal.css";
 import axios from "axios";
-import { 
-  HiArrowCircleLeft, 
-  HiArrowCircleRight 
+import {
+  HiArrowCircleLeft,
+  HiArrowCircleRight
 } from "react-icons/hi";
 import { BASE_URL } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
@@ -125,71 +125,77 @@ const IssuesModal: React.FC<ContributeProps> = ({
                       </div>
                     </div>
                     <div>
-                      {
-                        isLoading ? (
-                          <Loader direction={"vertical"} n={3} padding={14} height={154} width={424} />
-                        ) : (
-                          issues.length > 0 ? (
-                            <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
-                              {
-                                issues.map((issue: Issue) => (
-                                  <div className="p-4">
-                                    <div style={{ backgroundColor: USED_COLORS[2] }} className="justify-between flex rounded-lg p-4">
+                      <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
+                        {
+                          isLoading ? (
+                            <Loader
+                              padding={14}
+                              backgroundColor={USED_COLORS[2]}
+                              foregroundColor={USED_COLORS[4]}
+                              direction="horizontal"
+                              height={154}
+                              width={414}
+                              n={3}
+                            />
+                          ) : (
+                            issues.length > 0 ? (
+                              issues.map((issue: Issue) => (
+                                <div className="p-4">
+                                  <div style={{ backgroundColor: USED_COLORS[2] }} className="justify-between flex rounded-lg p-4">
+                                    <div>
+                                      <h2
+                                        style={{ color: USED_COLORS[1], maxWidth: 340 }}
+                                        className="font-semibold text-lg font-workSans">{issue.title}
+                                      </h2>
+                                      <h2
+                                        style={{ color: USED_COLORS[1] }}
+                                        className="font-normal text-md font-workSans">@{issue.creator_username}
+                                      </h2>
+                                      <h2
+                                        className="mt-1 font-semibold font-workSans text-[gray]"
+                                      >{
+                                          issue.created_on.substring(0, 10).split("-")[2] + "/" +
+                                          issue.created_on.substring(0, 10).split("-")[1] + "/" +
+                                          issue.created_on.substring(0, 10).split("-")[0]
+                                        }
+                                      </h2>
+                                    </div>
+                                    <div className="items-center justify-around flex">
                                       <div>
-                                        <h2
-                                          style={{ color: USED_COLORS[1], maxWidth: 340 }}
-                                          className="font-semibold text-lg font-workSans">{issue.title}
-                                        </h2>
-                                        <h2
-                                          style={{ color: USED_COLORS[1] }}
-                                          className="font-normal text-md font-workSans">@{issue.creator_username}
-                                        </h2>
-                                        <h2
-                                          className="mt-1 font-semibold font-workSans text-[gray]"
-                                        >{
-                                            issue.created_on.substring(0, 10).split("-")[2] + "/" +
-                                            issue.created_on.substring(0, 10).split("-")[1] + "/" +
-                                            issue.created_on.substring(0, 10).split("-")[0]
-                                          }
-                                        </h2>
-                                      </div>
-                                      <div className="items-center justify-around flex">
-                                        <div>
-                                          {
-                                            issue.has_pull_requests ? (
-                                              <div className="pb-4 justify-around flex">
-                                                <a title="This issue has pull requests already.">
-                                                  <TbAlertTriangleFilled className="cursor-pointer" opacity={"40%"} size={24} color="orange" />
-                                                </a>
-                                              </div>
-                                            ):(
-                                              <></>
-                                            )
-                                          }
-                                          <button><HiArrowCircleRight onClick={() => {
-                                            addContribution({
-                                              issue_owner: issue.creator_username,
-                                              user_id: user.user_id,
-                                              repo_id: repo_id,
-                                              repo_full_name: repo_full_name,
-                                              issue_id: issue.issue_id,
-                                              issue_number: issue.number,
-                                              issue_title: issue.title,
-                                              issue_body: issue.body
-                                            })
-                                          }} size={34} color={USED_COLORS[1]} /></button>
-                                        </div>
+                                        {
+                                          issue.has_pull_requests ? (
+                                            <div className="pb-4 justify-around flex">
+                                              <a title="This issue has pull requests already.">
+                                                <TbAlertTriangleFilled className="cursor-pointer" opacity={"40%"} size={24} color="orange" />
+                                              </a>
+                                            </div>
+                                          ) : (
+                                            <></>
+                                          )
+                                        }
+                                        <button><HiArrowCircleRight onClick={() => {
+                                          addContribution({
+                                            issue_owner: issue.creator_username,
+                                            user_id: user.user_id,
+                                            repo_id: repo_id,
+                                            repo_full_name: repo_full_name,
+                                            issue_id: issue.issue_id,
+                                            issue_number: issue.number,
+                                            issue_title: issue.title,
+                                            issue_body: issue.body
+                                          })
+                                        }} size={34} color={USED_COLORS[1]} /></button>
                                       </div>
                                     </div>
                                   </div>
-                                ))
-                              }
-                            </div>
-                          ) : (
-                            <NoResults />
+                                </div>
+                              ))
+                            ) : (
+                              <NoResults />
+                            )
                           )
-                        )
-                      }
+                        }
+                      </div>
                     </div>
                   </div>
                 </div>

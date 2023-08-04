@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Overview from './pages/Overview';
 import Header from './components/header';
-import Home from './pages/Home';
-import Contribute from './pages/Contributions';
-import Contributions from './pages/Contributions';
-import NotFound from './pages/NotFound';
+import Contribute from './pages/contributions';
+import Contributions from './pages/contributions';
+import NotFound from './pages/not_found';
 import { colors } from './utils/utils';
+import Overview from './pages/overview';
+import Home from './pages/home';
 
 export let USED_COLORS: string[] = []
 

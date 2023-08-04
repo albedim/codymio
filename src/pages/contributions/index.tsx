@@ -1,12 +1,12 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { BASE_URL } from "../utils/utils";
+import { BASE_URL } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
-import Contribution, { RepoStatus } from "../components/contribution";
+import Contribution, { RepoStatus } from "../../components/contribution";
 import jwtDecode from "jwt-decode";
-import Loader from "../components/loading";
-import NoResults from "../components/no_results";
-import { USED_COLORS } from "../App";
+import Loader from "../../components/loading";
+import NoResults from "../../components/no_results";
+import { USED_COLORS } from "../../App";
 
 
 interface ContributionType {
@@ -87,7 +87,7 @@ const Contributions = () => {
 
   const loggedIn = async () => {
     await axios.get(BASE_URL + "/user/sync", {
-      headers: { "Authorization": "Bearer " + token}
+      headers: { "Authorization": "Bearer " + token }
     })
       .then((res) => {
         getData()
@@ -98,8 +98,8 @@ const Contributions = () => {
 
   const removeContribution = async (ContributionId: number) => {
     await axios.delete(BASE_URL + "/contributions/" + ContributionId)
-    .then((res) => getData())
-    .catch(err => console.log(err))
+      .then((res) => getData())
+      .catch(err => console.log(err))
   }
 
   useEffect(() => {
@@ -112,27 +112,27 @@ const Contributions = () => {
       {
         isSessionLoading ? (
           <></>
-        ):(
+        ) : (
           <div className="p-14">
             <div>
               <h2 style={{ color: USED_COLORS[1] }} className="text-2xl font-semibold font-workSans">My Contributions</h2>
             </div>
             <div className="flex">
-              <div 
+              <div
                 onClick={() => {
                   setPage("unmerged")
-                }} 
-                className="cursor-pointer pb-2 p-4" 
+                }}
+                className="cursor-pointer pb-2 p-4"
                 style={{ borderBottom: page == 'unmerged' ? "2px solid " + USED_COLORS[1] : "" }}
               >
                 <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">Unmerged</h2>
               </div>
-              <div 
+              <div
                 onClick={() => {
                   setPage("merged")
                   setSeen()
-                }} 
-                className="cursor-pointer items-center flex pb-2 p-4" 
+                }}
+                className="cursor-pointer items-center flex pb-2 p-4"
                 style={{ borderBottom: page == 'merged' ? "2px solid " + USED_COLORS[1] : "" }}
               >
                 <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">Merged</h2>
@@ -140,7 +140,7 @@ const Contributions = () => {
                   data.unseen > 0 ? (
                     <div className="pl-4">
                       <div className="rounded-full pb-0 pt-0 p-1 bg-[red]">
-                        <h2 
+                        <h2
                           className="text-sm rounded-full pb-0 pt-0 p-1 
                           bg-[red] font-workSans"
                           style={{ color: USED_COLORS[1] }}>{data.unseen}
@@ -156,11 +156,13 @@ const Contributions = () => {
             {
               isLoading ? (
                 <div className="mt-24">
-                  <Loader 
-                    padding={14} 
-                    direction="horizontal" 
-                    height={240} 
-                    width={454} 
+                  <Loader
+                    padding={14}
+                    backgroundColor={USED_COLORS[2]}
+                    foregroundColor={USED_COLORS[4]}
+                    direction="horizontal"
+                    height={384}
+                    width={450}
                     n={10}
                   />
                 </div>
@@ -177,7 +179,7 @@ const Contributions = () => {
                             language: "",
                             status: contribution.status
                           }}
-  
+
                           issue={{
                             title: contribution.issue.issue_title,
                             number: contribution.issue.issue_number,
@@ -185,12 +187,12 @@ const Contributions = () => {
                             body: contribution.issue.issue_body,
                             owner: contribution.issue.issue_owner
                           }}
-  
+
                           onRemove={() => removeContribution(contribution.contribution_id)}
                         />
                       ))
-                    ):(
-                      <NoResults/>
+                    ) : (
+                      <NoResults />
                     )
                   }
                 </div>
