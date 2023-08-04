@@ -38,15 +38,21 @@ const Header = () => {
 
   const headerStyle = () => {
     if (window.location.pathname == "/") {
-      return "top-0 bg-[" + USED_COLORS[0] + "] fixed border-b p-4 justify-between flex w-screen"
+      return `bg-opacity-10 top-0 fixed border-b p-4 justify-between flex w-screen`
     }
-    return "top-0 bg-[" + USED_COLORS[0] + "] fixed border-b p-4 justify-between flex w-screen"
+    return `bg-opacity-40 top-0 fixed border-b p-4 justify-between flex w-screen`
   }
 
   return (
-    <div style={{ borderColor: USED_COLORS[0] }} className={headerStyle()}>
+    <div style={{ backgroundColor: USED_COLORS[0], borderColor: USED_COLORS[0] }} className={headerStyle()}>
       <div>
-        <img className="cursor-pointer" width={145} src={require('../../images/logo.png')} alt="" />
+        {
+          darkMode ? (
+            <img className="cursor-pointer" width={145} src={require('../../images/logo_dark.png')} alt="" />
+          ):(
+            <img className="cursor-pointer" width={145} src={require('../../images/logo.png')} alt="" />
+          )
+        }
       </div>
       <div className="flex items-center">
         <div>

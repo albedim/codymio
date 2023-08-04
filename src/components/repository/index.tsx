@@ -81,11 +81,11 @@ const Repository: React.FC<RepositoryProps> = ({
           <div>
             {
               repository?.has_contributed ? (
-                <button disabled onClick={onClick} className="bg-[black] opacity-40 rounded-md font-workSans text-sm p-2 text-[white]">
+                <button style={{ color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }} disabled onClick={onClick} className="opacity-40 rounded-md font-workSans text-sm p-2 text-[white]">
                   Contribute
                 </button>
               ):(
-                <button onClick={onClick} className="bg-[black] rounded-md font-workSans text-sm p-2 text-[white]">
+                <button style={{ color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }} onClick={onClick} className="rounded-md font-workSans text-sm p-2 text-[white]">
                   Contribute
                 </button>
               )
