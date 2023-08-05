@@ -3,8 +3,8 @@ import React, {
   useState
 } from "react";
 import { RiCloseFill } from "react-icons/ri";
-import "./Modal.css";
 import axios from "axios";
+import './index.css'
 import {
   HiArrowCircleLeft,
   HiArrowCircleRight
