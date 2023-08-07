@@ -14,6 +14,7 @@ interface ContributionType {
   user_id: number,
   repository: Repository
   issue: Issue,
+  removable: boolean
   status: RepoStatus
 }
 
@@ -143,7 +144,7 @@ const Contributions = () => {
                         <h2
                           className="text-sm rounded-full pb-0 pt-0 p-1 
                           bg-[red] font-workSans"
-                          style={{ color: USED_COLORS[1] }}>{data.unseen}
+                          style={{ color: "white" }}>{data.unseen}
                         </h2>
                       </div>
                     </div>
@@ -187,7 +188,8 @@ const Contributions = () => {
                             body: contribution.issue.issue_body,
                             owner: contribution.issue.issue_owner
                           }}
-
+                          
+                          removable={contribution.removable}
                           onRemove={() => removeContribution(contribution.contribution_id)}
                         />
                       ))

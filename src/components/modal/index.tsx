@@ -24,6 +24,7 @@ interface ContributeProps {
   open_issues: number
   repo_full_name: string,
   repo_id: number,
+  onAlert: () => void
 }
 
 interface Issue {
@@ -43,7 +44,8 @@ const IssuesModal: React.FC<ContributeProps> = ({
   onClose,
   repo_full_name,
   repo_id,
-  open_issues
+  open_issues,
+  onAlert
 }) => {
 
   const [page, setPage] = useState(0)
@@ -190,7 +192,13 @@ const IssuesModal: React.FC<ContributeProps> = ({
                                           issue.has_pull_requests ? (
                                             <div className="pb-4 justify-around flex">
                                               <a title="This issue has pull requests already.">
-                                                <TbAlertTriangleFilled className="cursor-pointer" opacity={"40%"} size={24} color="orange" />
+                                                <TbAlertTriangleFilled 
+                                                  className="cursor-pointer" 
+                                                  opacity={"40%"} 
+                                                  size={24} 
+                                                  color="orange"
+                                                  onClick={onAlert}
+                                                />
                                               </a>
                                             </div>
                                           ) : (
@@ -201,7 +209,8 @@ const IssuesModal: React.FC<ContributeProps> = ({
                                           issue.has_contributed ? (
                                             <button disabled>
                                               <HiArrowCircleRight 
-                                                size={34} 
+                                                size={34}
+                                                opacity={"40%"}
                                                 color={USED_COLORS[1]} 
                                               />
                                             </button>

@@ -8,6 +8,7 @@ import { USED_COLORS } from "../../App"
 interface ContributionProps {
   repository: RepositoryType
   issue: Issue,
+  removable: boolean,
   onRemove: () => void
 }
 
@@ -39,6 +40,7 @@ export interface RepoStatus{
 const Contribution: React.FC<ContributionProps> = ({
   repository,
   issue,
+  removable,
   onRemove
 }) => {
 
@@ -55,7 +57,11 @@ const Contribution: React.FC<ContributionProps> = ({
             </a>
           </div>
           <div className="items-center justify-around flex">
-            <AiFillDelete className="cursor-pointer" onClick={onRemove} opacity={"40%"} color="red" size={24}/>
+            {
+              removable ? (
+                <AiFillDelete className="cursor-pointer" onClick={onRemove} opacity={"40%"} color="red" size={24}/>
+              ): null
+            }
           </div>
         </div>
         <div>

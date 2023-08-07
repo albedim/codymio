@@ -32,6 +32,8 @@ const Home = () => {
 
   const navigate = useNavigate()
 
+  const [onOpenModal, setOnOpenModal] = useState(false)
+
 
   const getData = async () => {
     setIsLoading(true)
@@ -83,6 +85,9 @@ const Home = () => {
               })}
               repo_full_name={modalOptions.repo_full_name}
               visible={modalOptions.visible}
+              onAlert={() => {
+                alert("This issue has open pull requests already")
+              }}
             />
             <div className="w-4/5">
               <div className="justify-around flex">
