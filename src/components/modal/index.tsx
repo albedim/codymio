@@ -31,6 +31,7 @@ interface Issue {
   created_on: string,
   body: string,
   number: number,
+  has_contributed: boolean,
   has_pull_requests: boolean,
   issue_id: number,
   creator_username: string
@@ -60,7 +61,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
 
   const getIssues = async () => {
     setIsLoading(true)
-    await axios.get(BASE_URL + "/repositories/" + repo_full_name + "/issues?page=" + page, {
+    await axios.get(BASE_URL + "/repositories/" + repo_id + "/issues?repo_full_name="+repo_full_name+"&user_id="+user.user_id+"&page=" + page, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
       .then(res => setIssues(res.data.param))
@@ -92,7 +93,14 @@ const IssuesModal: React.FC<ContributeProps> = ({
               >
                 <div className="pb-0 p-4 items-center justify-between flex">
                   <div></div>
-                  <div><RiCloseFill className="cursor-pointer" onClick={() => { onClose(); }} color="gray" size={24} /></div>
+                  <div>
+                    <RiCloseFill 
+                      className="cursor-pointer" 
+                      onClick={() => { onClose(); }} 
+                      color="gray" 
+                      size={24}
+                    />
+                </div>
                 </div>
                 <div className="p-8 justify-around flex">
                   <div>
@@ -102,25 +110,41 @@ const IssuesModal: React.FC<ContributeProps> = ({
                     <div className="items-center justify-around flex">
                       <div className="items-center flex">
                         <div className="p-2">
-                          <HiArrowCircleLeft color={USED_COLORS[1]} style={{ cursor: isLoading || page == 0 ? "default" : "pointer", opacity: isLoading || page == 0 ? "40%" : "100%" }} size={34} onClick={() => {
-                            if (isLoading || page == 0)
-                              return;
-                            if (page > 0) {
-                              setPage(page - 1)
-                              getIssues()
-                            }
-                          }} />
+                          <HiArrowCircleLeft 
+                            color={USED_COLORS[1]} 
+                            style={{ 
+                              cursor: isLoading || page == 0 ? "default" : "pointer", 
+                              opacity: isLoading || page == 0 ? "40%" : "100%" 
+                            }} 
+                            size={34} 
+                            onClick={() => {
+                              if (isLoading || page == 0)
+                                return;
+                              if (page > 0) {
+                                setPage(page - 1)
+                                getIssues()
+                              }
+                            }} 
+                          />
                         </div>
                         <h2 style={{ color: USED_COLORS[1] }} className="text-xl font-workSans">{page + 1}</h2>
                         <div className="p-2" >
-                          <HiArrowCircleRight color={USED_COLORS[1]} style={{ cursor: isLoading || page == 30 ? "default" : "pointer", opacity: isLoading || page == 30 ? "40%" : "100%" }} size={34} onClick={() => {
-                            if (isLoading || page == 30)
-                              return;
-                            if (page <= 30) {
-                              setPage(page + 1)
-                              getIssues()
-                            }
-                          }} />
+                          <HiArrowCircleRight 
+                            color={USED_COLORS[1]} 
+                            style={{ 
+                              cursor: isLoading || page == 30 ? "default" : "pointer", 
+                              opacity: isLoading || page == 30 ? "40%" : "100%" 
+                            }} 
+                            size={34} 
+                            onClick={() => {
+                              if (isLoading || page == 30)
+                                return;
+                              if (page <= 30) {
+                                setPage(page + 1)
+                                getIssues()
+                              }
+                            }} 
+                          />
                         </div>
                       </div>
                     </div>
@@ -173,18 +197,29 @@ const IssuesModal: React.FC<ContributeProps> = ({
                                             <></>
                                           )
                                         }
-                                        <button><HiArrowCircleRight onClick={() => {
-                                          addContribution({
-                                            issue_owner: issue.creator_username,
-                                            user_id: user.user_id,
-                                            repo_id: repo_id,
-                                            repo_full_name: repo_full_name,
-                                            issue_id: issue.issue_id,
-                                            issue_number: issue.number,
-                                            issue_title: issue.title,
-                                            issue_body: issue.body
-                                          })
-                                        }} size={34} color={USED_COLORS[1]} /></button>
+                                        {
+                                          issue.has_contributed ? (
+                                            <button disabled>
+                                              <HiArrowCircleRight 
+                                                size={34} 
+                                                color={USED_COLORS[1]} 
+                                              />
+                                            </button>
+                                          ):(
+                                            <button><HiArrowCircleRight onClick={() => {
+                                              addContribution({
+                                                issue_owner: issue.creator_username,
+                                                user_id: user.user_id,
+                                                repo_id: repo_id,
+                                                repo_full_name: repo_full_name,
+                                                issue_id: issue.issue_id,
+                                                issue_number: issue.number,
+                                                issue_title: issue.title,
+                                                issue_body: issue.body
+                                              })
+                                            }} size={34} color={USED_COLORS[1]} /></button>
+                                          )
+                                        }
                                       </div>
                                     </div>
                                   </div>

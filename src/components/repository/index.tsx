@@ -14,7 +14,6 @@ export interface RepositoryType {
   github_repo_id: number,
   open_issues: number,
   full_name: string,
-  has_contributed: boolean,
   description: string,
   forks: number,
   language: string
@@ -103,30 +102,17 @@ const Repository: React.FC<RepositoryProps> = ({
             )
           }
           <div>
-            {
-              repository?.has_contributed ? (
-                <button
-                  style={{ color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }}
-                  disabled
-                  onClick={onClick}
-                  className="opacity-40 rounded-md font-workSans text-sm p-2 text-[white]"
-                >
-                  Contribute
-                </button>
-              ) : (
-                <button
-                  style={{ color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }}
-                  onClick={onClick}
-                  className="rounded-md font-workSans text-sm p-2 text-[white]"
-                >
-                  Contribute
-                </button>
-              )
-            }
+            <button
+              style={{ color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }}
+              onClick={onClick}
+              className="rounded-md font-workSans text-sm p-2 text-[white]"
+            >
+              Contribute
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
