@@ -3,7 +3,7 @@ import { BsFillSignMergeLeftFill } from 'react-icons/bs'
 import { AiFillClockCircle, AiFillDelete } from 'react-icons/ai'
 import { PiPushPinFill } from 'react-icons/pi'
 import { USED_COLORS } from "../../App"
-
+import Stepper from "../stepper"
 
 interface ContributionProps {
   repository: RepositoryType
@@ -26,14 +26,8 @@ export interface RepositoryType {
   name: string,
   github_repo_id: number,
   full_name: string,
-  status: RepoStatus
+  status: "completed" | "none" | "pushed",
   language: string
-}
-
-export interface RepoStatus{
-  pushed: boolean,
-  waiting: boolean,
-  merged: boolean
 }
 
 
@@ -45,7 +39,6 @@ const Contribution: React.FC<ContributionProps> = ({
 }) => {
 
   const [showMore, setShowMore] = useState(false)
-
 
   return (
     <div className="pb-14 p-4">
@@ -59,8 +52,8 @@ const Contribution: React.FC<ContributionProps> = ({
           <div className="items-center justify-around flex">
             {
               removable ? (
-                <AiFillDelete className="cursor-pointer" onClick={onRemove} opacity={"40%"} color="red" size={24}/>
-              ): null
+                <AiFillDelete className="cursor-pointer" onClick={onRemove} opacity={"40%"} color="red" size={24} />
+              ) : null
             }
           </div>
         </div>
@@ -70,8 +63,8 @@ const Contribution: React.FC<ContributionProps> = ({
         <div style={{ borderColor: USED_COLORS[0] }} className="pt-2 border-t mt-4">
           <div className="items-center justify-between flex">
             <div>
-              <a 
-                target="_blank" 
+              <a
+                target="_blank"
                 href={"https://github.com/" + repository.full_name + "/issues/" + issue.number}>
                 <h2
                   style={{ color: USED_COLORS[1] }}
@@ -87,70 +80,22 @@ const Contribution: React.FC<ContributionProps> = ({
               issue.body.length > 240 ? (
                 <div className="mt-2">
                   <h2 style={{ color: USED_COLORS[1] }} className="pt-2 font-workSans" >
-                    {showMore ? issue.body : issue.body.substring(0,240)+"..."}
+                    {showMore ? issue.body : issue.body.substring(0, 240) + "..."}
                   </h2>
                   <h2 style={{ color: USED_COLORS[1] }} className="cursor-pointer font-semibold underline" onClick={() => setShowMore(!showMore)} >
                     {showMore ? "Show less" : "Show more"}
                   </h2>
                 </div>
-              ):(
+              ) : (
                 <h2 style={{ color: USED_COLORS[1] }} className="pt-2 font-workSans" >{issue.body}</h2>
               )
-            ):(
+            ) : (
               <h2 style={{ color: USED_COLORS[1] }} className="italic pt-2 font-workSans" >No description provided for this issue.</h2>
             )
           }
         </div>
         <div className="mt-4">
-          <div className="items-center flex">
-            {
-              repository.status.pushed ? (
-                <>
-                  <div className="pr-2"><PiPushPinFill color="green"/></div>
-                  <h2 className="font-semibold text-[green] font-workSans">Pushed</h2>
-                </>
-              ):(
-                <>
-                  <div className="pr-2"><PiPushPinFill color="gray"/></div>
-                  <h2 className="text-[gray] font-workSans">Pushed</h2>
-                </>
-              )
-            }
-          </div>
-          <div className="items-center flex">
-            {
-              repository.status.waiting ? (
-                <>
-                  <div className="pr-2"><AiFillClockCircle color="orange"/></div>
-                  <h2 className="font-semibold text-[orange] font-workSans">Waiting</h2>
-                </>
-              ):(
-                repository.status.merged ? (
-                  <></>
-                ):(
-                  <>
-                    <div className="pr-2"><AiFillClockCircle color="gray"/></div>
-                    <h2 className="text-[gray] font-workSans">Waiting</h2>
-                  </>
-                )
-              )
-            }
-          </div>
-          <div className="items-center flex">
-            {
-              repository.status.merged ? (
-                <>
-                  <div className="pr-2"><BsFillSignMergeLeftFill color="green"/></div>
-                  <h2 className="font-semibold text-[green] font-workSans">Merged</h2>
-                </>
-              ):(
-                <>
-                  <div className="pr-2"><BsFillSignMergeLeftFill color="gray"/></div>
-                  <h2 className="text-[gray] font-workSans">Merged</h2>
-                </>
-              )
-            }
-          </div>
+          <Stepper status={repository.status}/>
         </div>
       </div>
     </div>

@@ -4,18 +4,18 @@ import React, {
 } from "react";
 import { RiCloseFill } from "react-icons/ri";
 import axios from "axios";
-import './index.css'
+import '../index.css'
 import {
   HiArrowCircleLeft,
   HiArrowCircleRight
 } from "react-icons/hi";
-import { BASE_URL } from "../../utils/utils";
+import { BASE_URL } from "../../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import Loader from "../loading";
-import NoResults from "../no_results";
+import Loader from "../../loading";
+import NoResults from "../../no_results";
 import { TbAlertTriangleFilled } from "react-icons/tb";
-import { USED_COLORS } from "../../App";
+import { USED_COLORS } from "../../../App";
 
 
 interface ContributeProps {

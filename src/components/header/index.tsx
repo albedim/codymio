@@ -49,7 +49,7 @@ const Header = () => {
         {
           darkMode ? (
             <img className="cursor-pointer" width={145} src={require('../../images/logo_dark.png')} alt="" />
-          ):(
+          ) : (
             <img className="cursor-pointer" width={145} src={require('../../images/logo.png')} alt="" />
           )
         }
@@ -91,14 +91,16 @@ const Header = () => {
                 />
               </div>
               <a title="Go to your dashboard">
-                <img
-                  onClick={() => navigate("/contributions")}
-                  style={{ borderRadius: "50%" }}
-                  width={40.4}
-                  src={jwtDecode<any>(token).sub.avatar}
-                  alt=""
-                  className="cursor-pointer"
-                />
+                <div className="pr-6">
+                  <img
+                    onClick={() => navigate("/contributions")}
+                    style={{ borderRadius: "50%" }}
+                    width={40.4}
+                    src={jwtDecode<any>(token).sub.avatar}
+                    alt=""
+                    className="cursor-pointer"
+                  />
+                </div>
               </a>
             </div>
           ) : (

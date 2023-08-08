@@ -6,7 +6,8 @@ import { USED_COLORS } from "../../App"
 
 interface RepositoryProps {
   repository: RepositoryType | null,
-  onClick: () => void
+  onClick: () => void,
+  onAlert: () => void
 }
 
 export interface RepositoryType {
@@ -16,12 +17,14 @@ export interface RepositoryType {
   full_name: string,
   description: string,
   forks: number,
+  contributable: boolean,
   language: string
 }
 
 const Repository: React.FC<RepositoryProps> = ({
   repository,
-  onClick
+  onClick,
+  onAlert
 }) => {
 
   const maxLength = 62
@@ -102,13 +105,25 @@ const Repository: React.FC<RepositoryProps> = ({
             )
           }
           <div>
-            <button
-              style={{ color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }}
-              onClick={onClick}
-              className="rounded-md font-workSans text-sm p-2 text-[white]"
-            >
-              Contribute
-            </button>
+            {
+              repository?.contributable ? (
+                <button
+                style={{ color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }}
+                onClick={onClick}
+                className="rounded-md font-workSans text-sm p-2 text-[white]"
+              >
+                Contribute
+              </button>
+              ):(
+                <button
+                style={{ opacity: "40%", color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }}
+                onClick={onAlert}
+                className="rounded-md font-workSans text-sm p-2 text-[white]"
+              >
+                Contribute
+              </button>
+              )
+            }
           </div>
         </div>
       </div>

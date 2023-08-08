@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { HiArrowCircleLeft, HiArrowCircleRight, HiSearch } from "react-icons/hi";
 import HomeLoader from "../../components/loading";
 import Loader from "../../components/loading";
-import IssuesModal from "../../components/modal";
+import IssuesModal from "../../components/modal/issues";
 import Repository, { RepositoryType } from "../../components/repository";
 import { USED_COLORS } from "../../App";
+import { Alert, AlertTitle } from "@mui/material";
+import ErrorAlert from "../../components/alert/error";
 
 
 const Home = () => {
@@ -32,13 +34,14 @@ const Home = () => {
 
   const navigate = useNavigate()
 
-  const [onOpenModal, setOnOpenModal] = useState(false)
+  const [alertVisible, setAlertVisible] = useState(false)
 
 
   const getData = async () => {
     setIsLoading(true)
-    await axios.get(BASE_URL + "/repositories/fetch?query=" + (anyTopic ? "all" : query) + "&language=" + language + "&page="+page, {
-      headers: { "Authorization": "Bearer " + window.localStorage.getItem("token")}
+    await axios.get(BASE_URL + "/repositories/fetch?query=" + 
+    (anyTopic ? "all" : query) + "&language=" + language + "&page=" + page, {
+      headers: { "Authorization": "Bearer " + window.localStorage.getItem("token") }
     })
       .then(res => setData(res.data.param))
       .catch(err => console.log(err))
@@ -68,12 +71,15 @@ const Home = () => {
   }, [])
 
   return (
-    <div style={{ backgroundColor: USED_COLORS[0] }} className="mt-40 items-center justify-around w-screen flex">
+    <div 
+      style={{ backgroundColor: USED_COLORS[0] }} 
+      className="mt-40 items-center justify-around w-screen flex">
       {
         isSessionLoading ? (
           <></>
         ) : (
           <>
+            <ErrorAlert visible={alertVisible} />
             <IssuesModal
               repo_id={modalOptions.repo_id}
               open_issues={modalOptions.repo_open_issues}
@@ -105,12 +111,22 @@ const Home = () => {
                           type="checkbox"
                         />
                       </div>
-                      <h2 style={{ color: USED_COLORS[1] }} className="font-semibold font-workSans" >Any Topic</h2>
+                      <h2 
+                        style={{ 
+                        color: USED_COLORS[1] }} 
+                        className="font-semibold font-workSans" >
+                          Any Topic
+                      </h2>
                     </div>
                   </div>
                   <div className="p-4">
                     <input
-                      style={{ color: USED_COLORS[1], backgroundColor: USED_COLORS[2], display: anyTopic ? 'none' : 'block', opacity: anyTopic ? "64%" : "100%" }}
+                      style={{ 
+                        color: USED_COLORS[1], 
+                        backgroundColor: USED_COLORS[2], 
+                        display: anyTopic ? 'none' : 'block', 
+                        opacity: anyTopic ? "64%" : "100%" 
+                      }}
                       disabled={anyTopic}
                       onChange={(e) => setQuery(e.target.value)}
                       value={query}
@@ -120,8 +136,8 @@ const Home = () => {
                     />
                   </div>
                   <div className="p-4">
-                    <select 
-                      className="pr-14 rounded-lg p-4" 
+                    <select
+                      className="pr-14 rounded-lg p-4"
                       onChange={(e) => setLanguage(e.target.value)}
                       value={language} name="" id=""
                       style={{ color: USED_COLORS[1], backgroundColor: USED_COLORS[2] }}
@@ -137,20 +153,20 @@ const Home = () => {
                   <div className="p-4">
                     {
                       anyTopic || !anyTopic && query != "" ? (
-                        <button 
-                          className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4" 
+                        <button
+                          className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4"
                           style={{ backgroundColor: USED_COLORS[1] }}
                           onClick={() => {
                             getData()
                             setPage(0)
-                          }} 
+                          }}
                         >
                           <HiSearch size={24} color={USED_COLORS[0]} />
                         </button>
                       ) : (
-                        <button 
-                          disabled 
-                          className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4" 
+                        <button
+                          disabled
+                          className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4"
                           style={{ backgroundColor: USED_COLORS[1] }}
                           onClick={() => {
                             getData()
@@ -166,31 +182,38 @@ const Home = () => {
               <div className="items-center justify-around flex">
                 <div className="items-center flex">
                   <div className="p-2">
-                    <HiArrowCircleLeft 
-                      style={{ cursor: isLoading || page == 0 ? "default" : "pointer", 
-                      opacity: isLoading || page == 0 ? "40%" : "100%" }}
-                      size={34} 
+                    <HiArrowCircleLeft
+                      style={{
+                        cursor: isLoading || page == 0 ? "default" : "pointer",
+                        opacity: isLoading || page == 0 ? "40%" : "100%"
+                      }}
+                      size={34}
                       color={USED_COLORS[1]}
                       onClick={() => {
-                        if(isLoading || page == 0 )
+                        if (isLoading || page == 0)
                           return;
-                        if(page > 0){
+                        if (page > 0) {
                           setPage(page - 1)
                           getData()
                         }
                       }}
                     />
                   </div>
-                  <h2 style={{ color: USED_COLORS[1] }} className="text-xl font-workSans">{page + 1}</h2>
+                  <h2 
+                    style={{ color: USED_COLORS[1] }} 
+                    className="text-xl font-workSans">{page + 1}
+                  </h2>
                   <div className="p-2" >
-                    <HiArrowCircleRight 
-                      style={{ cursor: isLoading || page == 30 ? "default" : "pointer",
-                      opacity: isLoading || page == 30 ? "40%" : "100%" }}
+                    <HiArrowCircleRight
+                      style={{
+                        cursor: isLoading || page == 30 ? "default" : "pointer",
+                        opacity: isLoading || page == 30 ? "40%" : "100%"
+                      }}
                       color={USED_COLORS[1]}
                       size={34} onClick={() => {
-                        if(isLoading || page == 30 )
+                        if (isLoading || page == 30)
                           return;
-                        if(page < 30){
+                        if (page < 30) {
                           setPage(page + 1)
                           getData()
                         }
@@ -202,11 +225,11 @@ const Home = () => {
               {
                 isLoading ? (
                   <div className="mt-24">
-                    <Loader 
+                    <Loader
                       padding={14}
                       backgroundColor={USED_COLORS[2]}
                       foregroundColor={USED_COLORS[4]}
-                      direction="horizontal" 
+                      direction="horizontal"
                       height={284}
                       width={450}
                       n={10}
@@ -224,6 +247,12 @@ const Home = () => {
                               repo.full_name,
                             visible: true
                           })}
+                          onAlert={() => {
+                            setAlertVisible(true)
+                            setTimeout(() => {
+                              setAlertVisible(false)
+                            }, 5400)
+                          }}
                           repository={repo}
                         />
                       ))

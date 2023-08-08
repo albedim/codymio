@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { BASE_URL } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
-import Contribution, { RepoStatus } from "../../components/contribution";
+import Contribution from "../../components/contribution";
 import jwtDecode from "jwt-decode";
 import Loader from "../../components/loading";
 import NoResults from "../../components/no_results";
@@ -15,7 +15,7 @@ interface ContributionType {
   repository: Repository
   issue: Issue,
   removable: boolean
-  status: RepoStatus
+  status: "completed" | "none" | "pushed"
 }
 
 interface Repository {
@@ -33,19 +33,19 @@ interface Issue {
 
 interface Response {
   unseen: number,
-  merged: ContributionType[],
-  unmerged: ContributionType[]
+  completed: ContributionType[],
+  uncompleted: ContributionType[]
 }
 
 const Contributions = () => {
 
   const [data, setData] = useState<Response>({
     unseen: 0,
-    merged: [],
-    unmerged: []
+    completed: [],
+    uncompleted: []
   })
 
-  const [page, setPage] = useState<"merged" | "unmerged">("unmerged")
+  const [page, setPage] = useState<"completed" | "uncompleted">("uncompleted")
 
   const [isSessionLoading, setIsSessionLoading] = useState(true)
 
@@ -79,8 +79,8 @@ const Contributions = () => {
       .then(res => {
         setData({
           unseen: 0,
-          merged: data.merged,
-          unmerged: data.unmerged
+          completed: data.completed,
+          uncompleted: data.uncompleted
         })
       })
       .catch(err => console.log(err))
@@ -116,27 +116,38 @@ const Contributions = () => {
         ) : (
           <div className="p-14">
             <div>
-              <h2 style={{ color: USED_COLORS[1] }} className="text-2xl font-semibold font-workSans">My Contributions</h2>
+              <h2 
+                style={{ color: USED_COLORS[1] }} 
+                className="text-2xl font-semibold font-workSans">
+                  My Contributions
+              </h2>
             </div>
             <div className="flex">
               <div
                 onClick={() => {
-                  setPage("unmerged")
+                  setPage("uncompleted")
                 }}
                 className="cursor-pointer pb-2 p-4"
-                style={{ borderBottom: page == 'unmerged' ? "2px solid " + USED_COLORS[1] : "" }}
+                style={{ borderBottom: page == 'uncompleted' ? "2px solid " + USED_COLORS[1] : "" }}
               >
-                <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">Unmerged</h2>
+                <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">In progress</h2>
               </div>
               <div
                 onClick={() => {
-                  setPage("merged")
+                  setPage("completed")
                   setSeen()
                 }}
                 className="cursor-pointer items-center flex pb-2 p-4"
-                style={{ borderBottom: page == 'merged' ? "2px solid " + USED_COLORS[1] : "" }}
+                style={{ 
+                  borderBottom: page == 'completed' ? 
+                  "2px solid " + USED_COLORS[1] : "" 
+                }}
               >
-                <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">Merged</h2>
+                <h2 
+                  style={{ color: USED_COLORS[1] }} 
+                  className="font-workSans">
+                    Completed
+                </h2>
                 {
                   data.unseen > 0 ? (
                     <div className="pl-4">
