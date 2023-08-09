@@ -67,3 +67,7 @@ input[type="checkbox"] {
   background-color: gray;
   border-radius: 24px;
 }
+
+body{
+  overflow-x: hidden
+}

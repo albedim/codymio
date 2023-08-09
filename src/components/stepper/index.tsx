@@ -60,11 +60,11 @@ const PushedStep: React.FC<StepProps> = ({
           </>
         ) : (
           <>
-            <div className="items-center flex">
+            <div className="opacity-60 items-center flex">
               <div className="pr-2"><PiPushPinFill color="darkgray" /></div>
               <h2 className="text-[darkgray] font-workSans">Pushed</h2>
             </div>
-            <div className="pb-0 pt-0 p-2">
+            <div className="opacity-60 pb-0 pt-0 p-2">
               <div style={{ backgroundColor: 'darkgray', width: 2, height: 8 }} ></div>
             </div>
           </>
@@ -105,11 +105,11 @@ const WaitingStep: React.FC<StepProps> = ({
             </>
           ) : (
             <>
-              <div className="items-center flex">
+              <div className="opacity-60 items-center flex">
                 <div className="pr-2"><AiFillClockCircle color="darkgray" /></div>
                 <h2 className="text-[darkgray] font-workSans">Waiting</h2>
               </div>
-              <div className="pb-0 pt-0 p-2">
+              <div className="opacity-60 pb-0 pt-0 p-2">
                 <div style={{ backgroundColor: 'darkgray', width: 2, height: 8 }} ></div>
               </div>
             </>
