@@ -10,6 +10,7 @@ import Repository, { RepositoryType } from "../../components/repository";
 import { USED_COLORS } from "../../App";
 import { Alert, AlertTitle } from "@mui/material";
 import ErrorAlert from "../../components/alert/error";
+import NoResults from "../../components/no_results";
 
 
 const Home = () => {
@@ -39,8 +40,8 @@ const Home = () => {
 
   const getData = async () => {
     setIsLoading(true)
-    await axios.get(BASE_URL + "/repositories/fetch?query=" + 
-    (anyTopic ? "all" : query) + "&language=" + language + "&page=" + page, {
+    await axios.get(BASE_URL + "/repositories/fetch?query=" +
+      (anyTopic ? "all" : query) + "&language=" + language + "&page=" + page, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("token") }
     })
       .then(res => setData(res.data.param))
@@ -71,8 +72,8 @@ const Home = () => {
   }, [])
 
   return (
-    <div 
-      style={{ backgroundColor: USED_COLORS[0] }} 
+    <div
+      style={{ backgroundColor: USED_COLORS[0] }}
       className="mt-40 items-center justify-around w-screen flex">
       {
         isSessionLoading ? (
@@ -111,21 +112,22 @@ const Home = () => {
                           type="checkbox"
                         />
                       </div>
-                      <h2 
-                        style={{ 
-                        color: USED_COLORS[1] }} 
+                      <h2
+                        style={{
+                          color: USED_COLORS[1]
+                        }}
                         className="font-semibold font-workSans" >
-                          Any Topic
+                        Any Topic
                       </h2>
                     </div>
                   </div>
                   <div className="p-4">
                     <input
-                      style={{ 
-                        color: USED_COLORS[1], 
-                        backgroundColor: USED_COLORS[2], 
-                        display: anyTopic ? 'none' : 'block', 
-                        opacity: anyTopic ? "64%" : "100%" 
+                      style={{
+                        color: USED_COLORS[1],
+                        backgroundColor: USED_COLORS[2],
+                        display: anyTopic ? 'none' : 'block',
+                        opacity: anyTopic ? "64%" : "100%"
                       }}
                       disabled={anyTopic}
                       onChange={(e) => setQuery(e.target.value)}
@@ -199,8 +201,8 @@ const Home = () => {
                       }}
                     />
                   </div>
-                  <h2 
-                    style={{ color: USED_COLORS[1] }} 
+                  <h2
+                    style={{ color: USED_COLORS[1] }}
                     className="text-xl font-workSans">{page + 1}
                   </h2>
                   <div className="p-2" >
@@ -230,28 +232,36 @@ const Home = () => {
                     />
                   </div>
                 ) : (
-                  <div className="mt-24 flex flex-wrap">
-                    {
-                      data.map((repo: RepositoryType) => (
-                        <Repository
-                          onClick={() => setModalOptions({
-                            repo_id: repo.github_repo_id,
-                            repo_open_issues: repo.open_issues,
-                            repo_full_name:
-                              repo.full_name,
-                            visible: true
-                          })}
-                          onAlert={() => {
-                            setAlertVisible(true)
-                            setTimeout(() => {
-                              setAlertVisible(false)
-                            }, 5400)
-                          }}
-                          repository={repo}
-                        />
-                      ))
-                    }
-                  </div>
+                  data.length > 0 ? (
+                    <div className="mt-24 flex flex-wrap">
+                      {
+                        data.map((repo: RepositoryType) => (
+                          <Repository
+                            onClick={() => setModalOptions({
+                              repo_id: repo.github_repo_id,
+                              repo_open_issues: repo.open_issues,
+                              repo_full_name:
+                                repo.full_name,
+                              visible: true
+                            })}
+                            onAlert={() => {
+                              setAlertVisible(true)
+                              setTimeout(() => {
+                                setAlertVisible(false)
+                              }, 5400)
+                            }}
+                            repository={repo}
+                          />
+                        ))
+                      }
+                    </div>
+                  ) : (
+                    <div className="justify-around flex" >
+                      <div className="p-24" >
+                        <NoResults />
+                      </div>
+                    </div>
+                  )
                 )
               }
             </div>

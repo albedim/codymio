@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react"
 
 interface MenuProps {
-  children: any[],
+  children: any[] | any,
   maxHeight?: number,
+  maxWidth?: number,
+  width?: number,
+  height?: number,
   color: string,
   backgroundColor: string,
   visible: boolean,
@@ -13,7 +16,10 @@ const Menu: React.FC<MenuProps> = ({
   backgroundColor,
   color,
   visible,
-  maxHeight
+  maxHeight,
+  maxWidth,
+  height,
+  width
 }) => {
 
   const [contextVisible, setContextVisible] = useState(visible)
@@ -26,11 +32,23 @@ const Menu: React.FC<MenuProps> = ({
     <>
       {
         contextVisible ? (
-          <div style={{ overflowY: "scroll", maxHeight: maxHeight ? maxHeight : "auto", backgroundColor: backgroundColor, color: color }} className="right-3 p-2 border rounded-md top-14 absolute" onClick={() => setContextVisible(false)}>
+          <div style={{ 
+            height: height ? height : "auto", 
+            width: width ? width : "auto", 
+            maxWidth: maxWidth ? maxWidth : "auto", 
+            overflowY: "scroll", 
+            maxHeight: maxHeight ? maxHeight : "auto", 
+            backgroundColor: 
+            backgroundColor, color: color 
+          }} className="right-3 p-2 border rounded-md top-14 absolute" onClick={() => setContextVisible(false)}>
             {
-              children.map((child, i) => (
-                child
-              ))
+              Array.isArray(children) ? (
+                children.map((child, i) => (
+                  child
+                ))
+              ):(
+                children
+              )
             }
           </div>
         ) : null

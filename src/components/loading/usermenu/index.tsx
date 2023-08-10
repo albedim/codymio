@@ -12,7 +12,7 @@ const Loader: React.FC<LoaderProps> = ({
 }) => {
 
   return (
-    <div className="items-center flex border">
+    <div className="items-center flex">
       <ContentLoader
         speed={2}
         width={114}

@@ -188,7 +188,9 @@ const Contributions = () => {
                         />
                       ))
                     ) : (
-                      <NoResults />
+                      <div className="p-14">
+                        <NoResults />
+                      </div>
                     )
                   }
                 </div>
