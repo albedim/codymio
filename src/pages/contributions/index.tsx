@@ -7,6 +7,7 @@ import jwtDecode from "jwt-decode";
 import Loader from "../../components/loading";
 import NoResults from "../../components/no_results";
 import { USED_COLORS } from "../../App";
+import NotificationBadge from "../../components/NotificationBadge";
 
 
 interface ContributionType {
@@ -148,34 +149,16 @@ const Contributions = () => {
                   className="font-workSans">
                     Completed
                 </h2>
-                {
-                  data.unseen > 0 ? (
-                    <div className="pl-4">
-                      <div className="rounded-full pb-0 pt-0 p-1 bg-[red]">
-                        <h2
-                          className="text-sm rounded-full pb-0 pt-0 p-1 
-                          bg-[red] font-workSans"
-                          style={{ color: "white" }}>{data.unseen}
-                        </h2>
-                      </div>
-                    </div>
-                  ) : (
-                    <></>
-                  )
-                }
+                <div>
+                  <NotificationBadge maxNumber={10} number={data.unseen} backgroundColor="red" color="white" />
+                </div>
               </div>
             </div>
             {
               isLoading ? (
                 <div className="mt-24">
                   <Loader
-                    padding={14}
-                    backgroundColor={USED_COLORS[2]}
-                    foregroundColor={USED_COLORS[4]}
-                    direction="horizontal"
-                    height={384}
-                    width={450}
-                    n={10}
+                    color={USED_COLORS[1]}
                   />
                 </div>
               ) : (

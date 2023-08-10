@@ -155,13 +155,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                         {
                           isLoading ? (
                             <Loader
-                              padding={14}
-                              backgroundColor={USED_COLORS[2]}
-                              foregroundColor={USED_COLORS[4]}
-                              direction="horizontal"
-                              height={154}
-                              width={414}
-                              n={3}
+                              color={USED_COLORS[1]}
                             />
                           ) : (
                             issues.length > 0 ? (

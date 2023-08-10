@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { BASE_FE_URL, BASE_URL } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { USED_COLORS } from "../../App";
+import jwtDecode from "jwt-decode";
 
 
 const Overview = () => {
@@ -44,7 +45,7 @@ const Overview = () => {
       .catch(err => {
         setIsLoggedIn(false)
       })
-  }
+    }
 
   useEffect(() => {
     const code = urlParams.get('code');

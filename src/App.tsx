@@ -17,6 +17,8 @@ function App() {
   const [isThemeLoaded, setIsThemeLoaded] = useState(false)
 
   const getColors = () => {
+    USED_COLORS = colors["light"]
+    /*
     const savedMode: null | string = window.localStorage.getItem("theme")
     if (savedMode == null) {
       window.localStorage.setItem("theme", "light")
@@ -29,6 +31,7 @@ function App() {
       USED_COLORS = colors["dark"]
       document.body.style.backgroundColor = colors["dark"][0]
     }
+    */
     setIsThemeLoaded(true)
   }
 

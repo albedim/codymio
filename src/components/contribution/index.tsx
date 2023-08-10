@@ -42,23 +42,42 @@ const Contribution: React.FC<ContributionProps> = ({
 
   return (
     <div className="pb-14 p-4">
-      <div style={{ borderColor: USED_COLORS[3], backgroundColor: USED_COLORS[2] }} className="border-2 repository p-6 rounded-lg">
+      <div 
+        style={{ 
+          borderColor: USED_COLORS[3], 
+          backgroundColor: USED_COLORS[2] 
+        }} 
+        className="border-2 repository p-6 rounded-lg">
         <div className="itens-center justify-between flex">
           <div>
             <a target="_blank" href={"https://github.com/" + repository.full_name}>
-              <h2 style={{ color: USED_COLORS[1] }} className="hover:underline text-xl font-semibold font-workSans">{repository.name}</h2>
+              <h2 
+                style={{ color: USED_COLORS[1] }} 
+                className="hover:underline text-xl font-semibold font-workSans">{
+                repository.name}
+              </h2>
             </a>
           </div>
           <div className="items-center justify-around flex">
             {
               removable ? (
-                <AiFillDelete className="cursor-pointer" onClick={onRemove} opacity={"40%"} color="red" size={24} />
+                <AiFillDelete 
+                  className="cursor-pointer" 
+                  onClick={onRemove} 
+                  opacity={"40%"} 
+                  color="red" 
+                  size={24} 
+                />
               ) : null
             }
           </div>
         </div>
         <div>
-          <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">@{repository.full_name.split("/")[0]}</h2>
+          <h2 
+            style={{ color: USED_COLORS[1] }} 
+            className="font-workSans">
+            @{repository.full_name.split("/")[0]}
+          </h2>
         </div>
         <div style={{ borderColor: USED_COLORS[0] }} className="pt-2 border-t mt-4">
           <div className="items-center justify-between flex">
@@ -69,11 +88,15 @@ const Contribution: React.FC<ContributionProps> = ({
                 <h2
                   style={{ color: USED_COLORS[1] }}
                   className="hover:underline cursor-pointer text-lg font-semibold font-workSans" >
-                  {issue.title} • <span className="text-sm font-normal">@{repository.full_name.split("/")[0]}</span>
+                  {issue.title} • <span className="text-sm font-normal">@{issue.owner}</span>
                 </h2>
               </a>
             </div>
-            <div><h2 className="bg-opacity-40 text-[white] rounded-md text-xs p-1 font-workSans bg-[red]" >PROBLEM</h2></div>
+            <div>
+              <h2 className="bg-opacity-40 text-[white] rounded-md text-xs p-1 font-workSans bg-[red]" >
+                PROBLEM
+              </h2>
+            </div>
           </div>
           {
             issue.body != null ? (
@@ -82,15 +105,26 @@ const Contribution: React.FC<ContributionProps> = ({
                   <h2 style={{ color: USED_COLORS[1] }} className="pt-2 font-workSans" >
                     {showMore ? issue.body : issue.body.substring(0, 240) + "..."}
                   </h2>
-                  <h2 style={{ color: USED_COLORS[1] }} className="cursor-pointer font-semibold underline" onClick={() => setShowMore(!showMore)} >
+                  <h2 
+                    style={{ color: USED_COLORS[1] }} 
+                    className="cursor-pointer font-semibold underline" 
+                    onClick={() => setShowMore(!showMore)} >
                     {showMore ? "Show less" : "Show more"}
                   </h2>
                 </div>
               ) : (
-                <h2 style={{ color: USED_COLORS[1] }} className="pt-2 font-workSans" >{issue.body}</h2>
+                <h2 
+                  style={{ color: USED_COLORS[1] }} 
+                  className="pt-2 font-workSans" >
+                  {issue.body}
+                </h2>
               )
             ) : (
-              <h2 style={{ color: USED_COLORS[1] }} className="italic pt-2 font-workSans" >No description provided for this issue.</h2>
+              <h2 
+                style={{ color: USED_COLORS[1] }} 
+                className="italic pt-2 font-workSans" >
+                No description provided for this issue.
+              </h2>
             )
           }
         </div>

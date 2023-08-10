@@ -224,15 +224,9 @@ const Home = () => {
               </div>
               {
                 isLoading ? (
-                  <div className="mt-24">
+                  <div className="justify-around flex mt-24">
                     <Loader
-                      padding={14}
-                      backgroundColor={USED_COLORS[2]}
-                      foregroundColor={USED_COLORS[4]}
-                      direction="horizontal"
-                      height={284}
-                      width={450}
-                      n={10}
+                      color={USED_COLORS[1]}
                     />
                   </div>
                 ) : (
