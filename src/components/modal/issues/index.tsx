@@ -2,13 +2,16 @@ import React, {
   useEffect,
   useState
 } from "react";
+
 import { RiCloseFill } from "react-icons/ri";
 import axios from "axios";
 import '../index.css'
+
 import {
   HiArrowCircleLeft,
   HiArrowCircleRight
 } from "react-icons/hi";
+
 import { BASE_URL } from "../../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
@@ -63,7 +66,10 @@ const IssuesModal: React.FC<ContributeProps> = ({
 
   const getIssues = async () => {
     setIsLoading(true)
-    await axios.get(BASE_URL + "/repositories/" + repo_id + "/issues?repo_full_name="+repo_full_name+"&user_id="+user.user_id+"&page=" + page, {
+    await axios.get(BASE_URL + "/repositories/" + repo_id + 
+    "/issues?repo_full_name=" + repo_full_name + 
+    "&user_id=" + user.user_id + 
+    "&page=" + page, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
       .then(res => setIssues(res.data.param))
@@ -107,7 +113,10 @@ const IssuesModal: React.FC<ContributeProps> = ({
                 <div className="p-8 justify-around flex">
                   <div>
                     <div className="pb-4">
-                      <h2 style={{ color: USED_COLORS[1] }} className="text-xl font-semibold font-workSans">Issues ({open_issues})</h2>
+                      <h2 
+                        style={{ color: USED_COLORS[1] }} 
+                        className="text-xl font-semibold font-workSans">Issues ({open_issues})
+                      </h2>
                     </div>
                     <div className="items-center justify-around flex">
                       <div className="items-center flex">
@@ -129,7 +138,9 @@ const IssuesModal: React.FC<ContributeProps> = ({
                             }} 
                           />
                         </div>
-                        <h2 style={{ color: USED_COLORS[1] }} className="text-xl font-workSans">{page + 1}</h2>
+                        <h2 style={{ color: USED_COLORS[1] }} className="text-xl font-workSans">
+                          {page + 1}
+                        </h2>
                         <div className="p-2" >
                           <HiArrowCircleRight 
                             color={USED_COLORS[1]} 
@@ -161,7 +172,9 @@ const IssuesModal: React.FC<ContributeProps> = ({
                             issues.length > 0 ? (
                               issues.map((issue: Issue) => (
                                 <div className="p-4">
-                                  <div style={{ backgroundColor: USED_COLORS[2] }} className="justify-between flex rounded-lg p-4">
+                                  <div 
+                                    style={{ backgroundColor: USED_COLORS[2] }} 
+                                    className="justify-between flex rounded-lg p-4">
                                     <div>
                                       <h2
                                         style={{ color: USED_COLORS[1], maxWidth: 340 }}

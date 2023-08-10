@@ -15,7 +15,9 @@ const NotificationBadge: React.FC<Notificationbadge> = ({
   return(
     number > 0 ? (
       <div style={{ marginTop: -14 }} className="absolute ml-4">
-        <div style={{ color: color, backgroundColor: backgroundColor }} className="rounded-full pb-0 pt-0 p-1">
+        <div 
+          style={{ color: color, backgroundColor: backgroundColor }} 
+          className="rounded-full pb-0 pt-0 p-1">
           <h2
             className="text-sm rounded-full pb-0 pt-0 p-1 
             font-workSans"

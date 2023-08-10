@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { USED_COLORS } from "../../App";
-import ContentLoader from "react-content-loader";
 import { PiAirplaneTakeoffFill } from "react-icons/pi";
 import { LinearProgress } from "@mui/material";
 
@@ -18,7 +16,10 @@ const Loader: React.FC<LoaderProps> = ({
       <div className="justify-around items-center flex pb-2">
         <PiAirplaneTakeoffFill size={54} color={color}/>
       </div>
-      <h2 style={{ color: color }} className="text-xl font-semibold font-lato">Loading...</h2>
+      <h2 
+        style={{ color: color }} 
+        className="text-xl font-semibold font-lato">Loading...
+      </h2>
       <div className="mt-4">
         <LinearProgress color="inherit"/>
       </div>

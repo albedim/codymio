@@ -16,7 +16,10 @@ const Overview = () => {
 
 
   const login = async () => {
-    window.location.assign("https://github.com/login/oauth/authorize/?client_id=" + process.env.REACT_APP_CLIENT_ID)
+    window.location.assign(
+      "https://github.com/login/oauth/authorize/?client_id=" + 
+      process.env.REACT_APP_CLIENT_ID
+    )
   }
 
   const signin = async (code: string) => {
@@ -72,7 +75,13 @@ const Overview = () => {
             your commits and <br />track your repository updates.
           </h2>
           <div className="mt-8">
-            <button style={{ color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }} onClick={() => login()} className="font-normal font-workSans rounded-lg p-4">
+            <button 
+              style={{ 
+                color: USED_COLORS[0], 
+                backgroundColor: USED_COLORS[1] 
+              }} 
+              onClick={() => login()} 
+              className="font-normal font-workSans rounded-lg p-4">
               GET STARTED
             </button>
           </div>

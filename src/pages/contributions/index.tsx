@@ -1,5 +1,10 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+
+import { 
+  useEffect, 
+  useState 
+} from "react"
+
 import { BASE_URL } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import Contribution from "../../components/contribution";
@@ -110,7 +115,9 @@ const Contributions = () => {
   }, [])
 
   return (
-    <div style={{ backgroundColor: USED_COLORS[0] }} className="mt-40 justify-around flex w-screen">
+    <div 
+      style={{ backgroundColor: USED_COLORS[0] }} 
+      className="mt-40 justify-around flex w-screen">
       {
         isSessionLoading ? (
           <></>
@@ -129,9 +136,15 @@ const Contributions = () => {
                   setPage("uncompleted")
                 }}
                 className="cursor-pointer pb-2 p-4"
-                style={{ borderBottom: page == 'uncompleted' ? "2px solid " + USED_COLORS[1] : "" }}
+                style={{ 
+                  borderBottom: page == 'uncompleted' ? 
+                  "2px solid " + USED_COLORS[1] : "" 
+                }}
               >
-                <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">In progress</h2>
+                <h2 
+                  style={{ color: USED_COLORS[1] }} 
+                  className="font-workSans">In progress
+                </h2>
               </div>
               <div
                 onClick={() => {
@@ -150,7 +163,12 @@ const Contributions = () => {
                     Completed
                 </h2>
                 <div>
-                  <NotificationBadge maxNumber={10} number={data.unseen} backgroundColor="red" color="white" />
+                  <NotificationBadge 
+                    maxNumber={10} 
+                    number={data.unseen} 
+                    backgroundColor="red" 
+                    color="white" 
+                  />
                 </div>
               </div>
             </div>

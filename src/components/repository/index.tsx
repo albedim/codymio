@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { AiFillCode } from "react-icons/ai"
 import { BiGitRepoForked } from 'react-icons/bi'
-import { useNavigate } from "react-router-dom"
 import { USED_COLORS } from "../../App"
 
 interface RepositoryProps {

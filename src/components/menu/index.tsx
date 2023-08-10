@@ -41,7 +41,9 @@ const Menu: React.FC<MenuProps> = ({
             maxHeight: maxHeight ? maxHeight : "auto", 
             backgroundColor: 
             backgroundColor, color: color 
-          }} className="right-3 p-2 border rounded-md top-14 absolute" onClick={() => setContextVisible(false)}>
+          }} 
+          className="right-3 p-2 border rounded-md top-14 absolute" 
+          onClick={() => setContextVisible(false)}>
             {
               Array.isArray(children) ? (
                 children.map((child, i) => (

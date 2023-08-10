@@ -1,7 +1,5 @@
 import React, { useState } from "react"
-import { BsFillSignMergeLeftFill } from 'react-icons/bs'
-import { AiFillClockCircle, AiFillDelete } from 'react-icons/ai'
-import { PiPushPinFill } from 'react-icons/pi'
+import { AiFillDelete } from 'react-icons/ai'
 import { USED_COLORS } from "../../App"
 import Stepper from "../stepper"
 
