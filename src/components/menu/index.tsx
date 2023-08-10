@@ -36,7 +36,8 @@ const Menu: React.FC<MenuProps> = ({
             height: height ? height : "auto", 
             width: width ? width : "auto", 
             maxWidth: maxWidth ? maxWidth : "auto", 
-            overflowY: "scroll", 
+            overflowY: "scroll",
+            overflowX: 'hidden',
             maxHeight: maxHeight ? maxHeight : "auto", 
             backgroundColor: 
             backgroundColor, color: color 

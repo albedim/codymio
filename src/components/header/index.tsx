@@ -143,11 +143,11 @@ const Header = () => {
                   <NotificationBadge color={USED_COLORS[0]} backgroundColor={USED_COLORS[1]} maxNumber={10} number={notifications.length} />
                   <MdNotifications color={USED_COLORS[1]} className="cursor-pointer" onClick={() => setVisibleMenu(visibleMenu == "notifications" ? "" : "notifications")} size={24} />
                 </div>
-                <Menu width={304} visible={visibleMenu == "notifications"} backgroundColor={USED_COLORS[0]} color={USED_COLORS[1]}>
+                <Menu width={384} visible={visibleMenu == "notifications"} backgroundColor={USED_COLORS[0]} color={USED_COLORS[1]}>
                   {
                     notifications.length > 0 ? (
                       notifications.map((notification: Notification) => (
-                        <div style={{ maxWidth: 340 }} className="border-b items-center pt-1 pb-1 p-4 justify-between flex">
+                        <div style={{ maxWidth: 340 }} className="border-b items-center pt-4 pb-1 p-4 justify-between flex">
                           <div>
                             <h2 className="text-md font-semibold font-lato">{notification.title}</h2>
                             <h2 className="text-md font-lato">{notification.content}</h2>
