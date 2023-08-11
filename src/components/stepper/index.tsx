@@ -4,6 +4,7 @@ import { BsFillSignMergeLeftFill } from "react-icons/bs"
 import { PiPushPinFill } from "react-icons/pi"
 import AlertsModal from "../modal/alerts"
 import { LABELS } from "../../utils/labels"
+import { CSSTransition } from "react-transition-group"
 
 interface StepperProps {
   status: "none" | "pushed" | "completed"

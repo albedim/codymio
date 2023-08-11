@@ -24,6 +24,7 @@ import {
 import NotificationBadge from "../NotificationBadge";
 import NoResults from "../no_results";
 import Loader from "../loading/usermenu";
+import { CSSTransition } from "react-transition-group";
 
 
 interface Notification {
@@ -185,38 +186,46 @@ const Header = () => {
                     size={24} 
                   />
                 </div>
-                <Menu 
-                  width={384} 
-                  visible={visibleMenu == "notifications"} 
-                  backgroundColor={USED_COLORS[0]} 
-                  color={USED_COLORS[1]}>
-                  {
-                    notifications.length > 0 ? (
-                      notifications.map((notification: Notification) => (
-                        <div 
-                          style={{ maxWidth: 340 }} 
-                          className="border-b items-center pt-3 pb-3 p-4 justify-between flex">
-                          <div>
-                            <h2 className="text-md font-semibold font-lato">{notification.title}</h2>
-                            <h2 className="text-md font-lato">{notification.content}</h2>
-                          </div>
-                          <div className="pl-4">
-                            <div className="border rounded-full">
-                              <MdOutlineDone 
-                                className="cursor-pointer" 
-                                onClick={() => removeNotification(notification.notification_id)} 
-                              />
+                <CSSTransition
+                  in={visibleMenu == "notifications"}
+                  timeout={300}
+                  classNames="fade"
+                  unmountOnExit
+                >
+                  <Menu 
+                    width={384} 
+                    maxHeight={540}
+                    visible={visibleMenu == "notifications"} 
+                    backgroundColor={USED_COLORS[0]} 
+                    color={USED_COLORS[1]}>
+                    {
+                      notifications.length > 0 ? (
+                        notifications.map((notification: Notification) => (
+                          <div 
+                            style={{ maxWidth: 340 }} 
+                            className="border-b items-center pt-3 pb-3 p-4 justify-between flex">
+                            <div>
+                              <h2 className="text-md font-semibold font-lato">{notification.title}</h2>
+                              <h2 className="text-md font-lato">{notification.content}</h2>
+                            </div>
+                            <div className="pl-4">
+                              <div className="border rounded-full">
+                                <MdOutlineDone 
+                                  className="cursor-pointer" 
+                                  onClick={() => removeNotification(notification.notification_id)} 
+                                />
+                              </div>
                             </div>
                           </div>
+                        ))
+                      ):(
+                        <div className="p-4">
+                          <NoResults/>
                         </div>
-                      ))
-                    ):(
-                      <div className="p-4">
-                        <NoResults/>
-                      </div>
-                    )
-                  }
-                </Menu>
+                      )
+                    }
+                  </Menu>
+                </CSSTransition>
               </div>
 
               <div className="items-center flex">
@@ -232,28 +241,35 @@ const Header = () => {
                     className="cursor-pointer"
                   />
                 </div >
-                <Menu 
-                  visible={visibleMenu == "user"} 
-                  backgroundColor={USED_COLORS[0]} 
-                  color={USED_COLORS[1]}
+                <CSSTransition
+                  in={visibleMenu == "user"}
+                  timeout={300}
+                  classNames="fade"
+                  unmountOnExit
                 >
+                  <Menu 
+                    visible={visibleMenu == "user"} 
+                    backgroundColor={USED_COLORS[0]} 
+                    color={USED_COLORS[1]}
+                  >
 
-                  <div 
-                    onClick={() => navigate("/contributions")} 
-                    className="hover:opacity-80 cursor-pointer  mb-1 mt-1 p-1 pr-4 pl-4">
-                    <h2>Dashboard</h2>
-                  </div>
+                    <div 
+                      onClick={() => navigate("/contributions")} 
+                      className="hover:opacity-80 cursor-pointer  mb-1 mt-1 p-1 pr-4 pl-4">
+                      <h2>Dashboard</h2>
+                    </div>
 
-                  <div onClick={() => {
-                    window.localStorage.removeItem("token")
-                    window.localStorage.removeItem("github-token")
-                    window.location.href = BASE_FE_URL
-                  }} className="hover:opacity-80 cursor-pointer items-center flex mb-1 mt-1 p-1 pr-4 pl-4">
-                    <div className="pr-2"><LuLogOut /></div>
-                    <h2>Log out</h2>
-                  </div>
+                    <div onClick={() => {
+                      window.localStorage.removeItem("token")
+                      window.localStorage.removeItem("github-token")
+                      window.location.href = BASE_FE_URL
+                    }} className="hover:opacity-80 cursor-pointer items-center flex mb-1 mt-1 p-1 pr-4 pl-4">
+                      <div className="pr-2"><LuLogOut /></div>
+                      <h2>Log out</h2>
+                    </div>
 
-                </Menu>
+                  </Menu>
+                </CSSTransition>
               </div>
             </div>
           ) : (
