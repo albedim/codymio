@@ -189,7 +189,11 @@ const Header = () => {
                             className="border-b items-center pt-3 pb-3 p-4 justify-between flex">
                             <div>
                               <h2 className="text-md font-semibold font-lato">{notification.title}</h2>
-                              <h2 className="text-md font-lato">{notification.content}</h2>
+                              <h2 className="text-md font-lato">{
+                                notification.content.split("/")[1] != undefined && 
+                                notification.content.split("/")[1].length + notification.content.split("/")[0].split(" ")[1].length > 34 ? 
+                                notification.content.substring(0,54) + "..." : notification.content
+                              }</h2>
                             </div>
                             <div className="pl-4">
                               <div className="border rounded-full">

@@ -65,11 +65,11 @@ const Overview = () => {
       <></>
     ) : (
       <div className="bg-[#f9f8fd] items-center justify-around flex h-screen w-screen">
-        <div className="p-4">
-          <h2 className="text-[#475072] text-center text-5xl font-semibold font-workSans">
+        <div className="p-14">
+          <h2 className="text-[#475072] text text-5xl font-semibold font-workSans">
             Find the perfect <br />open source for you.
           </h2>
-          <h2 className="text-[#475072] text-center mt-8 text-xl font-workSans">
+          <h2 className="text-[#475072] text mt-8 text-xl font-workSans">
             Find the perfect open source projects
             to contribute to. <br />Manage
             your pull requests and track your contributions easily. <br />500+ developers are getting closer to open source <br />with Contrycode.
@@ -79,7 +79,7 @@ const Overview = () => {
               <button 
                 style={{ 
                   color: "#f9f8fd", 
-                  width: 240,
+                  width: 340,
                   backgroundColor: "#7024f8"
                 }} 
                 onClick={() => login()} 

@@ -29,6 +29,9 @@ input[type="checkbox"] {
   .padding-right{
     padding: 4px;
   }
+  .text{
+    text-align: left !important;
+  }
 }
 
 .block-flex{
@@ -89,4 +92,8 @@ body{
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 300ms, transform 300ms;
+}
+
+.text{
+  text-align: center;
 }
