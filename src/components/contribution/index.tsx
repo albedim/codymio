@@ -40,18 +40,13 @@ const Contribution: React.FC<ContributionProps> = ({
 
   return (
     <div className="pb-14 p-4">
-      <div 
-        style={{ 
-          borderColor: USED_COLORS[3], 
-          backgroundColor: USED_COLORS[2] 
-        }} 
-        className="border-2 repository p-6 rounded-lg">
+      <div
+        className="bg-[#fafafa] border repository p-6 rounded-lg">
         <div className="itens-center justify-between flex">
           <div>
             <a target="_blank" href={"https://github.com/" + repository.full_name}>
               <h2 
-                style={{ color: USED_COLORS[1] }} 
-                className="hover:underline text-xl font-semibold font-workSans">{
+                className="text-[#475072] hover:underline text-xl font-semibold font-workSans">{
                 repository.name}
               </h2>
             </a>
@@ -72,27 +67,25 @@ const Contribution: React.FC<ContributionProps> = ({
         </div>
         <div>
           <h2 
-            style={{ color: USED_COLORS[1] }} 
-            className="font-workSans">
+            className="text-[#475072] font-workSans">
             @{repository.full_name.split("/")[0]}
           </h2>
         </div>
-        <div style={{ borderColor: USED_COLORS[0] }} className="pt-2 border-t mt-4">
+        <div className="pt-2 border-t mt-4">
           <div className="items-center justify-between flex">
             <div>
               <a
                 target="_blank"
                 href={"https://github.com/" + repository.full_name + "/issues/" + issue.number}>
                 <h2
-                  style={{ color: USED_COLORS[1] }}
-                  className="hover:underline cursor-pointer text-lg font-semibold font-workSans" >
+                  className="text-[#475072] hover:underline cursor-pointer text-lg font-semibold font-workSans" >
                   {issue.title} • <span className="text-sm font-normal">@{issue.owner}</span>
                 </h2>
               </a>
             </div>
             <div>
-              <h2 className="bg-opacity-40 text-[white] rounded-md text-xs p-1 font-workSans bg-[red]" >
-                PROBLEM
+              <h2 className="pr-2 pl-2 bg-opacity-40 text-[white] rounded-md text-xs p-1 font-workSans bg-[#7024f8]" >
+                ISSUE
               </h2>
             </div>
           </div>
@@ -100,34 +93,32 @@ const Contribution: React.FC<ContributionProps> = ({
             issue.body != null ? (
               issue.body.length > 240 ? (
                 <div className="mt-2">
-                  <h2 style={{ color: USED_COLORS[1] }} className="pt-2 font-workSans" >
+                  <h2 className="text-[#475072] pt-2 font-workSans" >
                     {showMore ? issue.body : issue.body.substring(0, 240) + "..."}
                   </h2>
                   <h2 
-                    style={{ color: USED_COLORS[1] }} 
-                    className="cursor-pointer font-semibold underline" 
+                    className="text-[#475072] cursor-pointer font-semibold underline" 
                     onClick={() => setShowMore(!showMore)} >
                     {showMore ? "Show less" : "Show more"}
                   </h2>
                 </div>
               ) : (
                 <h2 
-                  style={{ color: USED_COLORS[1] }} 
-                  className="pt-2 font-workSans" >
+                  className="text-[#475072] pt-2 font-workSans" >
                   {issue.body}
                 </h2>
               )
             ) : (
-              <h2 
-                style={{ color: USED_COLORS[1] }} 
-                className="italic pt-2 font-workSans" >
+              <h2
+                className="text-[#475072] italic pt-2 font-workSans" >
                 No description provided for this issue.
               </h2>
             )
           }
         </div>
-        <div className="mt-4">
+        <div className="justify-between flex mt-4">
           <Stepper status={repository.status}/>
+          <div></div>
         </div>
       </div>
     </div>

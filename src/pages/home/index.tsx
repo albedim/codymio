@@ -8,10 +8,18 @@ import Loader from "../../components/loading";
 import IssuesModal from "../../components/modal/issues";
 import Repository, { RepositoryType } from "../../components/repository";
 import { USED_COLORS } from "../../App";
-import { Alert, AlertTitle } from "@mui/material";
 import ErrorAlert from "../../components/alert/error";
 import NoResults from "../../components/no_results";
+import { Checkbox, ThemeProvider, createTheme } from "@mui/material";
 
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#7024f8"
+    }
+  },
+});
 
 const Home = () => {
 
@@ -73,8 +81,7 @@ const Home = () => {
 
   return (
     <div
-      style={{ backgroundColor: USED_COLORS[0] }}
-      className="mt-40 items-center justify-around w-screen flex">
+      className="bgb-[#f9f8fd] mt-40 items-center justify-around w-screen flex">
       {
         isSessionLoading ? (
           <></>
@@ -102,21 +109,15 @@ const Home = () => {
                   <div className="pl-4 flex items-center">
                     <div className="block-flex">
                       <div className="padding-right items-center justify-around flex">
-                        <input
-                          className="w-4 h-4 text-black-600 
-                          bg-gray-100 border-gray-300 rounded focus:ring-black-500 
-                          dark:focus:ring-black-600 dark:ring-offset-gray-800 
-                          focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                          onChange={() => setAnyTopic(!anyTopic)}
-                          checked={anyTopic}
-                          type="checkbox"
-                        />
+                        <ThemeProvider theme={theme}>
+                          <Checkbox
+                            onChange={() => setAnyTopic(!anyTopic)}
+                            checked={anyTopic}
+                          />
+                        </ThemeProvider>
                       </div>
                       <h2
-                        style={{
-                          color: USED_COLORS[1]
-                        }}
-                        className="font-semibold font-workSans" >
+                        className="text-[#475072] font-semibold font-workSans" >
                         Any Topic
                       </h2>
                     </div>
@@ -124,8 +125,8 @@ const Home = () => {
                   <div className="p-4">
                     <input
                       style={{
-                        color: USED_COLORS[1],
-                        backgroundColor: USED_COLORS[2],
+                        color: "#475072",
+                        backgroundColor: "#fafafa",
                         display: anyTopic ? 'none' : 'block',
                         opacity: anyTopic ? "64%" : "100%"
                       }}
@@ -133,16 +134,16 @@ const Home = () => {
                       onChange={(e) => setQuery(e.target.value)}
                       value={query}
                       placeholder="Search for a topic..."
-                      className="pr-14 rounded-lg p-4"
+                      className="outline-none border pr-14 rounded-lg p-4"
                       type="text"
                     />
                   </div>
                   <div className="p-4">
                     <select
-                      className="pr-14 rounded-lg p-4"
+                      className="cursor-pointer outline-none border pr-14 rounded-lg p-4"
                       onChange={(e) => setLanguage(e.target.value)}
                       value={language} name="" id=""
-                      style={{ color: USED_COLORS[1], backgroundColor: USED_COLORS[2] }}
+                      style={{ color: "#475072", backgroundColor: "#fafafa" }}
                     >
                       <option value="all">Any Language</option>
                       {
@@ -156,25 +157,23 @@ const Home = () => {
                     {
                       anyTopic || !anyTopic && query != "" ? (
                         <button
-                          className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4"
-                          style={{ backgroundColor: USED_COLORS[1] }}
+                          className="bg-[#7024f8] font-workSans text-[#f9f8fd] rounded-lg pl-7 pr-7 p-4"
                           onClick={() => {
                             getData()
                             setPage(0)
                           }}
                         >
-                          <HiSearch size={24} color={USED_COLORS[0]} />
+                          <HiSearch size={24} color={"#f9f8fd"} />
                         </button>
                       ) : (
                         <button
                           disabled
-                          className="font-workSans text-[white] rounded-lg pl-7 pr-7 p-4"
-                          style={{ backgroundColor: USED_COLORS[1] }}
+                          className="bg-[#7024f8] opacity-40 font-workSans text-[#f9f8fd] rounded-lg pl-7 pr-7 p-4"
                           onClick={() => {
                             getData()
                             setPage(0)
                           }} >
-                          <HiSearch size={24} color={USED_COLORS[0]} />
+                          <HiSearch size={24} color={"#f9f8fd"} />
                         </button>
                       )
                     }
@@ -190,7 +189,7 @@ const Home = () => {
                         opacity: isLoading || page == 0 ? "40%" : "100%"
                       }}
                       size={34}
-                      color={USED_COLORS[1]}
+                      color={"#7024f8"}
                       onClick={() => {
                         if (isLoading || page == 0)
                           return;
@@ -202,8 +201,7 @@ const Home = () => {
                     />
                   </div>
                   <h2
-                    style={{ color: USED_COLORS[1] }}
-                    className="text-xl font-workSans">{page + 1}
+                    className="text-[#475072] text-xl font-workSans">{page + 1}
                   </h2>
                   <div className="p-2" >
                     <HiArrowCircleRight
@@ -211,7 +209,7 @@ const Home = () => {
                         cursor: isLoading || page == 30 ? "default" : "pointer",
                         opacity: isLoading || page == 30 ? "40%" : "100%"
                       }}
-                      color={USED_COLORS[1]}
+                      color={"#7024f8"}
                       size={34} onClick={() => {
                         if (isLoading || page == 30)
                           return;
@@ -227,9 +225,7 @@ const Home = () => {
               {
                 isLoading ? (
                   <div className="justify-around flex mt-24">
-                    <Loader
-                      color={USED_COLORS[1]}
-                    />
+                    <Loader/>
                   </div>
                 ) : (
                   data.length > 0 ? (

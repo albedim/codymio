@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { PiAirplaneTakeoffFill } from "react-icons/pi";
-import { LinearProgress } from "@mui/material";
+import { LinearProgress, ThemeProvider, createTheme } from "@mui/material";
 
-interface LoaderProps {
-  color: string
-}
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#7024f8"
+    }
+  },
+});
 
-const Loader: React.FC<LoaderProps> = ({
-  color
-}) => {
+const Loader: React.FC = () => {
 
   return (
     <div className="items-center justify-around flex repository">
       <div>
       <div className="justify-around items-center flex pb-2">
-        <PiAirplaneTakeoffFill size={54} color={color}/>
+        <PiAirplaneTakeoffFill size={54} color={"#7024f8"}/>
       </div>
       <h2 
-        style={{ color: color }} 
-        className="text-xl font-semibold font-lato">Loading...
+        className="text-[#475072] text-xl font-semibold font-lato">Loading...
       </h2>
       <div className="mt-4">
-        <LinearProgress color="inherit"/>
+        <ThemeProvider theme={theme}>
+          <LinearProgress/>
+        </ThemeProvider>
       </div>
       </div>
     </div>

@@ -26,7 +26,7 @@ const Repository: React.FC<RepositoryProps> = ({
   onAlert
 }) => {
 
-  const maxLength = 62
+  const maxLength = 54
 
   const [showMore, setShowMore] = useState(false)
 
@@ -37,31 +37,28 @@ const Repository: React.FC<RepositoryProps> = ({
 
   return (
     <div className="pb-14 p-4">
-      <div style={{
-        borderColor: USED_COLORS[3],
-        backgroundColor: USED_COLORS[2]
-      }}
-        className="border repository p-6 rounded-lg">
+      <div
+        className="bg-[#fafafa] border repository p-6 rounded-lg">
         <div className="justify-between flex">
           <div>
-            <a target="_blank" href={"https://github.com/" + repository?.full_name}>
+            <a title={repository?.name} target="_blank" href={"https://github.com/" + repository?.full_name}>
               <h2
-                style={{ color: USED_COLORS[1] }}
-                className="hover:underline text-xl font-semibold font-workSans">{repository?.name}
+                className="text-[#475072] hover:underline text-xl font-semibold font-workSans">{
+                  repository?.name != undefined && repository?.name.length > 24 ? 
+                  repository?.name.substring(0,18) + "..." : repository?.name}
               </h2>
             </a>
           </div>
           <div
-            style={{ borderColor: USED_COLORS[1] }}
-            className="items-center flex pr-3 pl-3 rounded-md border-2"
+            className="border-[#475072] text-[#475072] items-center flex pr-3 pl-3 rounded-md border"
           >
-            <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">
+            <h2 className="text-[#475072] [font-workSans">
               {repository?.open_issues} Issues
             </h2>
           </div>
         </div>
         <div>
-          <h2 style={{ color: USED_COLORS[1] }} className="font-workSans">
+          <h2 className="text-[#475072] font-workSans">
             @{repository?.full_name.split("/")[0]}
           </h2>
         </div>
@@ -69,11 +66,11 @@ const Repository: React.FC<RepositoryProps> = ({
           {
             overLength ? (
               <div className="mt-2">
-                <h2 style={{ maxWidth: 254, color: USED_COLORS[1] }} className="font-workSans" >{
+                <h2 style={{ maxWidth: 284, color: "#475072"}} className="font-workSans" >{
                   showMore ? repository?.description : repository?.description?.substring(0, maxLength) + "..."
                 }</h2>
                 <h2
-                  style={{ color: USED_COLORS[1] }}
+                  style={{ color: "#475072" }}
                   className="cursor-pointer font-semibold underline"
                   onClick={() => setShowMore(!showMore)}
                 >
@@ -81,12 +78,12 @@ const Repository: React.FC<RepositoryProps> = ({
                 </h2>
               </div>
             ) : (
-              <h2 style={{ color: USED_COLORS[1] }} className="pt-2 font-workSans" >{repository?.description}</h2>
+              <h2 style={{ minHeight: 78, maxWidth: 284, color: "#475072" }} className="pt-2 font-workSans" >{repository?.description}</h2>
             )
           }
           <div className="pt-2 items-center flex">
-            <div className="pr-2"><BiGitRepoForked color={USED_COLORS[1]} /></div>
-            <h2 style={{ color: USED_COLORS[1] }} className="font-semibold font-workSans">{repository?.forks}</h2>
+            <div className="pr-2"><BiGitRepoForked color={"#7024f8"} /></div>
+            <h2 className="text-[#475072] font-semibold font-workSans">{repository?.forks}</h2>
           </div>
         </div>
         <div className="pt-8 justify-between flex">
@@ -107,17 +104,16 @@ const Repository: React.FC<RepositoryProps> = ({
             {
               repository?.contributable ? (
                 <button
-                style={{ color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }}
                 onClick={onClick}
-                className="rounded-md font-workSans text-sm p-2 text-[white]"
+                className="text-[white] bg-[#7024f8] rounded-md font-workSans text-sm p-2 text-[white]"
               >
                 Contribute
               </button>
               ):(
                 <button
-                style={{ opacity: "40%", color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }}
                 onClick={onAlert}
-                className="rounded-md font-workSans text-sm p-2 text-[white]"
+                disabled
+                className="opacity-40 text-[white] bg-[#7024f8] rounded-md font-workSans text-sm p-2 text-[white]"
               >
                 Contribute
               </button>

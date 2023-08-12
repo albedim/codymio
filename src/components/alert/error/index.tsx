@@ -21,7 +21,7 @@ const ErrorAlert: React.FC<ErrorAlertProps> = ({
               Error
             </h2>
           </AlertTitle>
-        <h2 
+        <h2
           className="text-md font-normal font-lato" 
           style={{ maxWidth: 450 }} >
             You already contributed to this project and your pull request 

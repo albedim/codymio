@@ -23,12 +23,10 @@ const AlertsModal: React.FC<AlertsModalProps> = ({
           <div className="modal">
             <div className="modal-wrapper p-4">
               <div
-                style={{ 
-                  borderColor: USED_COLORS[3], 
-                  backgroundColor: USED_COLORS[0], 
+                style={{
                   borderRadius: 8 
                 }}
-                className="border modal-content"
+                className="bg-[#fafafa] border modal-content"
                 onClick={e => e.stopPropagation()}
               >
                 <div className="pb-0 p-4 items-center justify-between flex">
@@ -46,13 +44,12 @@ const AlertsModal: React.FC<AlertsModalProps> = ({
                   <div>
                     <div className="pb-4">
                       <h2 
-                        style={{ color: USED_COLORS[1] }} 
-                        className="text-xl font-normal font-workSans">{text}
+                        className="text-[#475072] text-xl font-normal font-workSans">{text}
                       </h2>
                     </div>
                     <div className="pt-8">
                       <button 
-                        style={{ color: USED_COLORS[0], backgroundColor: USED_COLORS[1] }} 
+                        style={{ color: "white", backgroundColor: "#7024f8" }} 
                         onClick={() => onClose()} 
                         className="font-normal font-workSans rounded-lg p-4">
                         GOT IT

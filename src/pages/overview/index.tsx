@@ -64,26 +64,29 @@ const Overview = () => {
     isloggedIn ? (
       <></>
     ) : (
-      <div className="bg-img items-center justify-around flex h-screen w-screen">
+      <div className="bg-[#f9f8fd] items-center justify-around flex h-screen w-screen">
         <div className="p-4">
-          <h2 style={{ color: USED_COLORS[1] }} className="text-4xl font-semibold font-workSans">
+          <h2 className="text-[#475072] text-center text-5xl font-semibold font-workSans">
             Find the perfect <br />open source for you.
           </h2>
-          <h2 style={{ color: USED_COLORS[1] }} className="mt-5 text-xl font-workSans">
-            We'll help you find the right open source projects
-            to contribute to. <br />Contrycode is also going to manage
-            your commits and <br />track your repository updates.
+          <h2 className="text-[#475072] text-center mt-8 text-xl font-workSans">
+            Find the perfect open source projects
+            to contribute to. <br />Manage
+            your pull requests and track your contributions easily. <br />500+ developers are getting closer to open source <br />with Contrycode.
           </h2>
-          <div className="mt-8">
-            <button 
-              style={{ 
-                color: USED_COLORS[0], 
-                backgroundColor: USED_COLORS[1] 
-              }} 
-              onClick={() => login()} 
-              className="font-normal font-workSans rounded-lg p-4">
-              GET STARTED
-            </button>
+          <div className="justify-around flex mt-14">
+            <div>
+              <button 
+                style={{ 
+                  color: "#f9f8fd", 
+                  width: 240,
+                  backgroundColor: "#7024f8"
+                }} 
+                onClick={() => login()} 
+                className="font-normal font-workSans rounded-md p-4">
+                GET STARTED
+              </button>
+            </div>
           </div>
         </div>
       </div>

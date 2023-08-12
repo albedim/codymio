@@ -95,7 +95,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
           <div className="modal">
             <div className="modal-wrapper p-4">
               <div
-                style={{ borderColor: USED_COLORS[3], backgroundColor: USED_COLORS[0], borderRadius: 8 }}
+                style={{ backgroundColor: USED_COLORS[0], borderRadius: 8 }}
                 className="border modal-content"
                 onClick={e => e.stopPropagation()}
               >
@@ -114,8 +114,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                   <div>
                     <div className="pb-4">
                       <h2 
-                        style={{ color: USED_COLORS[1] }} 
-                        className="text-xl font-semibold font-workSans">Issues ({open_issues})
+                        className="text-[#475072] text-xl font-semibold font-workSans">Issues ({open_issues})
                       </h2>
                     </div>
                     <div className="items-center justify-around flex">
@@ -138,12 +137,12 @@ const IssuesModal: React.FC<ContributeProps> = ({
                             }} 
                           />
                         </div>
-                        <h2 style={{ color: USED_COLORS[1] }} className="text-xl font-workSans">
+                        <h2 className="text-[#475072] text-xl font-workSans">
                           {page + 1}
                         </h2>
                         <div className="p-2" >
                           <HiArrowCircleRight 
-                            color={USED_COLORS[1]} 
+                            color={"#7024f8"} 
                             style={{ 
                               cursor: isLoading || page == 30 ? "default" : "pointer", 
                               opacity: isLoading || page == 30 ? "40%" : "100%" 
@@ -165,23 +164,20 @@ const IssuesModal: React.FC<ContributeProps> = ({
                       <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
                         {
                           isLoading ? (
-                            <Loader
-                              color={USED_COLORS[1]}
-                            />
+                            <Loader/>
                           ) : (
                             issues.length > 0 ? (
                               issues.map((issue: Issue) => (
                                 <div className="p-4">
                                   <div 
-                                    style={{ backgroundColor: USED_COLORS[2] }} 
-                                    className="justify-between flex rounded-lg p-4">
+                                    className="bg-[#fafafa] justify-between flex rounded-lg p-4">
                                     <div>
                                       <h2
-                                        style={{ color: USED_COLORS[1], maxWidth: 340 }}
+                                        style={{ color: "#475072", maxWidth: 340 }}
                                         className="font-semibold text-lg font-workSans">{issue.title}
                                       </h2>
                                       <h2
-                                        style={{ color: USED_COLORS[1] }}
+                                        style={{ color: "#475072" }}
                                         className="font-normal text-md font-workSans">@{issue.creator_username}
                                       </h2>
                                       <h2
@@ -218,7 +214,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                                               <HiArrowCircleRight 
                                                 size={34}
                                                 opacity={"40%"}
-                                                color={USED_COLORS[1]} 
+                                                color={"#7024f8"} 
                                               />
                                             </button>
                                           ):(
@@ -233,7 +229,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                                                 issue_title: issue.title,
                                                 issue_body: issue.body
                                               })
-                                            }} size={34} color={USED_COLORS[1]} /></button>
+                                            }} size={34} color={"#7024f8"} /></button>
                                           )
                                         }
                                       </div>

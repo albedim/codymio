@@ -1,14 +1,14 @@
 import axios from "axios"
 import { LuLogOut } from 'react-icons/lu'
 
-import { 
-  useEffect, 
-  useState 
+import {
+  useEffect,
+  useState
 } from "react"
 
-import { 
-  BASE_FE_URL, 
-  BASE_URL 
+import {
+  BASE_FE_URL,
+  BASE_URL
 } from "../../utils/utils";
 
 import { useNavigate } from "react-router-dom";
@@ -16,10 +16,8 @@ import jwtDecode from "jwt-decode";
 import { USED_COLORS } from "../../App";
 import Menu from "../menu";
 
-import { 
-  MdNotifications, 
-  MdOutlineDone 
-} from "react-icons/md";
+import { MdOutlineDone } from "react-icons/md";
+import { GrNotification } from 'react-icons/gr'
 
 import NotificationBadge from "../NotificationBadge";
 import NoResults from "../no_results";
@@ -105,36 +103,21 @@ const Header = () => {
 
   const headerStyle = () => {
     if (window.location.pathname == "/") {
-      return `bg-opacity-10 top-0 fixed border-b p-4 justify-between flex w-screen`
+      return `border bg-[white] bg-opacity-10 top-0 fixed border-b p-4 justify-between flex w-screen`
     }
-    return `bg-opacity-40 top-0 fixed border-b p-4 justify-between flex w-screen`
+    return `border bg-[white] bg-opacity-20 top-0 fixed border-b p-4 justify-between flex w-screen`
   }
 
   return (
-    <div 
-      style={{ 
-        backgroundColor: USED_COLORS[0], 
-        borderColor: USED_COLORS[0] 
-      }} 
+    <div
       className={headerStyle()}>
       <div>
-        {
-          darkMode ? (
-            <img 
-              className="cursor-pointer" 
-              width={145} 
-              src={require('../../images/logo_dark.png')} 
-              alt="" 
-            />
-          ) : (
-            <img 
-              className="cursor-pointer" 
-              width={145} 
-              src={require('../../images/logo.png')} 
-              alt="" 
-            />
-          )
-        }
+        <img
+          className="cursor-pointer"
+          width={45}
+          src={require('../../images/logo.png')}
+          alt=""
+        />
       </div>
       <div className="flex items-center">
         <div>
@@ -168,22 +151,22 @@ const Header = () => {
 
               <div className="items-center flex mr-6">
                 <div>
-                  <NotificationBadge 
-                    color={USED_COLORS[0]} 
-                    backgroundColor={USED_COLORS[1]} 
-                    maxNumber={10} 
-                    number={notifications.length} 
+                  <NotificationBadge
+                    color={"#f9f8fd"}
+                    backgroundColor={"#7024f8"}
+                    maxNumber={10}
+                    number={notifications.length}
                   />
-                  <MdNotifications 
-                    color={USED_COLORS[1]} 
-                    className="cursor-pointer" 
+                  <GrNotification
+                    color={"#475072"}
+                    className="cursor-pointer"
                     onClick={() => {
                       setVisibleMenu(
-                        visibleMenu == "notifications" ? 
-                        "" : "notifications"
+                        visibleMenu == "notifications" ?
+                          "" : "notifications"
                       )
                     }}
-                    size={24} 
+                    size={24}
                   />
                 </div>
                 <CSSTransition
@@ -192,17 +175,17 @@ const Header = () => {
                   classNames="fade"
                   unmountOnExit
                 >
-                  <Menu 
-                    width={384} 
+                  <Menu
+                    width={384}
                     maxHeight={540}
-                    visible={visibleMenu == "notifications"} 
-                    backgroundColor={USED_COLORS[0]} 
-                    color={USED_COLORS[1]}>
+                    visible={visibleMenu == "notifications"}
+                    backgroundColor={"white"}
+                    color={"#475072"}>
                     {
                       notifications.length > 0 ? (
                         notifications.map((notification: Notification) => (
-                          <div 
-                            style={{ maxWidth: 340 }} 
+                          <div
+                            style={{ maxWidth: 340 }}
                             className="border-b items-center pt-3 pb-3 p-4 justify-between flex">
                             <div>
                               <h2 className="text-md font-semibold font-lato">{notification.title}</h2>
@@ -210,17 +193,18 @@ const Header = () => {
                             </div>
                             <div className="pl-4">
                               <div className="border rounded-full">
-                                <MdOutlineDone 
-                                  className="cursor-pointer" 
-                                  onClick={() => removeNotification(notification.notification_id)} 
+                                <MdOutlineDone
+                                  className="cursor-pointer"
+                                  color="#7024f8"
+                                  onClick={() => removeNotification(notification.notification_id)}
                                 />
                               </div>
                             </div>
                           </div>
                         ))
-                      ):(
+                      ) : (
                         <div className="p-4">
-                          <NoResults/>
+                          <NoResults />
                         </div>
                       )
                     }
@@ -229,9 +213,9 @@ const Header = () => {
               </div>
 
               <div className="items-center flex">
-                < div 
-                  onClick={() => setVisibleMenu(visibleMenu == "user" ? "" : "user")} 
-                  className="pr-6" 
+                < div
+                  onClick={() => setVisibleMenu(visibleMenu == "user" ? "" : "user")}
+                  className="pr-6"
                 >
                   <img
                     style={{ borderRadius: "50%" }}
@@ -247,14 +231,14 @@ const Header = () => {
                   classNames="fade"
                   unmountOnExit
                 >
-                  <Menu 
-                    visible={visibleMenu == "user"} 
-                    backgroundColor={USED_COLORS[0]} 
-                    color={USED_COLORS[1]}
+                  <Menu
+                    visible={visibleMenu == "user"}
+                    backgroundColor={"white"}
+                    color={"#475072"}
                   >
 
-                    <div 
-                      onClick={() => navigate("/contributions")} 
+                    <div
+                      onClick={() => navigate("/contributions")}
                       className="hover:opacity-80 cursor-pointer  mb-1 mt-1 p-1 pr-4 pl-4">
                       <h2>Dashboard</h2>
                     </div>
@@ -275,10 +259,7 @@ const Header = () => {
           ) : (
             isSessionLoading ? (
               <div>
-                <Loader
-                  backgroundColor={USED_COLORS[2]}
-                  foregroundColor={USED_COLORS[4]}
-                />
+                <Loader />
               </div>
             ) : (
               <></>

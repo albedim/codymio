@@ -115,8 +115,7 @@ const Contributions = () => {
   }, [])
 
   return (
-    <div 
-      style={{ backgroundColor: USED_COLORS[0] }} 
+    <div
       className="mt-40 justify-around flex w-screen">
       {
         isSessionLoading ? (
@@ -124,9 +123,8 @@ const Contributions = () => {
         ) : (
           <div className="p-14">
             <div>
-              <h2 
-                style={{ color: USED_COLORS[1] }} 
-                className="text-2xl font-semibold font-workSans">
+              <h2
+                className="text-[#475072] text-2xl font-semibold font-workSans">
                   My Contributions
               </h2>
             </div>
@@ -135,15 +133,14 @@ const Contributions = () => {
                 onClick={() => {
                   setPage("uncompleted")
                 }}
-                className="cursor-pointer pb-2 p-4"
+                className="text-[#475072] cursor-pointer pb-2 p-4"
                 style={{ 
                   borderBottom: page == 'uncompleted' ? 
-                  "2px solid " + USED_COLORS[1] : "" 
+                  "2px solid #7024f8" : ""
                 }}
               >
                 <h2 
-                  style={{ color: USED_COLORS[1] }} 
-                  className="font-workSans">In progress
+                  className="text-[#475072] font-workSans">In progress
                 </h2>
               </div>
               <div
@@ -154,12 +151,11 @@ const Contributions = () => {
                 className="cursor-pointer items-center flex pb-2 p-4"
                 style={{ 
                   borderBottom: page == 'completed' ? 
-                  "2px solid " + USED_COLORS[1] : "" 
+                  "2px solid #7024f8" : ""
                 }}
               >
                 <h2 
-                  style={{ color: USED_COLORS[1] }} 
-                  className="font-workSans">
+                  className="text-[#475072] font-workSans">
                     Completed
                 </h2>
                 <div>
@@ -175,9 +171,7 @@ const Contributions = () => {
             {
               isLoading ? (
                 <div className="mt-24">
-                  <Loader
-                    color={USED_COLORS[1]}
-                  />
+                  <Loader/>
                 </div>
               ) : (
                 <div className="mt-8 flex-wrap flex">

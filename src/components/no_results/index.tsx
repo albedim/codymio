@@ -7,11 +7,11 @@ const NoResults = () => {
     <div className="justify-around flex">
       <div>
         <div className="justify-around flex">
-          <BsFillInboxesFill color={USED_COLORS[1]} size={54} />
+          <BsFillInboxesFill color={"#7024f8"} size={54} />
         </div>
         <h2 
-          style={{ color: USED_COLORS[1] }} 
-          className="mt-2 text-2xl font-semibold font-workSans">
+          style={{ color: "#475072" }} 
+          className="mt-6 text-2xl font-semibold font-workSans">
           Nothing found here
         </h2>
       </div>

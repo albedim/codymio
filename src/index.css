@@ -69,7 +69,8 @@ input[type="checkbox"] {
 }
 
 body{
-  overflow-x: hidden
+  overflow-x: hidden;
+  background-color: #f9f8fd
 }
 
 .fade-enter {
