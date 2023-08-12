@@ -31,6 +31,7 @@ const ErrorAlert: React.FC<ErrorAlertProps> = ({
       </Alert>
     ) : null
   )
+  
 }
 
 export default ErrorAlert
