@@ -85,7 +85,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
   useEffect(() => {
     setPage(0)
     getIssues()
-  }, [visible])
+  }, [repo_id])
 
   return (
     <>

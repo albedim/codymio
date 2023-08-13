@@ -22,16 +22,9 @@ import NotificationBadge from "../NotificationBadge";
 import NoResults from "../no_results";
 import Loader from "../loading/usermenu";
 import { CSSTransition } from "react-transition-group";
+import { BsCalendar2Date } from "react-icons/bs";
+import Notification, { NotificationType } from "../notification";
 
-
-interface Notification {
-  content: string,
-  global_notification: boolean,
-  notification_id: number,
-  title: string,
-  created_on: string,
-  user_id: number
-}
 
 const Header = () => {
 
@@ -39,7 +32,7 @@ const Header = () => {
 
   const [isSessionLoading, setIsSessionLoading] = useState(false)
 
-  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [notifications, setNotifications] = useState<NotificationType[]>([])
 
   const [visibleMenu, setVisibleMenu] = useState<"" | "notifications" | "user">("")
 
@@ -72,15 +65,6 @@ const Header = () => {
       .catch(err => { })
   }
 
-  const removeNotification = async (notificationId: number) => {
-    await axios.delete(BASE_URL + "/notifications/" + notificationId.toString())
-      .then((res) => {
-        setNotifications(res.data.param)
-      })
-      .catch(err => { })
-  }
-
-
   const updateData = async () => {
     const userId = jwtDecode<any>(token).sub.user_id
     await axios.post(BASE_URL + "/contributions/update", { user_id: userId }, {
@@ -104,19 +88,6 @@ const Header = () => {
       return `border bg-[white] bg-opacity-10 top-0 fixed border-b p-4 justify-between flex w-screen`
     }
     return `border bg-[white] bg-opacity-20 top-0 fixed border-b p-4 justify-between flex w-screen`
-  }
-
-  const getDate = (date: string) => {
-    const newDate = new Date(parseInt(date.split("-")[0]), parseInt(date.split("-")[1]), parseInt(date.split("-")[2]))
-    const days = new Date().getDate() - newDate.getDate()
-    if(days == 0)
-      return "Today"
-    if(days > 0 && days < 7){
-      if (days == 1)
-        return days + " day ago"
-      return days + " days ago"
-    }
-    return date.replaceAll("-", "/")
   }
 
   return (
@@ -169,31 +140,8 @@ const Header = () => {
                     color={"#475072"}>
                     {
                       notifications.length > 0 ? (
-                        notifications.map((notification: Notification) => (
-                          <div
-                            style={{ maxWidth: 340 }}
-                            className="border-b items-center pt-3 pb-3 p-4 justify-between flex">
-                            <div>
-                              <h2 className="text-md font-semibold font-lato">{notification.title}</h2>
-                              <h2 className="text-md font-lato">{
-                                notification.content.split("/")[1] != undefined && 
-                                notification.content.split("/")[1].length + 
-                                notification.content.split("/")[0].split(" ")[1].length > 34 ? 
-                                notification.content.substring(0,54) + "..." : notification.content
-                              }</h2>
-                              <h2 className="mt-2 font-semibold text-[gray] font-lato">{getDate(notification.created_on).toString()}</h2>
-                            </div>
-                            <div className="pl-4">
-                              <div className="border rounded-full">
-                                <MdOutlineDone
-                                  className="cursor-pointer"
-                                  color="#7024f8"
-                                  size={24}
-                                  onClick={() => removeNotification(notification.notification_id)}
-                                />
-                              </div>
-                            </div>
-                          </div>
+                        notifications.map((notification: NotificationType) => (
+                          <Notification onRemove={(res: NotificationType[]) => setNotifications(res)} notification={notification} />
                         ))
                       ) : (
                         <div className="p-4">

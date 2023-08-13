@@ -112,8 +112,7 @@ const Repository: React.FC<RepositoryProps> = ({
               ):(
                 <button
                 onClick={onAlert}
-                disabled
-                className="opacity-40 text-[white] bg-[#7024f8] rounded-md font-workSans text-sm p-2 text-[white]"
+                className="text-[white] bg-[#7024f8] rounded-md font-workSans text-sm p-2 text-[white]"
               >
                 Contribute
               </button>

@@ -8,9 +8,11 @@ import Loader from "../../components/loading";
 import IssuesModal from "../../components/modal/issues";
 import Repository, { RepositoryType } from "../../components/repository";
 import { USED_COLORS } from "../../App";
-import ErrorAlert from "../../components/alert/error";
 import NoResults from "../../components/no_results";
 import { Checkbox, ThemeProvider, createTheme } from "@mui/material";
+import jwtDecode from "jwt-decode";
+import AlertsModal from "../../components/modal/alerts";
+import { LABELS } from "../../utils/labels";
 
 
 const theme = createTheme({
@@ -48,9 +50,11 @@ const Home = () => {
 
   const getData = async () => {
     setIsLoading(true)
+    const token: any = window.localStorage.getItem("token")
+    const user = jwtDecode<any>(token).sub
     await axios.get(BASE_URL + "/repositories/fetch?query=" +
-      (anyTopic ? "all" : query) + "&language=" + language + "&page=" + page, {
-      headers: { "Authorization": "Bearer " + window.localStorage.getItem("token") }
+      (anyTopic ? "all" : query) + "&language=" + language + "&userId="+user.user_id+"&page=" + page, {
+      headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
       .then(res => setData(res.data.param))
       .catch(err => console.log(err))
@@ -87,7 +91,11 @@ const Home = () => {
           <></>
         ) : (
           <>
-            <ErrorAlert visible={alertVisible} />
+            <AlertsModal 
+              text={LABELS.contribution.already_contributed} 
+              onClose={() => setAlertVisible(false)} 
+              visible={alertVisible} 
+            />
             <IssuesModal
               repo_id={modalOptions.repo_id}
               open_issues={modalOptions.repo_open_issues}
@@ -208,6 +216,7 @@ const Home = () => {
                       }}
                       color={"#7024f8"}
                       size={34} onClick={() => {
+                        console.log(data.length)
                         if (isLoading || page == 30)
                           return;
                         if (page < 30) {
