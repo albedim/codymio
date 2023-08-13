@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { AiFillDelete } from 'react-icons/ai'
-import { USED_COLORS } from "../../App"
 import Stepper from "../stepper"
 
 interface ContributionProps {

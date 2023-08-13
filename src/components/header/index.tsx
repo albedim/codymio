@@ -13,7 +13,6 @@ import {
 
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import { USED_COLORS } from "../../App";
 import Menu from "../menu";
 
 import { MdOutlineDone } from "react-icons/md";
@@ -30,6 +29,7 @@ interface Notification {
   global_notification: boolean,
   notification_id: number,
   title: string,
+  created_on: string,
   user_id: number
 }
 
@@ -46,8 +46,6 @@ const Header = () => {
   const token: any = window.localStorage.getItem("token")
 
   const navigate = useNavigate()
-
-  const [darkMode, setDarkMode] = useState(window.localStorage.getItem("theme") == "dark")
 
 
   const loggedIn = async () => {
@@ -108,6 +106,19 @@ const Header = () => {
     return `border bg-[white] bg-opacity-20 top-0 fixed border-b p-4 justify-between flex w-screen`
   }
 
+  const getDate = (date: string) => {
+    const newDate = new Date(parseInt(date.split("-")[0]), parseInt(date.split("-")[1]), parseInt(date.split("-")[2]))
+    const days = new Date().getDate() - newDate.getDate()
+    if(days == 0)
+      return "Today"
+    if(days > 0 && days < 7){
+      if (days == 1)
+        return days + " day ago"
+      return days + " days ago"
+    }
+    return date.replaceAll("-", "/")
+  }
+
   return (
     <div
       className={headerStyle()}>
@@ -120,36 +131,11 @@ const Header = () => {
         />
       </div>
       <div className="flex items-center">
-        <div>
-          {
-            /*
-            darkMode ? (
-              <div className="pr-6">
-                <BsFillSunFill className="cursor-pointer" size={18} onClick={() => {
-                  window.localStorage.setItem("theme", "light")
-                  navigate(0)
-                }}
-                  color={USED_COLORS[1]}
-                />
-              </div>
-            ) : (
-              <div className="pr-6">
-                <BsFillMoonFill className="cursor-pointer" size={18} onClick={() => {
-                  window.localStorage.setItem("theme", "dark")
-                  navigate(0)
-                }}
-                  color={USED_COLORS[1]}
-                />
-              </div>
-            )
-            */
-          }
-        </div>
         {
           isLoggedIn ? (
             <div className="flex" >
 
-              <div className="items-center flex mr-6">
+              <div className="items-center flex mr-8">
                 <div>
                   <NotificationBadge
                     color={"#f9f8fd"}
@@ -191,15 +177,18 @@ const Header = () => {
                               <h2 className="text-md font-semibold font-lato">{notification.title}</h2>
                               <h2 className="text-md font-lato">{
                                 notification.content.split("/")[1] != undefined && 
-                                notification.content.split("/")[1].length + notification.content.split("/")[0].split(" ")[1].length > 34 ? 
+                                notification.content.split("/")[1].length + 
+                                notification.content.split("/")[0].split(" ")[1].length > 34 ? 
                                 notification.content.substring(0,54) + "..." : notification.content
                               }</h2>
+                              <h2 className="mt-2 font-semibold text-[gray] font-lato">{getDate(notification.created_on).toString()}</h2>
                             </div>
                             <div className="pl-4">
                               <div className="border rounded-full">
                                 <MdOutlineDone
                                   className="cursor-pointer"
                                   color="#7024f8"
+                                  size={24}
                                   onClick={() => removeNotification(notification.notification_id)}
                                 />
                               </div>

@@ -81,7 +81,7 @@ const Home = () => {
 
   return (
     <div
-      className="bgb-[#f9f8fd] mt-40 items-center justify-around w-screen flex">
+      className="bg-[#f9f8fd] mt-40 items-center justify-around w-screen flex">
       {
         isSessionLoading ? (
           <></>
@@ -99,9 +99,6 @@ const Home = () => {
               })}
               repo_full_name={modalOptions.repo_full_name}
               visible={modalOptions.visible}
-              onAlert={() => {
-                alert("This issue has open pull requests already")
-              }}
             />
             <div className="w-4/5">
               <div className="justify-around flex">

@@ -19,6 +19,7 @@ import Loader from "../../loading";
 import NoResults from "../../no_results";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 import { USED_COLORS } from "../../../App";
+import Issue from "../../issue";
 
 
 interface ContributeProps {
@@ -26,8 +27,7 @@ interface ContributeProps {
   visible: boolean,
   open_issues: number
   repo_full_name: string,
-  repo_id: number,
-  onAlert: () => void
+  repo_id: number
 }
 
 interface Issue {
@@ -47,8 +47,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
   onClose,
   repo_full_name,
   repo_id,
-  open_issues,
-  onAlert
+  open_issues
 }) => {
 
   const [page, setPage] = useState(0)
@@ -66,10 +65,10 @@ const IssuesModal: React.FC<ContributeProps> = ({
 
   const getIssues = async () => {
     setIsLoading(true)
-    await axios.get(BASE_URL + "/repositories/" + repo_id + 
-    "/issues?repo_full_name=" + repo_full_name + 
-    "&user_id=" + user.user_id + 
-    "&page=" + page, {
+    await axios.get(BASE_URL + "/repositories/" + repo_id +
+      "/issues?repo_full_name=" + repo_full_name +
+      "&user_id=" + user.user_id +
+      "&page=" + page, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
       .then(res => setIssues(res.data.param))
@@ -102,31 +101,31 @@ const IssuesModal: React.FC<ContributeProps> = ({
                 <div className="pb-0 p-4 items-center justify-between flex">
                   <div></div>
                   <div>
-                    <RiCloseFill 
-                      className="cursor-pointer" 
-                      onClick={() => { onClose(); }} 
-                      color="gray" 
+                    <RiCloseFill
+                      className="cursor-pointer"
+                      onClick={() => { onClose(); }}
+                      color="gray"
                       size={24}
                     />
-                </div>
+                  </div>
                 </div>
                 <div className="p-8 justify-around flex">
                   <div>
                     <div className="pb-4">
-                      <h2 
+                      <h2
                         className="text-[#475072] text-xl font-semibold font-workSans">Issues ({open_issues})
                       </h2>
                     </div>
                     <div className="items-center justify-around flex">
                       <div className="items-center flex">
                         <div className="p-2">
-                          <HiArrowCircleLeft 
-                            color={USED_COLORS[1]} 
-                            style={{ 
-                              cursor: isLoading || page == 0 ? "default" : "pointer", 
-                              opacity: isLoading || page == 0 ? "40%" : "100%" 
-                            }} 
-                            size={34} 
+                          <HiArrowCircleLeft
+                            color={"#7024f8"}
+                            style={{
+                              cursor: isLoading || page == 0 ? "default" : "pointer",
+                              opacity: isLoading || page == 0 ? "40%" : "100%"
+                            }}
+                            size={34}
                             onClick={() => {
                               if (isLoading || page == 0)
                                 return;
@@ -134,20 +133,20 @@ const IssuesModal: React.FC<ContributeProps> = ({
                                 setPage(page - 1)
                                 getIssues()
                               }
-                            }} 
+                            }}
                           />
                         </div>
                         <h2 className="text-[#475072] text-xl font-workSans">
                           {page + 1}
                         </h2>
                         <div className="p-2" >
-                          <HiArrowCircleRight 
-                            color={"#7024f8"} 
-                            style={{ 
-                              cursor: isLoading || page == 30 ? "default" : "pointer", 
-                              opacity: isLoading || page == 30 ? "40%" : "100%" 
-                            }} 
-                            size={34} 
+                          <HiArrowCircleRight
+                            color={"#7024f8"}
+                            style={{
+                              cursor: isLoading || page == 30 ? "default" : "pointer",
+                              opacity: isLoading || page == 30 ? "40%" : "100%"
+                            }}
+                            size={34}
                             onClick={() => {
                               if (isLoading || page == 30)
                                 return;
@@ -155,7 +154,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                                 setPage(page + 1)
                                 getIssues()
                               }
-                            }} 
+                            }}
                           />
                         </div>
                       </div>
@@ -164,78 +163,29 @@ const IssuesModal: React.FC<ContributeProps> = ({
                       <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
                         {
                           isLoading ? (
-                            <Loader/>
+                            <Loader />
                           ) : (
                             issues.length > 0 ? (
                               issues.map((issue: Issue) => (
-                                <div className="p-4">
-                                  <div 
-                                    className="bg-[#fafafa] justify-between flex rounded-lg p-4">
-                                    <div>
-                                      <h2
-                                        style={{ color: "#475072", maxWidth: 340 }}
-                                        className="font-semibold text-lg font-workSans">{issue.title}
-                                      </h2>
-                                      <h2
-                                        style={{ color: "#475072" }}
-                                        className="font-normal text-md font-workSans">@{issue.creator_username}
-                                      </h2>
-                                      <h2
-                                        className="mt-1 font-semibold font-workSans text-[gray]"
-                                      >{
-                                          issue.created_on.substring(0, 10).split("-")[2] + "/" +
-                                          issue.created_on.substring(0, 10).split("-")[1] + "/" +
-                                          issue.created_on.substring(0, 10).split("-")[0]
-                                        }
-                                      </h2>
-                                    </div>
-                                    <div className="items-center justify-around flex">
-                                      <div>
-                                        {
-                                          issue.has_pull_requests ? (
-                                            <div className="pb-4 justify-around flex">
-                                              <a title="This issue has pull requests already.">
-                                                <TbAlertTriangleFilled 
-                                                  className="cursor-pointer" 
-                                                  opacity={"40%"} 
-                                                  size={24} 
-                                                  color="orange"
-                                                  onClick={onAlert}
-                                                />
-                                              </a>
-                                            </div>
-                                          ) : (
-                                            <></>
-                                          )
-                                        }
-                                        {
-                                          issue.has_contributed ? (
-                                            <button disabled>
-                                              <HiArrowCircleRight 
-                                                size={34}
-                                                opacity={"40%"}
-                                                color={"#7024f8"} 
-                                              />
-                                            </button>
-                                          ):(
-                                            <button><HiArrowCircleRight onClick={() => {
-                                              addContribution({
-                                                issue_owner: issue.creator_username,
-                                                user_id: user.user_id,
-                                                repo_id: repo_id,
-                                                repo_full_name: repo_full_name,
-                                                issue_id: issue.issue_id,
-                                                issue_number: issue.number,
-                                                issue_title: issue.title,
-                                                issue_body: issue.body
-                                              })
-                                            }} size={34} color={"#7024f8"} /></button>
-                                          )
-                                        }
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                                <Issue
+                                  onCreate={() => addContribution({
+                                      issue_owner: issue.creator_username,
+                                      user_id: user.user_id,
+                                      repo_id: repo_id,
+                                      repo_full_name: repo_full_name,
+                                      issue_id: issue.issue_id,
+                                      issue_number: issue.number,
+                                      issue_title: issue.title,
+                                      issue_body: issue.body
+                                    })
+                                  }
+                                  hasPullRequests={issue.has_pull_requests} 
+                                  creator_username={issue.creator_username} 
+                                  title={issue.title} 
+                                  created_on={issue.created_on}
+                                  onAlert={() => alert("This issue has open pull requests already")}
+                                  has_contributed={issue.has_contributed}
+                                />
                               ))
                             ) : (
                               <NoResults />

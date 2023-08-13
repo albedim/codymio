@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { PiAirplaneTakeoffFill } from "react-icons/pi";
-import { LinearProgress, ThemeProvider, createTheme } from "@mui/material";
+import { 
+  LinearProgress, 
+  ThemeProvider, 
+  createTheme 
+} from "@mui/material";
 
 const theme = createTheme({
   palette: {
