@@ -65,21 +65,22 @@ const Overview = () => {
       <></>
     ) : (
       <div className="bg-[#f9f8fd] items-center justify-around flex h-screen w-screen">
-        <div className="p-14">
-          <h2 className="text-[#475072] text text-5xl font-semibold font-workSans">
-            Find the perfect <br />open source for you.
+        <main className="p-14">
+          <h1 className="text-[#475072] text font-semibold font-workSans">
+            We didn't create open source <br />We just made it more accessible.
+          </h1>
+          <h2 className="text-[#475072] mt-8 text-xl font-workSans">
+            <b>Find the perfect open source projects
+            to contribute to.</b> Manage
+            your pull <br />requests and track your contributions easily. 500+ developers are getting <br />closer
+            to open source with Codymio.
           </h2>
-          <h2 className="text-[#475072] text mt-8 text-xl font-workSans">
-            Find the perfect open source projects
-            to contribute to. <br />Manage
-            your pull requests and track your contributions easily. <br />500+ developers are getting closer to open source <br />with Codymio.
-          </h2>
-          <div className="justify-around flex mt-14">
-            <div>
+          <div className="flex mt-14">
+            <div className="pr-8">
               <button 
                 style={{ 
                   color: "#f9f8fd", 
-                  width: 340,
+                  width: 240,
                   backgroundColor: "#7024f8"
                 }} 
                 onClick={() => login()} 
@@ -88,7 +89,7 @@ const Overview = () => {
               </button>
             </div>
           </div>
-        </div>
+        </main>
       </div>
     )
   )

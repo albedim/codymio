@@ -9,8 +9,7 @@
   align-items: center;
   justify-content: space-around;
   opacity: 100;
-  transition: all 0.3s ease-in-out;
-  z-index: 1;
+  transition: all 0.3s ease-in-out
 }
 
 .modal-wrapper{

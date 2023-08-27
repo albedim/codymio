@@ -42,48 +42,48 @@ const Repository: React.FC<RepositoryProps> = ({
         <div className="justify-between flex">
           <div>
             <a title={repository?.name} target="_blank" href={"https://github.com/" + repository?.full_name}>
-              <h2
+              <p
                 className="text-[#475072] hover:underline text-xl font-semibold font-workSans">{
                   repository?.name != undefined && repository?.name.length > 24 ? 
                   repository?.name.substring(0,18) + "..." : repository?.name}
-              </h2>
+              </p>
             </a>
           </div>
           <div
             className="border-[#475072] text-[#475072] items-center flex pr-3 pl-3 rounded-md border"
           >
-            <h2 className="text-[#475072] [font-workSans">
+            <p className="text-[#475072] [font-workSans">
               {repository?.open_issues} Issues
-            </h2>
+            </p>
           </div>
         </div>
         <div>
-          <h2 className="text-[#475072] font-workSans">
+          <p className="text-[#475072] font-workSans">
             @{repository?.full_name.split("/")[0]}
-          </h2>
+          </p>
         </div>
         <div className="pt-2">
           {
             overLength ? (
               <div className="mt-2">
-                <h2 style={{ maxWidth: 284, color: "#475072"}} className="font-workSans" >{
+                <p style={{ maxWidth: 284, color: "#475072"}} className="font-workSans" >{
                   showMore ? repository?.description : repository?.description?.substring(0, maxLength) + "..."
-                }</h2>
-                <h2
+                }</p>
+                <p
                   style={{ color: "#475072" }}
                   className="cursor-pointer font-semibold underline"
                   onClick={() => setShowMore(!showMore)}
                 >
                   {showMore ? "Show less" : "Show more"}
-                </h2>
+                </p>
               </div>
             ) : (
-              <h2 style={{ minHeight: 78, maxWidth: 284, color: "#475072" }} className="pt-2 font-workSans" >{repository?.description}</h2>
+              <p style={{ minHeight: 78, maxWidth: 284, color: "#475072" }} className="pt-2 font-workSans" >{repository?.description}</p>
             )
           }
           <div className="pt-2 items-center flex">
             <div className="pr-2"><BiGitRepoForked color={"#7024f8"} /></div>
-            <h2 className="text-[#475072] font-semibold font-workSans">{repository?.forks}</h2>
+            <p className="text-[#475072] font-semibold font-workSans">{repository?.forks}</p>
           </div>
         </div>
         <div className="pt-8 justify-between flex">
@@ -91,10 +91,10 @@ const Repository: React.FC<RepositoryProps> = ({
             repository?.language ? (
               <div className="items-center flex">
                 <div><AiFillCode size={18} color="gray" /></div>
-                <h2
+                <p
                   className="text-[gray] bg-opacity-40 rounded-md p-2 text-sm font-semibold font-lato" >
                   {repository?.language}
-                </h2>
+                </p>
               </div>
             ) : (
               <div></div>

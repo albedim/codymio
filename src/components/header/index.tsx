@@ -91,7 +91,7 @@ const Header = () => {
   }
 
   return (
-    <div
+    <header
       className={headerStyle()}>
       <div>
         <img
@@ -208,7 +208,7 @@ const Header = () => {
           )
         }
       </div>
-    </div>
+    </header>
   )
 
 }

@@ -20,7 +20,7 @@ const AlertsModal: React.FC<AlertsModalProps> = ({
     <>
       {
         visible ? (
-          <div className="modal">
+          <div className="z-30 modal">
             <div className="modal-wrapper p-4">
               <div
                 style={{

@@ -18,12 +18,12 @@ const NotificationBadge: React.FC<Notificationbadge> = ({
         <div 
           style={{ color: color, backgroundColor: backgroundColor }} 
           className="rounded-full pb-0 pt-0 p-1">
-          <h2
+          <p
             className="text-sm rounded-full pb-0 pt-0 p-1 
             font-workSans"
             style={{ backgroundColor: backgroundColor, color: color }}>
               {number < maxNumber ? number : maxNumber + "+"}
-          </h2>
+          </p>
         </div>
       </div>
     ) : (

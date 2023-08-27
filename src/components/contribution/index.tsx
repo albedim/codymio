@@ -39,7 +39,7 @@ const Contribution: React.FC<ContributionProps> = ({
 
   return (
     <div className="pb-14 p-4">
-      <div
+      <section
         className="bg-[#fafafa] border repository p-6 rounded-lg">
         <div className="itens-center justify-between flex">
           <div>
@@ -119,7 +119,7 @@ const Contribution: React.FC<ContributionProps> = ({
           <Stepper status={repository.status}/>
           <div></div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }

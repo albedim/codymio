@@ -123,10 +123,10 @@ const Contributions = () => {
         ) : (
           <div className="p-14">
             <div>
-              <h2
+              <h1
                 className="text-[#475072] text-2xl font-semibold font-workSans">
                   My Contributions
-              </h2>
+              </h1>
             </div>
             <div className="flex">
               <div

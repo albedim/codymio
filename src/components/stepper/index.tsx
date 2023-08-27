@@ -53,7 +53,7 @@ const PushedStep: React.FC<StepProps> = ({
           <>
             <div className="items-center flex">
               <div className="pr-2"><PiPushPinFill color="darkgray" /></div>
-              <h2 className="text-[darkgray] font-workSans">Pushed</h2>
+              <p className="text-[darkgray] font-workSans">Pushed</p>
             </div>
             <div className="pb-0 pt-0 p-2">
               <div style={{ backgroundColor: 'darkgray', width: 2, height: 12.4 }} ></div>
@@ -63,7 +63,7 @@ const PushedStep: React.FC<StepProps> = ({
           <>
             <div className="opacity-60 items-center flex">
               <div className="pr-2"><PiPushPinFill color="darkgray" /></div>
-              <h2 className="text-[darkgray] font-workSans">Pushed</h2>
+              <p className="text-[darkgray] font-workSans">Pushed</p>
             </div>
             <div className="opacity-60 pb-0 pt-0 p-2">
               <div style={{ backgroundColor: 'darkgray', width: 2, height: 8 }} ></div>
@@ -87,7 +87,7 @@ const WaitingStep: React.FC<StepProps> = ({
           <>
             <div className="items-center flex">
               <div className="pr-2"><AiFillClockCircle color="darkgray" /></div>
-              <h2 className="text-[darkgray] font-workSans">Waiting</h2>
+              <p className="text-[darkgray] font-workSans">Waiting</p>
             </div>
             <div className="pb-0 pt-0 p-2">
               <div style={{ backgroundColor: 'darkgray', width: 2, height: 12.4 }} ></div>
@@ -98,7 +98,7 @@ const WaitingStep: React.FC<StepProps> = ({
             <>
               <div onClick={onClick} className="cursor-pointer items-center flex">
                 <div className="pr-2"><AiFillClockCircle color="orange" /></div>
-                <h2 className="font-semibold text-[orange] font-workSans">Waiting</h2>
+                <p className="font-semibold text-[orange] font-workSans">Waiting</p>
               </div>
               <div className="pb-0 pt-0 p-2">
                 <div style={{ borderRadius: 40, backgroundColor: 'darkgray', width: 2, height: 12.4 }} ></div>
@@ -108,7 +108,7 @@ const WaitingStep: React.FC<StepProps> = ({
             <>
               <div className="opacity-60 items-center flex">
                 <div className="pr-2"><AiFillClockCircle color="darkgray" /></div>
-                <h2 className="text-[darkgray] font-workSans">Waiting</h2>
+                <p className="text-[darkgray] font-workSans">Waiting</p>
               </div>
               <div className="opacity-60 pb-0 pt-0 p-2">
                 <div style={{ backgroundColor: 'darkgray', width: 2, height: 8 }} ></div>
@@ -132,13 +132,13 @@ const FinalStep: React.FC<StepProps> = ({
         status == "none" || status == "pushed" ? (
           <div className="items-center flex">
             <div className="pr-2"><BsFillSignMergeLeftFill color="darkgray" /></div>
-            <h2 className="text-[darkgray] font-workSans">Completed</h2>
+            <p className="text-[darkgray] font-workSans">Completed</p>
           </div>
         ) : (
           status == "completed" ? (
             <div onClick={onClick} className="cursor-pointer items-center flex">
               <div className="pr-2"><BsFillSignMergeLeftFill color="#4a9e4c" /></div>
-              <h2 className="font-semibold text-[#4a9e4c] font-workSans">Completed</h2>
+              <p className="font-semibold text-[#4a9e4c] font-workSans">Completed</p>
             </div>
           ) : null
         )

@@ -91,7 +91,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
     <>
       {
         visible ? (
-          <div className="modal">
+          <div className="z-30 modal">
             <div className="modal-wrapper p-4">
               <div
                 style={{ backgroundColor: USED_COLORS[0], borderRadius: 8 }}
@@ -112,9 +112,9 @@ const IssuesModal: React.FC<ContributeProps> = ({
                 <div className="p-8 justify-around flex">
                   <div>
                     <div className="pb-4">
-                      <h2
+                      <p
                         className="text-[#475072] text-xl font-semibold font-workSans">Issues ({open_issues})
-                      </h2>
+                      </p>
                     </div>
                     <div className="items-center justify-around flex">
                       <div className="items-center flex">
@@ -136,9 +136,9 @@ const IssuesModal: React.FC<ContributeProps> = ({
                             }}
                           />
                         </div>
-                        <h2 className="text-[#475072] text-xl font-workSans">
+                        <p className="text-[#475072] text-xl font-workSans">
                           {page + 1}
-                        </h2>
+                        </p>
                         <div className="p-2" >
                           <HiArrowCircleRight
                             color={"#7024f8"}

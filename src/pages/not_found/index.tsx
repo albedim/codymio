@@ -13,7 +13,7 @@ const NotFound = () => {
       <div className="justify-around flex">
         <TbError404 size={54}/>
       </div>
-      <h2 className="mt-2 text-2xl font-semibold font-workSans">This page was not found</h2>
+      <h1 className="mt-2 text-2xl font-semibold font-workSans">This page was not found</h1>
     </div>
   </div>
   )

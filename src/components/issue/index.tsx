@@ -30,18 +30,18 @@ const Issue: React.FC<IssueProps> = ({
             style={{ color: "#475072", maxWidth: 340 }}
             className="font-semibold text-lg font-workSans">{title}
           </h2>
-          <h2
+          <p
             style={{ color: "#475072" }}
             className="font-normal text-md font-workSans">@{creator_username}
-          </h2>
-          <h2
+          </p>
+          <p
             className="mt-1 font-semibold font-workSans text-[gray]"
           >{
               created_on.substring(0, 10).split("-")[2] + "/" +
               created_on.substring(0, 10).split("-")[1] + "/" +
               created_on.substring(0, 10).split("-")[0]
             }
-          </h2>
+          </p>
         </div>
         <div className="items-center justify-around flex">
           <div>

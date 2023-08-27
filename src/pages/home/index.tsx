@@ -124,10 +124,10 @@ const Home = () => {
                           />
                         </ThemeProvider>
                       </div>
-                      <h2
+                      <p
                         className="text-[#475072] font-semibold font-workSans" >
                         Any Topic
-                      </h2>
+                      </p>
                     </div>
                   </div>
                   <div className="p-4">
@@ -208,9 +208,9 @@ const Home = () => {
                       }}
                     />
                   </div>
-                  <h2
+                  <p
                     className="text-[#475072] text-xl font-workSans">{page + 1}
-                  </h2>
+                  </p>
                   <div className="p-2" >
                     <HiArrowCircleRight
                       style={{
