@@ -111,7 +111,7 @@ const Contributions = () => {
 
   useEffect(() => {
     loggedIn()
-    document.title = "Contrycode - Dashboard"
+    document.title = "Codymio - Dashboard"
   }, [])
 
   return (

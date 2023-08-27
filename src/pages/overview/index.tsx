@@ -72,7 +72,7 @@ const Overview = () => {
           <h2 className="text-[#475072] text mt-8 text-xl font-workSans">
             Find the perfect open source projects
             to contribute to. <br />Manage
-            your pull requests and track your contributions easily. <br />500+ developers are getting closer to open source <br />with Contrycode.
+            your pull requests and track your contributions easily. <br />500+ developers are getting closer to open source <br />with Codymio.
           </h2>
           <div className="justify-around flex mt-14">
             <div>
