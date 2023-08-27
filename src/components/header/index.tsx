@@ -85,9 +85,9 @@ const Header = () => {
 
   const headerStyle = () => {
     if (window.location.pathname == "/") {
-      return `border bg-[white] bg-opacity-10 top-0 fixed border-b p-4 justify-between flex w-screen`
+      return `z-20 border bg-[white] bg-opacity-10 top-0 fixed border-b p-4 justify-between flex w-screen`
     }
-    return `border bg-[white] bg-opacity-20 top-0 fixed border-b p-4 justify-between flex w-screen`
+    return `z-20 border bg-[white] bg-opacity-20 top-0 fixed border-b p-4 justify-between flex w-screen`
   }
 
   return (
@@ -133,7 +133,7 @@ const Header = () => {
                   unmountOnExit
                 >
                   <Menu
-                    width={384}
+                    width={324}
                     maxHeight={540}
                     visible={visibleMenu == "notifications"}
                     backgroundColor={"white"}

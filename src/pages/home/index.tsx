@@ -53,7 +53,7 @@ const Home = () => {
     const token: any = window.localStorage.getItem("token")
     const user = jwtDecode<any>(token).sub
     await axios.get(BASE_URL + "/repositories/fetch?query=" +
-      (anyTopic ? "all" : query) + "&language=" + language + "&userId="+user.user_id+"&page=" + page, {
+      (anyTopic ? "all" : query) + "&language=" + language + "&userId=" + user.user_id + "&page=" + page, {
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
       .then(res => setData(res.data.param))
@@ -88,13 +88,15 @@ const Home = () => {
       className="bg-[#f9f8fd] mt-40 items-center justify-around w-screen flex">
       {
         isSessionLoading ? (
-          <></>
+          <div className="justify-around flex mt-24">
+            <Loader />
+          </div>
         ) : (
           <>
-            <AlertsModal 
-              text={LABELS.contribution.already_contributed} 
-              onClose={() => setAlertVisible(false)} 
-              visible={alertVisible} 
+            <AlertsModal
+              text={LABELS.contribution.already_contributed}
+              onClose={() => setAlertVisible(false)}
+              visible={alertVisible}
             />
             <IssuesModal
               repo_id={modalOptions.repo_id}
@@ -117,6 +119,7 @@ const Home = () => {
                         <ThemeProvider theme={theme}>
                           <Checkbox
                             onChange={() => setAnyTopic(!anyTopic)}
+                            style={{ zIndex: 10 }}
                             checked={anyTopic}
                           />
                         </ThemeProvider>
@@ -231,7 +234,7 @@ const Home = () => {
               {
                 isLoading ? (
                   <div className="justify-around flex mt-24">
-                    <Loader/>
+                    <Loader />
                   </div>
                 ) : (
                   data.length > 0 ? (

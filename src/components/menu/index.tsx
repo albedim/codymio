@@ -42,7 +42,7 @@ const Menu: React.FC<MenuProps> = ({
             backgroundColor: 
             backgroundColor, color: color 
           }} 
-          className="pr-4 pl-4 z-6 right-3 p-2 border rounded-md top-14 absolute" 
+          className="pr-4 pl-4 z-30 right-3 p-2 border rounded-md top-14 absolute" 
           onClick={() => setContextVisible(false)}>
             {
               Array.isArray(children) ? (

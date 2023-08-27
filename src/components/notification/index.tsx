@@ -48,7 +48,7 @@ const Notification: React.FC<NotificationProps> = ({
         <h2 className="text-md font-lato">{
           notification.content.split("/")[1] != undefined &&
           notification.content.split("/")[1].length +
-          notification.content.split("/")[0].split(" ")[1].length > 34 ?
+          notification.content.split("/")[0].split(" ")[1].length > 21 ?
           notification.content.substring(0, 54) + "..." : notification.content
         }</h2>
         <div className="mt-2 items-center flex">

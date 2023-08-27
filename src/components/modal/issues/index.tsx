@@ -160,7 +160,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                       </div>
                     </div>
                     <div>
-                      <div style={{ overflowY: 'scroll', maxHeight: 540 }}>
+                      <div style={{ overflowX: 'hidden', overflowY: 'scroll', maxHeight: 540 }}>
                         {
                           isLoading ? (
                             <Loader />
