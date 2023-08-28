@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { AiFillDelete } from 'react-icons/ai'
 import Stepper from "../stepper"
 
+
 interface ContributionProps {
   repository: RepositoryType
   issue: Issue,

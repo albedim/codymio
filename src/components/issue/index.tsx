@@ -72,7 +72,7 @@ const Issue: React.FC<IssueProps> = ({
                   />
                 </button>
               ) : (
-                <button><HiArrowCircleRight onClick={onCreate} size={34} color={"#7024f8"} /></button>
+                <button onClick={onCreate} ><HiArrowCircleRight className="transition hover:bg-opacity-70 " size={34} color={"#7024f8"} /></button>
               )
             }
           </div>

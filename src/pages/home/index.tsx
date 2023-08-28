@@ -13,6 +13,7 @@ import { Checkbox, ThemeProvider, createTheme } from "@mui/material";
 import jwtDecode from "jwt-decode";
 import AlertsModal from "../../components/modal/alerts";
 import { LABELS } from "../../utils/labels";
+import BottomHeader from "../../components/bottom_header";
 
 
 const theme = createTheme({
@@ -112,83 +113,101 @@ const Home = () => {
             />
             <div className="w-4/5">
               <div className="justify-around flex">
-                <div className="flex-block">
-                  <div className="pl-4 flex items-center">
-                    <div className="block-flex">
-                      <div className="padding-right items-center justify-around flex">
-                        <ThemeProvider theme={theme}>
-                          <Checkbox
-                            onChange={() => setAnyTopic(!anyTopic)}
-                            style={{ zIndex: 10 }}
-                            checked={anyTopic}
-                          />
-                        </ThemeProvider>
-                      </div>
-                      <p
-                        className="text-[#475072] font-semibold font-workSans" >
-                        Any Topic
-                      </p>
+                <div className="border p-4 rounded-lg bg-[#fafafa]">
+                  <div className="items-center flex">
+                    <div className="p-4">
+                      <select
+                        className="pl-4 pr-14 p-3 cursor-pointer outline-none border rounded-lg"
+                        onChange={(e) => setLanguage(e.target.value)}
+                        value={language} name="" id=""
+                        style={{ color: "#475072", backgroundColor: "white" }}
+                      >
+                        <option value="all">Any Language</option>
+                        {
+                          availableLanguages.map((language: string) => (
+                            <option value={language}>{language}</option>
+                          ))
+                        }
+                      </select>
                     </div>
-                  </div>
-                  <div className="p-4">
-                    <input
+                    <div 
                       style={{
-                        color: "#475072",
-                        backgroundColor: "#fafafa",
                         display: anyTopic ? 'none' : 'block',
                         opacity: anyTopic ? "64%" : "100%"
-                      }}
-                      disabled={anyTopic}
-                      onChange={(e) => setQuery(e.target.value)}
-                      value={query}
-                      placeholder="Search for a topic..."
-                      className="outline-none border pr-14 rounded-lg p-4"
-                      type="text"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <select
-                      className="cursor-pointer outline-none border pr-14 rounded-lg p-4"
-                      onChange={(e) => setLanguage(e.target.value)}
-                      value={language} name="" id=""
-                      style={{ color: "#475072", backgroundColor: "#fafafa" }}
-                    >
-                      <option value="all">Any Language</option>
+                      }} 
+                      className="p-4">
+                      <input
+                        style={{
+                          color: "#475072",
+                          backgroundColor: "white"
+                        }}
+                        autoFocus={!anyTopic}
+                        disabled={anyTopic}
+                        onChange={(e) => setQuery(e.target.value)}
+                        value={query}
+                        placeholder="Search for a topic..."
+                        className="pl-4 pr-14 p-3 outline-none border rounded-lg"
+                        type="text"
+                      />
+                    </div>
+                    <div className="p-4">
+                      
                       {
-                        availableLanguages.map((language: string) => (
-                          <option value={language}>{language}</option>
-                        ))
+                        isLoading ? (
+                          <button
+                            disabled
+                            className="bg-[#7024f8] opacity-40 font-workSans text-[#f9f8fd] rounded-lg pl-14 pr-14 p-3">
+                            Loading...
+                          </button>
+                        ):(
+                          anyTopic || !anyTopic && query != "" ? (
+                            <button
+                              className="transition hover:opacity-70 bg-[#7024f8] font-workSans text-[#f9f8fd] rounded-lg pl-14 pr-14 p-3"
+                              onClick={() => {
+                                getData()
+                                setPage(0)
+                              }}
+                            >
+                              <HiSearch size={24} color={"#f9f8fd"} />
+                            </button>
+                          ):(
+                            <button
+                              disabled
+                              className="bg-[#7024f8] opacity-40 font-workSans text-[#f9f8fd] rounded-lg pl-14 pr-14 p-3"
+                              onClick={() => {
+                                getData()
+                                setPage(0)
+                              }} >
+                              <HiSearch size={24} color={"#f9f8fd"} />
+                            </button>
+                          )
+                        )
                       }
-                    </select>
+                    </div>
                   </div>
-                  <div className="p-4">
-                    {
-                      anyTopic || !anyTopic && query != "" ? (
-                        <button
-                          className="bg-[#7024f8] font-workSans text-[#f9f8fd] rounded-lg pl-7 pr-7 p-4"
-                          onClick={() => {
-                            getData()
-                            setPage(0)
-                          }}
-                        >
-                          <HiSearch size={24} color={"#f9f8fd"} />
-                        </button>
-                      ) : (
-                        <button
-                          disabled
-                          className="bg-[#7024f8] opacity-40 font-workSans text-[#f9f8fd] rounded-lg pl-7 pr-7 p-4"
-                          onClick={() => {
-                            getData()
-                            setPage(0)
-                          }} >
-                          <HiSearch size={24} color={"#f9f8fd"} />
-                        </button>
-                      )
-                    }
+                  <div className="order">
+                    <div className="flex items-center">
+                      <div className="pl-1 flex">
+                        <div className="padding-right items-center justify-around flex">
+                          <ThemeProvider theme={theme}>
+                            <Checkbox
+                              onChange={() => setAnyTopic(!anyTopic)}
+                              style={{ zIndex: 10 }}
+                              checked={anyTopic}
+                              size="small"
+                            />
+                          </ThemeProvider>
+                        </div>
+                        <p
+                          className="text-md items-center flex text-[#475072] font-semibold font-workSans" >
+                          Any Topic
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="items-center justify-around flex">
+              <div className="mt-2 items-center justify-around flex">
                 <div className="items-center flex">
                   <div className="p-2">
                     <HiArrowCircleLeft
@@ -269,6 +288,7 @@ const Home = () => {
                   )
                 )
               }
+              <BottomHeader/>
             </div>
           </>
         )

@@ -105,7 +105,7 @@ const Repository: React.FC<RepositoryProps> = ({
               repository?.contributable ? (
                 <button
                 onClick={onClick}
-                className="text-[white] bg-[#7024f8] rounded-md font-workSans text-sm p-2 text-[white]"
+                className="transition hover:bg-opacity-70 text-[white] bg-[#7024f8] rounded-md font-workSans text-sm p-2 text-[white]"
               >
                 Contribute
               </button>
