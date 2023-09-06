@@ -113,7 +113,7 @@ const Home = () => {
             />
             <div className="w-4/5">
               <div className="justify-around flex-block">
-                <div className="border p-4 rounded-lg bg-[#fafafa]">
+                <div className="p-4 rounded-lg bg-[#fafafa]">
                   <div className="items-center flex-block">
                     <div className="p-4">
                       <select

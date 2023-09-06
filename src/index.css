@@ -36,14 +36,6 @@ input[type="checkbox"] {
   }
 }
 
-@media only screen and (max-device-width: 740px) {
-
-  [data-type="control_dropdown"] .form-input, [data-type="control_dropdown"] .form-input-wide {
-  
-      height: 100% !important;
-  }
-}
-
 .block-flex{
   display: block;
 }
