@@ -113,7 +113,7 @@ const Home = () => {
             />
             <div className="w-4/5">
               <div className="justify-around flex-block">
-                <div className="p-4 rounded-lg bg-[#fafafa]">
+                <div className="border p-4 rounded-lg bg-[#fafafa]">
                   <div className="items-center flex-block">
                     <div className="p-4">
                       <select
@@ -257,7 +257,7 @@ const Home = () => {
                   </div>
                 ) : (
                   data.length > 0 ? (
-                    <div className="border mt-24 flex flex-wrap">
+                    <div className="mt-24 flex flex-wrap">
                       {
                         data.map((repo: RepositoryType) => (
                           <Repository
