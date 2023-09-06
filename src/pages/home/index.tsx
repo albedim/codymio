@@ -112,12 +112,12 @@ const Home = () => {
               visible={modalOptions.visible}
             />
             <div className="w-4/5">
-              <div className="justify-around flex">
+              <div className="justify-around flex-block">
                 <div className="border p-4 rounded-lg bg-[#fafafa]">
-                  <div className="items-center flex">
+                  <div className="items-center flex-block">
                     <div className="p-4">
                       <select
-                        className="pl-4 pr-14 p-3 cursor-pointer outline-none border rounded-lg"
+                        className="h-15 w-60 pl-4 pr-14 p-3 cursor-pointer outline-none border rounded-lg"
                         onChange={(e) => setLanguage(e.target.value)}
                         value={language} name="" id=""
                         style={{ color: "#475072", backgroundColor: "white" }}
@@ -146,7 +146,7 @@ const Home = () => {
                         onChange={(e) => setQuery(e.target.value)}
                         value={query}
                         placeholder="Search for a topic..."
-                        className="pl-4 pr-14 p-3 outline-none border rounded-lg"
+                        className="h-15 w-60 pl-4 pr-14 p-3 outline-none border rounded-lg"
                         type="text"
                       />
                     </div>
@@ -257,7 +257,7 @@ const Home = () => {
                   </div>
                 ) : (
                   data.length > 0 ? (
-                    <div className="mt-24 flex flex-wrap">
+                    <div className="border mt-24 flex flex-wrap">
                       {
                         data.map((repo: RepositoryType) => (
                           <Repository
@@ -270,9 +270,6 @@ const Home = () => {
                             })}
                             onAlert={() => {
                               setAlertVisible(true)
-                              setTimeout(() => {
-                                setAlertVisible(false)
-                              }, 5400)
                             }}
                             repository={repo}
                           />

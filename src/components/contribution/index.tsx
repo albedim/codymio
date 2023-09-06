@@ -42,7 +42,7 @@ const Contribution: React.FC<ContributionProps> = ({
     <div className="pb-14 p-4">
       <section
         className="bg-[#fafafa] border repository p-6 rounded-lg">
-        <div className="itens-center justify-between flex">
+        <div className="items-center justify-between flex">
           <div>
             <a target="_blank" href={"https://github.com/" + repository.full_name}>
               <h2 

@@ -121,7 +121,7 @@ const Contributions = () => {
         isSessionLoading ? (
           <></>
         ) : (
-          <div className="p-14">
+          <div className="p-8">
             <div>
               <h1
                 className="text-[#475072] text-2xl font-semibold font-workSans">

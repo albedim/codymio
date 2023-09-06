@@ -85,9 +85,9 @@ const Header = () => {
 
   const headerStyle = () => {
     if (window.location.pathname == "/") {
-      return `z-20 border bg-[white] bg-opacity-10 top-0 fixed border-b p-4 justify-between flex w-screen`
+      return `z-20 border bg-[white] bg-opacity-10 top-0 fixed p-4 justify-between flex w-screen`
     }
-    return `z-20 border bg-[white] bg-opacity-20 top-0 fixed border-b p-4 justify-between flex w-screen`
+    return `shadow backdrop-blur-sm z-20 top-0 fixed p-4 justify-between flex w-screen`
   }
 
   return (

@@ -32,7 +32,10 @@ const Overview = () => {
         window.localStorage.setItem("github_token", res.data.param.github_token)
         window.location.href = BASE_FE_URL + "/home"
       })
-      .catch(err => signin(code))
+      .catch(err => {
+        if(code)
+          alert("sfsfssfs")
+      })
   }
 
   const loggedIn = async () => {
