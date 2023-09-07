@@ -33,8 +33,7 @@ const Overview = () => {
         window.location.href = BASE_FE_URL + "/home"
       })
       .catch(err => {
-        if(code)
-          alert("sfsfssfs")
+        
       })
   }
 
