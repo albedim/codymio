@@ -94,7 +94,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
           <div className="z-30 modal">
             <div className="modal-wrapper p-4">
               <div
-                style={{ backgroundColor: USED_COLORS[0], borderRadius: 8 }}
+                style={{ maxHeight: 640, backgroundColor: USED_COLORS[0], borderRadius: 8 }}
                 className="border modal-content"
                 onClick={e => e.stopPropagation()}
               >
@@ -160,7 +160,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                       </div>
                     </div>
                     <div>
-                      <div style={{ overflowX: 'hidden', overflowY: 'scroll', maxHeight: 540 }}>
+                      <div style={{ overflowX: 'hidden', overflowY: 'scroll', maxHeight: 384 }}>
                         {
                           isLoading ? (
                             <Loader />
