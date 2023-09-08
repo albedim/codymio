@@ -187,13 +187,7 @@ const Contributions = () => {
                             status: contribution.status
                           }}
 
-                          issue={{
-                            title: contribution.issue.issue_title,
-                            number: contribution.issue.issue_number,
-                            issue_id: contribution.issue.issue_id,
-                            body: contribution.issue.issue_body,
-                            owner: contribution.issue.issue_owner
-                          }}
+                          issue_number={contribution.issue.issue_number}
                           
                           removable={contribution.removable}
                           onRemove={() => removeContribution(contribution.contribution_id)}

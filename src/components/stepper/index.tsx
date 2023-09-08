@@ -31,11 +31,11 @@ const Stepper: React.FC<StepperProps> = ({
       />
       <PushedStep status={status} />
       <WaitingStep 
-        onClick={() => setModalOptions({ text: LABELS.stepper.waiting_label, visible: true })} 
+        onClick={() => setModalOptions({ text: LABELS.stepper.pushed, visible: true })} 
         status={status} 
       />
       <FinalStep 
-        onClick={() => setModalOptions({ text: LABELS.stepper.completed_label, visible: true })} 
+        onClick={() => setModalOptions({ text: LABELS.stepper.completed, visible: true })} 
         status={status} 
       />
     </div>

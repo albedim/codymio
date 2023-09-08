@@ -1,22 +1,16 @@
 import React, { useState } from "react"
 import { AiFillDelete } from 'react-icons/ai'
 import Stepper from "../stepper"
+import MarkdownPreview from '@uiw/react-markdown-preview';
+import { TbMarkdown } from "react-icons/tb";
+import { LABELS } from "../../utils/labels";
 
 
 interface ContributionProps {
   repository: RepositoryType
-  issue: Issue,
+  issue_number: number,
   removable: boolean,
   onRemove: () => void
-}
-
-
-export interface Issue {
-  title: string,
-  issue_id: number,
-  number: number,
-  body: string,
-  owner: string
 }
 
 
@@ -31,12 +25,11 @@ export interface RepositoryType {
 
 const Contribution: React.FC<ContributionProps> = ({
   repository,
-  issue,
+  issue_number,
   removable,
   onRemove
 }) => {
 
-  const [showMore, setShowMore] = useState(false)
 
   return (
     <div className="pb-14 p-4">
@@ -45,79 +38,45 @@ const Contribution: React.FC<ContributionProps> = ({
         <div className="items-center justify-between flex">
           <div>
             <a target="_blank" href={"https://github.com/" + repository.full_name}>
-              <h2 
+              <h2
                 className="text-[#475072] hover:underline text-xl font-semibold font-workSans">{
-                repository.name}
+                  repository.name}
               </h2>
             </a>
           </div>
           <div className="items-center justify-around flex">
             {
               removable ? (
-                <AiFillDelete 
-                  className="cursor-pointer" 
-                  onClick={onRemove} 
-                  opacity={"40%"} 
-                  color="red" 
-                  size={24} 
+                <AiFillDelete
+                  className="cursor-pointer"
+                  onClick={onRemove}
+                  opacity={"40%"}
+                  color="red"
+                  size={24}
                 />
               ) : null
             }
           </div>
         </div>
         <div>
-          <h2 
+          <h2
             className="text-[#475072] font-workSans">
             @{repository.full_name.split("/")[0]}
           </h2>
         </div>
         <div className="pt-2 border-t mt-4">
-          <div className="items-center justify-between flex">
-            <div>
-              <a
-                target="_blank"
-                href={"https://github.com/" + repository.full_name + "/issues/" + issue.number}>
-                <h2
-                  className="text-[#475072] hover:underline cursor-pointer text-lg font-semibold font-workSans" >
-                  {issue.title} • <span className="text-sm font-normal">@{issue.owner}</span>
-                </h2>
-              </a>
-            </div>
-            <div>
-              <h2 className="pr-2 pl-2 bg-opacity-40 text-[white] rounded-md text-xs p-1 font-workSans bg-[#7024f8]" >
-                ISSUE
-              </h2>
-            </div>
+          <p className="text-[#475072] font-workSans" >
+          {LABELS.stepper[repository.status]}</p>
+          <div className="pb-4 pt-4 items-center flex">
+            <a target="_blank" href={"https://github.com/"+repository.full_name+"/issues/"+issue_number}>
+              <button className="transition hover:text-white hover:bg-[#7024f8] border-2 border-[#7024f8] text-sm font-workSans rounded-md p-2 text-[#7024f8] items-center flex">
+                SEE ISSUE
+              </button>
+            </a>
           </div>
-          {
-            issue.body != null ? (
-              issue.body.length > 240 ? (
-                <div className="mt-2">
-                  <h2 className="text-[#475072] pt-2 font-workSans" >
-                    {showMore ? issue.body : issue.body.substring(0, 240) + "..."}
-                  </h2>
-                  <h2 
-                    className="text-[#475072] cursor-pointer font-semibold underline" 
-                    onClick={() => setShowMore(!showMore)} >
-                    {showMore ? "Show less" : "Show more"}
-                  </h2>
-                </div>
-              ) : (
-                <h2 
-                  className="text-[#475072] pt-2 font-workSans" >
-                  {issue.body}
-                </h2>
-              )
-            ) : (
-              <h2
-                className="text-[#475072] italic pt-2 font-workSans" >
-                No description provided for this issue.
-              </h2>
-            )
-          }
         </div>
         <div className="justify-between flex mt-4">
-          <Stepper status={repository.status}/>
+          <Stepper status={repository.status} />
           <div></div>
         </div>
       </section>
