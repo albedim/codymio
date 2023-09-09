@@ -162,12 +162,12 @@ const IssuesModal: React.FC<ContributeProps> = ({
                     <div>
                       {
                         isLoading ? (
-                          <div className="items-center justify-around flex" style={{ height: 384, width: 340 }}>
+                          <div className="items-center justify-around flex" style={{ height: 384, width: 314 }}>
                             <Loader />
                           </div>
                         ) : (
                           issues.length > 0 ? (
-                            <div style={{ overflowX: 'hidden', overflowY: 'scroll', width: 340, height: 384 }}>
+                            <div style={{ overflowX: 'hidden', overflowY: 'scroll', width: 314, height: 384 }}>
                               {
                                 issues.map((issue: Issue) => (
                                   <Issue
@@ -193,7 +193,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                               }
                             </div>
                           ) : (
-                            <div className="items-center justify-around flex" style={{ height: 384, width: 340 }}>
+                            <div className="items-center justify-around flex" style={{ height: 384, width: 314 }}>
                               <NoResults />
                             </div>
                           )
