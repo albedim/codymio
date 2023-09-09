@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="mt-24">
       <footer className="p-14 items-center justify-around flex w-screen">
-        <div className="justify-between flex">
+        <div className="items-center justify-between flex">
           <div className="flex">
             <div className="pr-2">
               <img width={24} src={require("../../images/logo.png")} alt="" />

@@ -86,7 +86,7 @@ const Home = () => {
 
   return (
     <div
-      className="bg-[#f9f8fd] mt-40 items-center justify-around w-screen flex">
+      className="mt-40 items-center justify-around w-screen flex">
       {
         isSessionLoading ? (
           <div className="justify-around flex mt-24">
@@ -113,7 +113,7 @@ const Home = () => {
             />
             <div className="w-4/5">
               <div className="justify-around flex-block">
-                <div className="border p-4 rounded-lg bg-[#fafafa]">
+                <div className="bg-[#fafafa] shadow-sm p-4 rounded-lg">
                   <div className="items-center flex-block">
                     <div className="p-4">
                       <select

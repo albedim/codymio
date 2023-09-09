@@ -72,14 +72,14 @@ const IssuesModal: React.FC<ContributeProps> = ({
       headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
     })
       .then(res => setIssues(res.data.param))
-      .catch(err => console.log(err))
+      .catch(err => { })
     setIsLoading(false)
   }
 
   const addContribution = async (obj: any) => {
     await axios.post(BASE_URL + "/contributions/create", obj)
       .then(res => navigate("/contributions"))
-      .catch(err => console.log(err))
+      .catch(err => { })
   }
 
   useEffect(() => {
@@ -160,15 +160,18 @@ const IssuesModal: React.FC<ContributeProps> = ({
                       </div>
                     </div>
                     <div>
-                      <div style={{ overflowX: 'hidden', overflowY: 'scroll', maxHeight: 384 }}>
-                        {
-                          isLoading ? (
+                      {
+                        isLoading ? (
+                          <div className="items-center justify-around flex" style={{ height: 384, width: 340 }}>
                             <Loader />
-                          ) : (
-                            issues.length > 0 ? (
-                              issues.map((issue: Issue) => (
-                                <Issue
-                                  onCreate={() => addContribution({
+                          </div>
+                        ) : (
+                          issues.length > 0 ? (
+                            <div style={{ overflowX: 'hidden', overflowY: 'scroll', width: 340, height: 384 }}>
+                              {
+                                issues.map((issue: Issue) => (
+                                  <Issue
+                                    onCreate={() => addContribution({
                                       issue_owner: issue.creator_username,
                                       user_id: user.user_id,
                                       repo_id: repo_id,
@@ -178,21 +181,24 @@ const IssuesModal: React.FC<ContributeProps> = ({
                                       issue_title: issue.title,
                                       issue_body: issue.body
                                     })
-                                  }
-                                  hasPullRequests={issue.has_pull_requests} 
-                                  creator_username={issue.creator_username} 
-                                  title={issue.title} 
-                                  created_on={issue.created_on}
-                                  onAlert={() => alert("This issue has open pull requests already")}
-                                  has_contributed={issue.has_contributed}
-                                />
-                              ))
-                            ) : (
+                                    }
+                                    hasPullRequests={issue.has_pull_requests}
+                                    creator_username={issue.creator_username}
+                                    title={issue.title}
+                                    created_on={issue.created_on}
+                                    onAlert={() => alert("This issue has open pull requests already")}
+                                    has_contributed={issue.has_contributed}
+                                  />
+                                ))
+                              }
+                            </div>
+                          ) : (
+                            <div className="items-center justify-around flex" style={{ height: 384, width: 340 }}>
                               <NoResults />
-                            )
+                            </div>
                           )
-                        }
-                      </div>
+                        )
+                      }
                     </div>
                   </div>
                 </div>

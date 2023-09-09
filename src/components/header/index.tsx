@@ -78,26 +78,18 @@ const Header = () => {
       })
   }
 
-
   useEffect(() => {
     loggedIn()
   }, [])
 
-  const headerStyle = () => {
-    if (window.location.pathname == "/") {
-      return `z-20 border bg-[white] bg-opacity-10 top-0 fixed p-4 justify-between flex w-screen`
-    }
-    return `shadow backdrop-blur-sm z-20 top-0 fixed p-4 justify-between flex w-screen`
-  }
-
   return (
     <header
-      className={headerStyle()}>
+      className="top-0 fixed backdrop-blur-sm items-center justify-around flex h-20 w-screen">
       <div>
         <img
           className="cursor-pointer"
-          width={45}
-          src={require('../../images/logo.png')}
+          width={94}
+          src={require('../../images/logo_super.png')}
           alt=""
         />
       </div>
@@ -136,7 +128,7 @@ const Header = () => {
                     width={324}
                     maxHeight={540}
                     visible={visibleMenu == "notifications"}
-                    backgroundColor={"white"}
+                    backgroundColor={"#fafafa"}
                     color={"#475072"}>
                     {
                       notifications.length > 0 ? (
@@ -174,7 +166,7 @@ const Header = () => {
                 >
                   <Menu
                     visible={visibleMenu == "user"}
-                    backgroundColor={"white"}
+                    backgroundColor={"#fafafa"}
                     color={"#475072"}
                   >
 
@@ -192,7 +184,6 @@ const Header = () => {
                       <div className="pr-2"><LuLogOut /></div>
                       <h2>Log out</h2>
                     </div>
-
                   </Menu>
                 </CSSTransition>
               </div>
@@ -203,7 +194,7 @@ const Header = () => {
                 <Loader />
               </div>
             ) : (
-              <></>
+               <></>
             )
           )
         }

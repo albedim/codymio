@@ -34,6 +34,9 @@ input[type="checkbox"] {
     line-height: 40px !important;
     margin-top: 154px;
   }
+  .rightMenu{
+    right: 3px !important;
+  }
 }
 
 .block-flex{
@@ -99,4 +102,19 @@ body{
 .text{
   font-size: 48px;
   line-height: 54px;
+}
+
+.transformLeft{
+  transition: margin-left 0.3s ease;
+}
+
+body{
+  background-image: url("./images/bg-background.png");
+  background-size: cover; /* Adjust how the image covers the entire background */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: fixed;
+}
+
+.rightMenu{
+  
 }

@@ -44,24 +44,24 @@ const Notification: React.FC<NotificationProps> = ({
   return (
     <div className="pb-2 pt-4 border-b items-center justify-between flex">
       <div>
-        <h2 className="text-md font-semibold font-lato">{notification.title}</h2>
+        <div className="items-center flex">
+          <h2 className="text-md font-semibold font-lato">{notification.title}</h2>
+          <p className="pr-2 pl-2">•</p>
+          <p className="text-sm font-normal text-[gray] font-lato">  {getDate(notification.created_on).toString()}</p>
+        </div>
         <p className="text-md font-lato">{
           notification.content.split("/")[1] != undefined &&
           notification.content.split("/")[1].length +
           notification.content.split("/")[0].split(" ")[1].length > 21 ?
           notification.content.substring(0, 54) + "..." : notification.content
         }</p>
-        <div className="mt-2 items-center flex">
-          <div className="pr-2" ><BsCalendar2Date color="gray" size={14} /></div>
-          <p className="font-semibold text-[gray] font-lato">{getDate(notification.created_on).toString()}</p>
-        </div>
       </div>
       <div className="pl-4">
-        <div className="border rounded-full">
+        <div className="p-1 border rounded-full">
           <MdOutlineDone
             className="cursor-pointer"
             color="#7024f8"
-            size={24}
+            size={18}
             onClick={() => removeNotification(notification.notification_id)}
           />
         </div>
