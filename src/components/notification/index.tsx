@@ -14,6 +14,7 @@ export interface NotificationType {
   notification_id: number,
   title: string,
   created_on: string,
+  removable: boolean,
   user_id: number
 }
 
@@ -57,14 +58,20 @@ const Notification: React.FC<NotificationProps> = ({
         }</p>
       </div>
       <div className="pl-4">
-        <div className="p-1 border rounded-full">
-          <MdOutlineDone
-            className="cursor-pointer"
-            color="#7024f8"
-            size={18}
-            onClick={() => removeNotification(notification.notification_id)}
-          />
-        </div>
+        {
+          notification.removable ? (
+            <div className="p-1 border rounded-full">
+              <MdOutlineDone
+                className="cursor-pointer"
+                color="#7024f8"
+                size={18}
+                onClick={() => removeNotification(notification.notification_id)}
+              />
+            </div>
+          ):(
+            null
+          )
+        }
       </div>
     </div >
   )
