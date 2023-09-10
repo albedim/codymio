@@ -162,7 +162,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                     <div>
                       {
                         isLoading ? (
-                          <div className="items-center justify-around flex" style={{ height: 384, width: 314 }}>
+                          <div className="items-center justify-around flex" style={{ height: 314, width: 314 }}>
                             <Loader />
                           </div>
                         ) : (
@@ -193,7 +193,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
                               }
                             </div>
                           ) : (
-                            <div className="items-center justify-around flex" style={{ height: 384, width: 314 }}>
+                            <div className="items-center justify-around flex" style={{ height: 314, width: 314 }}>
                               <NoResults />
                             </div>
                           )

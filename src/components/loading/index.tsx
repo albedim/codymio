@@ -5,6 +5,8 @@ import {
   ThemeProvider, 
   createTheme 
 } from "@mui/material";
+import { Oval } from "react-loading-icons";
+import Puff from "react-loading-icons/dist/esm/components/puff";
 
 const theme = createTheme({
   palette: {
@@ -18,18 +20,8 @@ const Loader: React.FC = () => {
 
   return (
     <div className="items-center justify-around flex repository">
-      <div>
       <div className="justify-around items-center flex pb-2">
-        <PiAirplaneTakeoffFill size={54} color={"#7024f8"}/>
-      </div>
-      <h2 
-        className="text-[#475072] text-xl font-semibold font-lato">Loading...
-      </h2>
-      <div className="mt-4">
-        <ThemeProvider theme={theme}>
-          <LinearProgress/>
-        </ThemeProvider>
-      </div>
+        <Puff height={84} width={84} strokeWidth={2.54} stroke={"#7024f8"}/>
       </div>
     </div>
   );

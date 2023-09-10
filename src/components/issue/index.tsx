@@ -24,10 +24,11 @@ const Issue: React.FC<IssueProps> = ({
   return (
     <div className="p-4">
       <div
+        style={{ width: 294 }}
         className="bg-[#fafafa] justify-between flex rounded-lg p-4">
         <div>
           <h2
-            style={{ color: "#475072", width: 240 }}
+            style={{ color: "#475072" }}
             className="font-semibold text-lg font-workSans">{title}
           </h2>
           <p
