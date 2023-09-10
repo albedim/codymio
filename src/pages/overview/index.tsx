@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { BASE_FE_URL, BASE_URL } from "../../utils/utils";
+import { BASE_FE_URL, BASE_URL, getCookie, setCookie } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { USED_COLORS } from "../../App";
 import jwtDecode from "jwt-decode";
@@ -30,9 +30,9 @@ const Overview = () => {
       code: code
     })
       .then((res) => {
-        window.localStorage.setItem("token", res.data.param.token)
+        setCookie("token", res.data.param.token, 7)
         console.log(res.data.param)
-        window.localStorage.setItem("github_token", res.data.param.github_token)
+        setCookie("github_token", res.data.param.github_token, 7)
         window.location.href = BASE_FE_URL + "/home"
       })
       .catch(err => {
@@ -42,14 +42,15 @@ const Overview = () => {
 
   const loggedIn = async () => {
     await axios.get(BASE_URL + "/user/sync", {
-      headers: { "Authorization": "Bearer " + window.localStorage.getItem("token") }
+      headers: { "Authorization": "Bearer " + getCookie("token") }
     })
       .then((res) => {
         if (!res.data.success) {
-          window.localStorage.setItem("token", res.data.param.token)
+          setCookie("token", res.data.param.token, 7)
+          setCookie("github_token", res.data.param.github_token, 7)
         }
         setIsLoggedIn(true)
-        const token: any = window.localStorage.getItem("token")
+        const token: any = getCookie("token")
         const username = jwtDecode<any>(token).sub.username
         setUsername(username)
       })

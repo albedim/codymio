@@ -5,7 +5,7 @@ import {
   useState 
 } from "react"
 
-import { BASE_URL } from "../../utils/utils";
+import { BASE_URL, getCookie } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import Contribution from "../../components/contribution";
 import jwtDecode from "jwt-decode";
@@ -59,7 +59,7 @@ const Contributions = () => {
 
   const navigate = useNavigate()
 
-  const token: any = window.localStorage.getItem("token")
+  const token: any = getCookie("token")
 
   const user: any = token ? jwtDecode<any>(token).sub : {}
 
@@ -67,7 +67,7 @@ const Contributions = () => {
   const getData = async () => {
     setIsLoading(true)
     await axios.get(BASE_URL + "/contributions/user/" + user.user_id, {
-      headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
+      headers: { "Authorization": "Bearer " + getCookie("github_token") }
     })
       .then(res => {
         console.log("aaa")
@@ -80,7 +80,7 @@ const Contributions = () => {
 
   const setSeen = async () => {
     await axios.post(BASE_URL + "/contributions/seen", { user_id: user.user_id }, {
-      headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
+      headers: { "Authorization": "Bearer " + getCookie("github_token") }
     })
       .then(res => {
         setData({

@@ -12,7 +12,7 @@ import {
   HiArrowCircleRight
 } from "react-icons/hi";
 
-import { BASE_URL } from "../../../utils/utils";
+import { BASE_URL, getCookie } from "../../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import Loader from "../../loading";
@@ -54,7 +54,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
 
   const [isLoading, setIsLoading] = useState(false)
 
-  const token: any = window.localStorage.getItem("token")
+  const token: any = getCookie("token")
 
   const user: any = jwtDecode<any>(token).sub
 
@@ -69,7 +69,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
       "/issues?repo_full_name=" + repo_full_name +
       "&user_id=" + user.user_id +
       "&page=" + page, {
-      headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
+      headers: { "Authorization": "Bearer " + getCookie("github_token") }
     })
       .then(res => setIssues(res.data.param))
       .catch(err => { })

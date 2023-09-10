@@ -8,7 +8,10 @@ import {
 
 import {
   BASE_FE_URL,
-  BASE_URL
+  BASE_URL,
+  eraseCookie,
+  getCookie,
+  setCookie
 } from "../../utils/utils";
 
 import { useNavigate } from "react-router-dom";
@@ -36,7 +39,7 @@ const Header = () => {
 
   const [visibleMenu, setVisibleMenu] = useState<"" | "notifications" | "user">("")
 
-  const token: any = window.localStorage.getItem("token")
+  const token: any = getCookie("token")
 
   const navigate = useNavigate()
 
@@ -48,7 +51,7 @@ const Header = () => {
       .then((res) => {
         setIsSessionLoading(true)
         if (!res.data.success) {
-          window.localStorage.setItem("token", res.data.param.token)
+          setCookie("token", res.data.param.token, 30)
         }
         updateData()
       })
@@ -68,7 +71,7 @@ const Header = () => {
   const updateData = async () => {
     const userId = jwtDecode<any>(token).sub.user_id
     await axios.post(BASE_URL + "/contributions/update", { user_id: userId }, {
-      headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
+      headers: { "Authorization": "Bearer " + getCookie("github_token") }
     })
       .then((res) => {
         getNotifications(userId)
@@ -177,8 +180,8 @@ const Header = () => {
                     </div>
 
                     <div onClick={() => {
-                      window.localStorage.removeItem("token")
-                      window.localStorage.removeItem("github-token")
+                      eraseCookie("token")
+                      eraseCookie("github-token")
                       window.location.href = BASE_FE_URL
                     }} className="hover:opacity-80 cursor-pointer items-center flex mb-1 mt-1 p-1 pr-4 pl-4">
                       <div className="pr-2"><LuLogOut /></div>

@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { BASE_URL } from "../../utils/utils";
+import { BASE_URL, getCookie } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { HiArrowCircleLeft, HiArrowCircleRight, HiSearch } from "react-icons/hi";
 import HomeLoader from "../../components/loading";
@@ -51,11 +51,11 @@ const Home = () => {
 
   const getData = async () => {
     setIsLoading(true)
-    const token: any = window.localStorage.getItem("token")
+    const token: any = getCookie("token")
     const user = jwtDecode<any>(token).sub
     await axios.get(BASE_URL + "/repositories/fetch?query=" +
       (anyTopic ? "all" : query) + "&language=" + language + "&userId=" + user.user_id + "&page=" + page, {
-      headers: { "Authorization": "Bearer " + window.localStorage.getItem("github_token") }
+      headers: { "Authorization": "Bearer " + getCookie("github_token") }
     })
       .then(res => setData(res.data.param))
       .catch(err => console.log(err))
@@ -70,7 +70,7 @@ const Home = () => {
 
   const loggedIn = async () => {
     await axios.get(BASE_URL + "/user/sync", {
-      headers: { "Authorization": "Bearer " + window.localStorage?.getItem("token") }
+      headers: { "Authorization": "Bearer " + getCookie("token") }
     })
       .then((res) => {
         getData()
