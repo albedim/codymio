@@ -171,7 +171,7 @@ const Contributions = () => {
             {
               isLoading ? (
                 <div className="mt-24">
-                  <Loader />
+                  <Loader/>
                 </div>
               ) : (
                 <div className="mt-8 flex-wrap flex">
