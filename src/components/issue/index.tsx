@@ -24,7 +24,7 @@ const Issue: React.FC<IssueProps> = ({
   return (
     <div className="p-4">
       <div
-        style={{ width: 354 }}
+        style={{ width: 294 }}
         className="bg-[#fafafa] justify-between flex rounded-lg p-4">
         <div>
           <h2
