@@ -91,7 +91,7 @@ const IssuesModal: React.FC<ContributeProps> = ({
     <>
       {
         visible ? (
-          <div className="z-30 modal">
+          <div className="z-40 modal">
             <div className="modal-wrapper p-4">
               <div
                 style={{ maxHeight: 640, backgroundColor: USED_COLORS[0], borderRadius: 8 }}

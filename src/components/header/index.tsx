@@ -87,7 +87,7 @@ const Header = () => {
 
   return (
     <header
-      className="p-8 bg-[white] border-b top-0 fixed backdrop-blur-sm items-center justify-between flex h-20 w-screen">
+      className="p-8 top-0 left-0 right-0 bg-[white] border-b top-0 fixed backdrop-blur-sm items-center justify-between flex h-20 w-screen">
       <div></div>
       <div className="flex items-center">
         {
@@ -154,34 +154,6 @@ const Header = () => {
                     className="cursor-pointer"
                   />
                 </div >
-                <CSSTransition
-                  in={visibleMenu == "user"}
-                  timeout={300}
-                  classNames="fade"
-                  unmountOnExit
-                >
-                  <Menu
-                    visible={visibleMenu == "user"}
-                    backgroundColor={"#fafafa"}
-                    color={"#475072"}
-                  >
-
-                    <div
-                      onClick={() => navigate("/contributions")}
-                      className="hover:opacity-80 cursor-pointer  mb-1 mt-1 p-1 pr-4 pl-4">
-                      <h2>Dashboard</h2>
-                    </div>
-
-                    <div onClick={() => {
-                      eraseCookie("token")
-                      eraseCookie("github-token")
-                      window.location.href = BASE_FE_URL
-                    }} className="hover:opacity-80 cursor-pointer items-center flex mb-1 mt-1 p-1 pr-4 pl-4">
-                      <div className="pr-2"><LuLogOut /></div>
-                      <h2>Log out</h2>
-                    </div>
-                  </Menu>
-                </CSSTransition>
               </div>
             </div>
           ) : (

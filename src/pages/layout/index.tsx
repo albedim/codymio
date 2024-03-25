@@ -8,9 +8,9 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ( props ) => {
   return (
-    <div className="w-screen h-screen">
+    <div className="w-screen flex h-screen">
       <NavBar page={props.currPage}/>
-      <div>
+      <div className="marginLeftNavbar">
         <Header/>
         {props.children}
       </div>

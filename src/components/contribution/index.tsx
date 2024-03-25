@@ -32,7 +32,7 @@ const Contribution: React.FC<ContributionProps> = ({
 
 
   return (
-    <div className="pb-14 p-4">
+    <div className="pb-14 pl-0 p-4">
       <section
         className="bg-[#fafafa] border repository p-6 rounded-lg">
         <div className="items-center justify-between flex">

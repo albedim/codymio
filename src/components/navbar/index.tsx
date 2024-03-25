@@ -22,7 +22,7 @@ const NavBar: React.FC<NavBarProps> = ( props ) => {
         <div>
           <img width={42} src={require("../../images/logo.png")} alt="" />
         </div>
-        <h2 className='block-none text-[#668AE4] ml-2 text-xl font-semibold font-cabin pl-2'>Cody<span className='text-[#4C73D5] font-bold'>mio</span></h2>
+        <h2 className='block-none text-[#7024f8] ml-2 text-xl font-semibold font-cabin pl-2'>Cody<span className='text-[#7024f8] font-bold'>mio</span></h2>
       </div>
       <div className='pb-8 border-b mt-8'>
         <ul>
@@ -30,14 +30,14 @@ const NavBar: React.FC<NavBarProps> = ( props ) => {
             <li className="cursor-pointer pb-2 align-center flex">
               {props.page == 'home' ? (
                 <div
-                  className='text-[#668AE4] transition-all w-full p-2 flex bg-opacity-10 bg-[#668AE4] rounded-md'>
+                  className='text-[#7024f8] transition-all w-full p-2 flex bg-opacity-10 bg-[#7024f8] rounded-md'>
                   <div className='items-center justify-around flex'><FaBookBookmark size={14} /></div>
                   <p className='block-none font-cabin pl-2' >Home</p>
                 </div>
               ):(
                 <div
-                  className='hover:text-[#668AE4] transition-all w-full p-2 flex 
-                             hover:bg-opacity-10 hover:bg-[#668AE4] rounded-md'
+                  className='hover:text-[#7024f8] transition-all w-full p-2 flex 
+                             hover:bg-opacity-10 hover:bg-[#7024f8] rounded-md'
                 >
                   <div className='items-center justify-around flex'><FaBookBookmark size={14} /></div>
                   <p className='block-none font-cabin pl-2' >Home</p>
@@ -48,13 +48,13 @@ const NavBar: React.FC<NavBarProps> = ( props ) => {
           <Link to={"/contributions"}>
             <li className="cursor-pointer pb-2 align-center flex">
               {props.page == 'contributions' ? (
-                <div className='text-[#668AE4] transition-all w-full p-2 flex bg-opacity-10 bg-[#668AE4] rounded-md'>
+                <div className='text-[#7024f8] transition-all w-full p-2 flex bg-opacity-10 bg-[#7024f8] rounded-md'>
                   <div className='items-center justify-around flex'><MdPeopleAlt size={14} /></div>
-                  <p className='block-none font-cabin pl-2' >Dasboard</p>
+                  <p className='block-none font-cabin pl-2' >Dashboard</p>
                 </div>
               ):(
-                <div className='hover:text-[#668AE4] transition-all 
-                                w-full p-2 flex hover:bg-opacity-10 hover:bg-[#668AE4] rounded-md'
+                <div className='hover:text-[#7024f8] transition-all 
+                                w-full p-2 flex hover:bg-opacity-10 hover:bg-[#7024f8] rounded-md'
                 >
                   <div className='items-center justify-around flex'><MdPeopleAlt size={14} /></div>
                   <p className='block-none font-cabin pl-2' >Dashboard</p>

@@ -16,6 +16,10 @@ input[type="checkbox"] {
   min-height: 264px;
 }
 
+.marginLeftNavbar{
+  margin-left: 284px;
+}
+
 @media screen and (max-width: 740px) {
   .repository{
     width: 294px !important;
@@ -36,6 +40,9 @@ input[type="checkbox"] {
   }
   .rightMenu{
     right: 3px !important;
+  }
+  .marginLeftNavbar{
+    margin-left: 84px;
   }
 }
 
@@ -116,5 +123,5 @@ body{
 }
 
 .rightMenu{
-  
+  right: 40px;
 }
