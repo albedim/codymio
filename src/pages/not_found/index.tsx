@@ -9,13 +9,13 @@ const NotFound = () => {
   const [c, setC] = useState(false)
 
   return(
-    <div className="justify-around mt-24 flex">
-    <div>
+    <div className="w-screen h-96 justify-around mt-24 flex">
+    <div className="items-center gap-4 flex">
       <div className="justify-around flex">
         <TbError404 size={54}/>
       </div>
-      <Button className="bg-[red] p-14" name={'button example'} token={'3fdg-33-dj3ld.--d3'} onClick={() => console.log("s")} children={<h2> dgdgd</h2>}  />
-      <h1 className="mt-2 text-2xl font-semibold font-workSans">This page was not found</h1>
+      <div className="rounded-full h-14 w-1 bg-[black]"></div>
+      <h1 className="mt-2 text-lg font-semibold font-workSans">This page was not found</h1>
     </div>
   </div>
   )

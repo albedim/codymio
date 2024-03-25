@@ -87,15 +87,8 @@ const Header = () => {
 
   return (
     <header
-      className="top-0 fixed backdrop-blur-sm items-center justify-around flex h-20 w-screen">
-      <div>
-        <img
-          className="cursor-pointer"
-          width={94}
-          src={require('../../images/logo_super.png')}
-          alt=""
-        />
-      </div>
+      className="p-8 bg-[white] border-b top-0 fixed backdrop-blur-sm items-center justify-between flex h-20 w-screen">
+      <div></div>
       <div className="flex items-center">
         {
           isLoggedIn ? (

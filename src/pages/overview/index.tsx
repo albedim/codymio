@@ -78,10 +78,10 @@ const Overview = () => {
         </h1>
         <h2 className="text-[#475072] mt-8 text-xl font-workSans">
           Find the perfect open source projects
-          to contribute to. <br />
+          to contribute to, manage your pull <br/>
+          requests & Track our contributions easily <br />
           500+ developers are getting closer
-          to open source with Codymio. <br />
-          Manage your pull requests & Track our contributions easily
+          to open source with <span className="underline underline-[#7024f8]">Codymio</span> .
         </h2>
         <div className="flex mt-14">
           <div className="pr-8">

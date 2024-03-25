@@ -14,6 +14,7 @@ import jwtDecode from "jwt-decode";
 import AlertsModal from "../../components/modal/alerts";
 import { LABELS } from "../../utils/labels";
 import BottomHeader from "../../components/bottom_header";
+import NavBar from "../../components/navbar";
 
 
 const theme = createTheme({
@@ -85,8 +86,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div
-      className="mt-40 items-center justify-around w-screen flex">
+    <div className="mt-40">
       {
         isSessionLoading ? (
           <div className="justify-around flex mt-24">

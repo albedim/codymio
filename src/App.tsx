@@ -9,6 +9,7 @@ import NotFound from './pages/not_found';
 import Overview from './pages/overview';
 import Home from './pages/home';
 import Footer from './components/footer';
+import Layout from './pages/layout';
 
 export let USED_COLORS: string[] = []
 
@@ -17,9 +18,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<><Header /><Overview /><Footer/></>} />
-        <Route path='/contributions' element={<><Header /><Contributions /><Footer/></>} />
-        <Route path="/home" element={<><Header /><Home /><Footer/></>} />
+        <Route path="/" element={<><Overview /><Footer/></>} />
+        <Route path='/contributions' element={<Layout currPage='contributions'><Contributions /><Footer/></Layout>} />
+        <Route path="/home" element={<Layout currPage='home'><Home /><Footer/></Layout>} />
         <Route path='/*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>

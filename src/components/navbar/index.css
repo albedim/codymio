@@ -1,0 +1,16 @@
+.block-none{
+    display: block;
+}
+
+.wi{
+    width: 256px;
+}
+
+@media screen and (max-width: 700px) {
+    .wi{
+        width: 64px !important;
+    }
+    .block-none{
+        display: none;
+    }
+}
